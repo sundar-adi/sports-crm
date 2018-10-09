@@ -1,0 +1,71 @@
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*bash_history
+
+#python specific
+*.pyc
+pip-log.txt
+*.egg
+*.egg-info
+.ropeproject
+dist
+build
+eggs
+
+# Vagrant
+.vagrant
+
+# Intellij
+.idea
+
+# Bower & Node
+bower_components
+node_modules
+
+#Virtualenv
+venv
+
+#Django
+
+*.log
+*.pot
+*.pyc
+settings_local.py
+local.py
+database.db
+db.sqlite3
+static_root
+whoosh_index
+backup/
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# SublimeText project files
+*.sublime-workspace
+*.fuse_hidden*
+
+# Media directory
+hptx/media_root/
+hptx/media/
+
+# Static directory
+hptx/static
+frontend/styleguide/static
+frontend/styleguide/web/static
+
+# npm
+package-lock.json
+
+
+#styleguide
+frontendDashboard/styleguide/static/

@@ -1,0 +1,14 @@
+Django==2.0.9
+wagtail==2.2.2
+psycopg2==2.7.5
+
+opencv-python==3.4.3.18
+numpy==1.15.2
+
+Wand==0.4.4
+pillow==5.3.0
+
+django-q==1.0.1
+arrow==0.12.1
+django-picklefield==1.1.0
+blessed==1.15.0
