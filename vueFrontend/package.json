@@ -12,18 +12,6 @@
     "lint": "eslint \"src/**/*.js\"",
     "prettier-all": "prettier --no-semi --write src/**/*.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "postcommit": "git update-index -g"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --write --no-semi",
-      "git add"
-    ]
-  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "7",
