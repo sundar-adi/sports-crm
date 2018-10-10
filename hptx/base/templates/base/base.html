@@ -1,0 +1,27 @@
+{% load i18n staticfiles %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE |default:'en'}}" {% block extrahtml %}{% endblock %}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <meta name="author" content="HPTX"/>
+
+</head>
+<body class="{% block body-class %}{% endblock %}">
+  <div {% block vue_app %}id="app"{% endblock %}>
+    {% block layout %}{% endblock layout %}
+  </div>
+
+  {% block scripts %}
+
+  <!-- VUE SCRIPT -->
+  {% if debug %}
+  <script src="http://localhost:9000/static/js/app.buildVue.js"></script>
+  {% else %}
+  <script src="{% static 'js/app.buildVue.js' %}"></script>
+  {% endif %}
+
+  {% endblock scripts %}
+</body>
+</html>
