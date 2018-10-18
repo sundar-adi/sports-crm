@@ -1,8 +1,17 @@
 from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from base.models import SimpleModel
+
+
+class User(AbstractUser):
+
+    autocomplete_search_field = 'username'
+
+    def autocomplete_label(self):
+        return self.username
 
 
 # Create your models here.

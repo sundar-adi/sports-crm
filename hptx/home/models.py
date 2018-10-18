@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
-from wagtail.images.models import Image
 
 from taggit.models import TagBase
 
@@ -25,14 +24,29 @@ class Tag(TagBase):
         blank=True,
         null=True
     )
-    main_image = Image(
-        _(u'Main Image'),
+    main_image = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_(u'Main Image'),
+        related_name='main_image_on',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
     )
-    secondary_image = Image(
-        _(u'Main Image'),
+    secondary_image = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_(u'Secondary Image'),
+        related_name='secondary_image_on',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
     )
-    hp_logo = Image(
-        _(u'HP Logo'),
+    hp_logo = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_(u'HP Logo'),
+        related_name='hp_logo_on',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
     )
     seo_title = models.CharField(
         verbose_name=_(u'Title (SEO)'),

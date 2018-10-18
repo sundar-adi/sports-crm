@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -38,19 +38,19 @@ class ArticleIndexPage(Page):
 
 class ArticlePage(Page):
     authors = models.ManyToManyField(
-        to=User,
+        to=settings.AUTH_USER_MODEL,
         verbose_name=_('authors'),
         related_name='author_on',
         blank=True,
     )
     editors = models.ManyToManyField(
-        to=User,
+        to=settings.AUTH_USER_MODEL,
         verbose_name=_('editors'),
         related_name='editor_on',
         blank=True,
     )
     contributors = models.ManyToManyField(
-        to=User,
+        to=settings.AUTH_USER_MODEL,
         verbose_name=_('contributors'),
         related_name='contributor_on',
         blank=True,
@@ -70,8 +70,11 @@ class ArticlePage(Page):
     ]
 
     promote_panels = Page.promote_panels + [
-        AutocompletePanel('authors', page_type='auth.User', is_single=False),
-        FieldPanel('editors'),
-        FieldPanel('contributors'),
+        AutocompletePanel(
+            'authors', page_type=settings.AUTH_USER_MODEL, is_single=False),
+        AutocompletePanel(
+            'editors', page_type=settings.AUTH_USER_MODEL, is_single=False),
+        AutocompletePanel(
+            'contributors', page_type=settings.AUTH_USER_MODEL, is_single=False),
         FieldPanel('publication_date'),
     ]
