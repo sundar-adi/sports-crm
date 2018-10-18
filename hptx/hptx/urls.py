@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import include, url, path
+from django.conf.urls import include, url
 from django.contrib import admin
 
 from wagtail.admin import urls as wagtailadmin_urls
@@ -9,7 +9,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 
 urlpatterns = [
-    path("stripe/", include("djstripe.urls", namespace="djstripe")),
+    url(r'^stripe/', include('djstripe.urls', namespace='djstripe')),
     url(r'^django-admin/', admin.site.urls),
 
     url(r'^admin/', include(wagtailadmin_urls)),
