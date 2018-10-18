@@ -26,6 +26,20 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
+        <header style="float: right;">
+          <table>
+            <tr>
+              {% if not user.is_authenticated %}
+              <td><a href="{% url 'user:signup'%}">Sign up</a></td>
+              <td><a href="{% url 'user:login'%}"> | Log in</a></td>
+              {% else %}
+              <td>Hello, {{ user.first_name }} {{ user.last_name }}</td>
+              <td><a href="{% url 'user:logout'%}"> | Log out</a></td>
+              {% endif %}
+              <td><a href="{% url 'plans'%}"> | Plans</a></td>
+            </tr>
+          </table>
+        </header>
         {% wagtailuserbar %}
 
         {% block content %}{% endblock %}
