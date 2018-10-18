@@ -4,6 +4,7 @@ from django.shortcuts import render
 from wagtail.core.models import Page
 from wagtail.search.models import Query
 
+from home.models import Article
 
 def search(request):
     search_query = request.GET.get('query', None)
@@ -30,5 +31,26 @@ def search(request):
 
     return render(request, 'search/search.html', {
         'search_query': search_query,
+        'search_results': search_results,
+    })
+
+
+def tag_page(request, slug):
+    page = request.GET.get('page', 1)
+
+    search_results = Article.objects.filter(
+        tags__slug=slug
+    )
+
+    # Pagination
+    paginator = Paginator(search_results, 10)
+    try:
+        search_results = paginator.page(page)
+    except PageNotAnInteger:
+        search_results = paginator.page(1)
+    except EmptyPage:
+        search_results = paginator.page(paginator.num_pages)
+
+    return render(request, 'search/search.html', {
         'search_results': search_results,
     })
