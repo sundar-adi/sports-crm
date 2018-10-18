@@ -6,9 +6,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
 from wagtail.images.models import Image
 
-from modelcluster.contrib.taggit import ClusterTaggableManager
-from modelcluster.fields import ParentalKey
-from taggit.models import TaggedItemBase, TagBase
+from taggit.models import TagBase
 
 
 class Tag(TagBase):
@@ -62,24 +60,6 @@ class Tag(TagBase):
         blank=True,
         null=True
     )
-
-
-class ArticleTag(TaggedItemBase):
-    tag = models.ForeignKey(Tag,
-                            related_name="%(app_label)s_%(class)s_items",
-                            on_delete=models.CASCADE)
-    content_object = ParentalKey(
-        'home.Article',
-        on_delete=models.CASCADE,
-        related_name='tagged_items')
-
-
-class Article(Page):
-    tags = ClusterTaggableManager(through=ArticleTag, blank=True)
-
-    promote_panels = Page.promote_panels + [
-        FieldPanel('tags'),
-    ]
 
 
 class HomePage(Page):

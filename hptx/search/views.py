@@ -4,7 +4,8 @@ from django.shortcuts import render
 from wagtail.core.models import Page
 from wagtail.search.models import Query
 
-from home.models import Article
+from article.models import ArticlePage
+
 
 def search(request):
     search_query = request.GET.get('query', None)
@@ -38,7 +39,7 @@ def search(request):
 def tag_page(request, slug):
     page = request.GET.get('page', 1)
 
-    search_results = Article.objects.filter(
+    search_results = ArticlePage.objects.filter(
         tags__slug=slug
     )
 

@@ -10,7 +10,22 @@ from wagtail.core.models import Page
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 
+from modelcluster.fields import ParentalKey
+from taggit.models import TaggedItemBase
 from wagtailautocomplete.edit_handlers import AutocompletePanel
+
+from home.models import Tag
+
+
+class ArticleTag(TaggedItemBase):
+    tag = models.ForeignKey(
+        Tag,
+        related_name="%(app_label)s_%(class)s_items",
+        on_delete=models.CASCADE)
+    content_object = ParentalKey(
+        'article.ArticlePage',
+        on_delete=models.CASCADE,
+        related_name='tagged_items')
 
 
 class ArticleIndexPage(Page):
