@@ -8,6 +8,9 @@ from wagtail.core.fields import RichTextField
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.embeds.blocks import EmbedBlock
+
+from wagtailautocomplete.edit_handlers import AutocompletePanel
 
 
 class ArticleIndexPage(Page):
@@ -19,12 +22,23 @@ class ArticleIndexPage(Page):
 
 
 class ArticlePage(Page):
-    author = models.ForeignKey(
+    authors = models.ManyToManyField(
         to=User,
-        verbose_name=_('author'),
-        on_delete=models.SET_NULL,
-        blank=False,
-        null=True,
+        verbose_name=_('authors'),
+        related_name='author_on',
+        blank=True,
+    )
+    editors = models.ManyToManyField(
+        to=User,
+        verbose_name=_('editors'),
+        related_name='editor_on',
+        blank=True,
+    )
+    contributors = models.ManyToManyField(
+        to=User,
+        verbose_name=_('contributors'),
+        related_name='contributor_on',
+        blank=True,
     )
     publication_date = models.DateField(
         verbose_name='publication date',
@@ -32,7 +46,8 @@ class ArticlePage(Page):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock())
+        ('image', ImageChooserBlock()),
+        ('embed', EmbedBlock()),
     ])
 
     content_panels = Page.content_panels + [
@@ -40,6 +55,8 @@ class ArticlePage(Page):
     ]
 
     promote_panels = Page.promote_panels + [
-        FieldPanel('author'),
+        AutocompletePanel('authors', page_type='auth.User', is_single=False),
+        FieldPanel('editors'),
+        FieldPanel('contributors'),
         FieldPanel('publication_date'),
     ]

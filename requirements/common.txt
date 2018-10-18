@@ -1,6 +1,10 @@
 Django==2.0.9
-wagtail==2.2.2
 psycopg2==2.7.5
+
+
+wagtail==2.2.2
+wagtail-autocomplete==0.1.1
+
 
 opencv-python==3.4.3.18
 numpy==1.15.2
