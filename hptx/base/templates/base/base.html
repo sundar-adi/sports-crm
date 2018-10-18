@@ -44,9 +44,13 @@
 
       {% block content %}{% endblock %}
     </div>
-    
+
       {# Global javascript #}
       <script type="text/javascript" src="{% static 'js/hptx.js' %}"></script>
+
+      {% block extra_js %}
+          {# Override this in templates to add extra javascript #}
+      {% endblock %}
 
       <!-- VUE SCRIPT -->
       {% if debug %}
@@ -54,9 +58,5 @@
       {% else %}
       <script src="{% static 'js/app.buildVue.js' %}"></script>
       {% endif %}
-
-      {% block extra_js %}
-          {# Override this in templates to add extra javascript #}
-      {% endblock %}
   </body>
 </html>

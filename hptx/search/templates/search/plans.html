@@ -9,7 +9,17 @@
   {% for plan in plans %}
     <li>{{ plan.nickname }}</li>
     <li>$ {{ plan.amount }}</li>
-    <li><button id="pay{{ plan.id }}">Purchase</button></li>
+    <li>
+      <stripe-button
+        public-key="{{ STRIPE_PUBLIC_KEY }}"
+        name="Houston Preeminence Media Incorporated"
+        image="https://hptx.us/images/hptx/HP-logo-9.png"
+        description="{{ plan.nickname }}"
+        :amount="{{ plan.amount|stripe_amount }}"
+        email="{{ user.email }}">
+          Subscribe
+      </stripe-button>
+    </li>
   {% endfor %}
   </ul>
 {% endblock %}
@@ -17,34 +27,4 @@
 
 {% block extra_js %}
 <script src="https://checkout.stripe.com/checkout.js"></script>
-
-<script>
-var handler = StripeCheckout.configure({
-  key: '{{ STRIPE_PUBLIC_KEY }}',
-  image: 'https://hptx.us/images/hptx/HP-logo-9.png',
-  locale: 'auto',
-  token: function(token) {
-    // You can access the token ID with `token.id`.
-    // Get the token ID to your server-side code for use.
-  }
-});
-
-{% for plan in plans %}
-document.getElementById('pay{{ plan.id }}').addEventListener('click', function(e) {
-  // Open Checkout with further options:
-  handler.open({
-    name: 'Houston Preeminence Media Incorporated',
-    description: '{{ plan.nickname }}',
-    amount: {{ plan.amount|stripe_amount }}
-  });
-  e.preventDefault();
-});
-{% endfor %}
-
-// Close Checkout on page navigation:
-window.addEventListener('popstate', function() {
-  handler.close();
-});
-</script>
-
 {% endblock %}
