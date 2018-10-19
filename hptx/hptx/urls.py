@@ -6,16 +6,20 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
+
 from search import views as search_views
+from user import urls as user_urls
 
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
 
+    url(r'^admin/autocomplete/', include(autocomplete_admin_urls)),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+    url(r'^community/', include(user_urls)),
 
     url(r'^search/$', search_views.search, name='search'),
-    url(r'^tag/(?P<slug>[\w-]+)/$', search_views.tag_page, name='tag'), 
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
@@ -34,4 +38,5 @@ if settings.DEBUG:
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
