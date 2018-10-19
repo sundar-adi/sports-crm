@@ -24,6 +24,16 @@ export default {
     },
     email: {
       type: String
+    },
+    paymentUrl: {
+      type: String
+    },
+    paymentPayload: {
+      type: Object,
+      default: () => new Object()
+    },
+    successUrl: {
+      type: String
     }
   },
   data() {
@@ -54,10 +64,18 @@ export default {
         image: this.image,
         locale: 'auto',
         token: (token) => {
-          console.log("ole", token)
           this.loading = true;
-          // You can access the token ID with `token.id`.
-          // Get the token ID to your server-side code for use.
+          this.$axios.post(
+              this.paymentUrl,
+              {
+                'token': token.id,
+                ...this.paymentPayload
+              }
+          ).then(
+            (response) => {
+              window.open(this.successUrl, "_self");
+            }
+          )
         }
       });
       window.addEventListener('popstate', () => {

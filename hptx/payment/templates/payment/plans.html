@@ -16,7 +16,10 @@
         image="https://hptx.us/images/hptx/HP-logo-9.png"
         description="{{ plan.nickname }}"
         :amount="{{ plan.amount|stripe_amount }}"
-        email="{{ user.email }}">
+        email="{{ user.email }}"
+        payment-url="{% url 'payment:rest:subscribe' %}"
+        :payment-payload="{'plan': '{{plan.stripe_id}}'}"
+        success-url="{% url 'payment:subscription_success' %}">
           Subscribe
       </stripe-button>
     </li>
