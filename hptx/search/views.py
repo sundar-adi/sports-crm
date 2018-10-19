@@ -41,7 +41,7 @@ def tag_page(request, slug):
 
     search_results = ArticlePage.objects.filter(
         tags__slug=slug
-    )
+    ).live()
 
     # Pagination
     paginator = Paginator(search_results, 10)

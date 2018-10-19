@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
+from wagtail.images.edit_handlers import ImageChooserPanel
 
 from taggit.models import TagBase
 
@@ -74,6 +75,12 @@ class Tag(TagBase):
         blank=True,
         null=True
     )
+
+    panels = [
+        ImageChooserPanel('main_image'),
+        ImageChooserPanel('secondary_image'),
+        ImageChooserPanel('hp_logo'),
+    ]
 
 
 class HomePage(Page):
