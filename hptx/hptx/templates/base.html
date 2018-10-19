@@ -28,7 +28,23 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
-        {% block content %}{% endblock %}
+        <section class="header">
+          <h1>HEADER</h1>
+        </section>
+        <section class="content">
+          <section class="left-sidebar">
+            <h1>LEFT SIDEBAR</h1>
+          </section>
+          <section class="main-content">
+            {% block content %}{% endblock %}
+          </section>
+          <section class="right-sidebar">
+            <h1>RIGHT SIDEBAR</h1>
+          </section>
+        </section>
+        <section class="footer">
+            <h1>FOOTER</h1>
+        </section>
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/hptx.js' %}"></script>
