@@ -1,9 +1,5 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
-from django.views.generic import TemplateView
-
-from djstripe.mixins import PaymentsContextMixin
-from djstripe.models import Plan
 
 from wagtail.core.models import Page
 from wagtail.search.models import Query
@@ -36,7 +32,3 @@ def search(request):
         'search_query': search_query,
         'search_results': search_results,
     })
-
-
-class PlansView(PaymentsContextMixin, TemplateView):
-    template_name = "search/plans.html"

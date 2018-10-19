@@ -6,6 +6,7 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from payment import views as payment_views
 from search import views as search_views
 
 urlpatterns = [
@@ -16,7 +17,7 @@ urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
 
     url(r'^search/$', search_views.search, name='search'),
-    url(r'^plans/$', search_views.PlansView.as_view(), name='plans'),
+    url(r'^plans/$', payment_views.PlansView.as_view(), name='plans'),
     url(r'^user/', include(('user.urls', 'user'), namespace="user")),
 
     # For anything not caught by a more specific rule above, hand over to
