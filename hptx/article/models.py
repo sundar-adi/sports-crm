@@ -5,7 +5,6 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.admin.edit_handlers import (
     FieldPanel, StreamFieldPanel, MultiFieldPanel)
 from wagtail.core import blocks
-from wagtail.core.fields import RichTextField
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
 from wagtail.images.blocks import ImageChooserBlock
@@ -28,14 +27,6 @@ class ArticleTag(TaggedItemBase):
         'article.ArticlePage',
         on_delete=models.CASCADE,
         related_name='tagged_items')
-
-
-class ArticleIndexPage(Page):
-    intro = RichTextField(blank=True)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
-    ]
 
 
 class ArticlePage(Page):
@@ -87,3 +78,20 @@ class ArticlePage(Page):
         ], heading=_('People')),
         StreamFieldPanel('body'),
     ]
+
+
+class ArticleTagIndexPage(Page):
+
+    def get_context(self, request):
+
+        tag = request.GET.get('tag')
+        articles = ArticlePage.objects.filter(
+            tags__name__iexact=tag).live()
+
+        context = super().get_context(request)
+        context['articles'] = articles
+        try:
+            context['tag'] = Tag.objects.get(name__iexact=tag)
+        except Tag.DoesNotExist:
+            pass
+        return context
