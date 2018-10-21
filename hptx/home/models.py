@@ -1,15 +1,20 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import (
+    FieldPanel, MultiFieldPanel, InlinePanel)
 from wagtail.core.fields import RichTextField
-from wagtail.core.models import Page
+from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from modelcluster.fields import ParentalKey
+from wagtailmodelchooser import register_model_chooser
 from taggit.models import TagBase
+from wagtailmodelchooser.edit_handlers import ModelChooserPanel
 
 
-class Tag(TagBase):
+@register_model_chooser
+class Tag(Orderable, TagBase):
     description = models.TextField(
         verbose_name=_('Description'),
     )
@@ -97,10 +102,58 @@ class Tag(TagBase):
     ]
 
 
+class TagLinkTopMenu(Orderable, models.Model):
+    page = ParentalKey(
+        'home.HomePage',
+        on_delete=models.CASCADE,
+        related_name='top_menu',
+    )
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_('name'),
+    )
+    tag = models.ForeignKey(
+        'home.Tag',
+        on_delete=models.CASCADE
+    )
+
+    panels = [
+        FieldPanel('name'),
+        ModelChooserPanel('tag'),
+    ]
+
+
+class TagLinkLeftMenu(Orderable, models.Model):
+    page = ParentalKey(
+        'home.HomePage',
+        on_delete=models.CASCADE,
+        related_name='left_menu',
+    )
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_('name'),
+    )
+    tag = models.ForeignKey(
+        'home.Tag',
+        on_delete=models.CASCADE
+    )
+
+    panels = [
+        FieldPanel('name'),
+        ModelChooserPanel('tag'),
+    ]
+
+
 class HomePage(Page):
 
-    body = RichTextField(blank=True)
+    twitter_handler = models.CharField(
+        max_length=255,
+        verbose_name=_('twitter handler'),
+        blank=True,
+    )
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full"),
+        InlinePanel('top_menu', label='Top menu'),
+        InlinePanel('left_menu', label='Left menu'),
+        FieldPanel('twitter_handler'),
     ]

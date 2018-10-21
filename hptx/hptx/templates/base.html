@@ -34,12 +34,16 @@
         <section class="content">
           <section class="left-sidebar">
             <h1>LEFT SIDEBAR</h1>
+            {% block left-sidebar-content %}
+            {% endblock left-sidebar-content %}
           </section>
           <section class="main-content">
             {% block content %}{% endblock %}
           </section>
           <section class="right-sidebar">
             <h1>RIGHT SIDEBAR</h1>
+            {% block right-sidebar-content %}
+            {% endblock right-sidebar-content %}
           </section>
         </section>
         <section class="footer">
