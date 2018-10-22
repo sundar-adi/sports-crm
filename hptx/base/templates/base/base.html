@@ -27,7 +27,8 @@
   <body class="{% block body_class %}{% endblock %}">
     <div {% block vue_app %}id="app"{% endblock %}>
       <header class="header">
-        <h1>HEADER</h1>
+        {% wagtailuserbar %}
+        <h1 style="display: inline-block;">HEADER</h1>
         <table style="float: right;">
           <tr>
             {% if not user.is_authenticated %}
@@ -59,9 +60,6 @@
       <section class="footer">
           <h1>FOOTER</h1>
       </section>
-      {% wagtailuserbar %}
-
-      {% block content %}{% endblock %}
     </div>
 
     {# Global javascript #}
