@@ -3,7 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from wagtail.admin.edit_handlers import (
     FieldPanel, MultiFieldPanel, InlinePanel)
-from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 
