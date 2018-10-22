@@ -25,10 +25,47 @@
       {% endblock %}
   </head>
   <body class="{% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
     <div {% block vue_app %}id="app"{% endblock %}>
-      <header class="header">
-        {% wagtailuserbar %}
-        <h1 style="display: inline-block;">HEADER</h1>
+      <header class="header uk-margin-bottom">
+        <div class="uk-navbar-container">
+          <div class="uk-container" uk-navbar>
+            <div class="uk-navbar-left">
+                <a href="" class="uk-navbar-item uk-logo">Logo!</a>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">...</ul>
+                <div class="uk-navbar-item">...</div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="uk-container">
+        <div class="uk-grid-small" uk-grid>
+          <aside class="uk-width-1-5">
+            <div class="uk-card uk-card-default">
+              <h1>LEFT SIDEBAR</h1>
+              {% block left-sidebar-content %}
+              {% endblock left-sidebar-content %}
+            </div>
+          </aside>
+          <main class="uk-width-expand">
+            <div class="uk-card uk-card-default">
+              MAIN
+              {% block content %}{% endblock %}
+            </div>
+          </main>
+          <aside class="uk-width-1-4">
+            <div class="uk-card uk-card-default">
+              <h1>RIGHT SIDEBAR</h1>
+              {% block right-sidebar-content %}
+              {% endblock right-sidebar-content %}
+            </div>
+
+          </aside>
+        </div>
+      </div>
+        <!-- <h1 style="display: inline-block;">HEADER</h1>
         <table style="float: right;">
           <tr>
             {% if not user.is_authenticated %}
@@ -40,23 +77,7 @@
             {% endif %}
             <td><a href="{% url 'plans'%}"> | Plans</a></td>
           </tr>
-        </table>
-      </header>
-      <section class="content">
-        <section class="left-sidebar">
-          <h1>LEFT SIDEBAR</h1>
-          {% block left-sidebar-content %}
-          {% endblock left-sidebar-content %}
-        </section>
-        <section class="main-content">
-          {% block content %}{% endblock %}
-        </section>
-        <section class="right-sidebar">
-          <h1>RIGHT SIDEBAR</h1>
-          {% block right-sidebar-content %}
-          {% endblock right-sidebar-content %}
-        </section>
-      </section>
+        </table> -->
       <section class="footer">
           <h1>FOOTER</h1>
       </section>
