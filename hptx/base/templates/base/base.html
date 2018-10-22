@@ -1,27 +1,79 @@
-{% load i18n staticfiles %}
-<!doctype html>
-<html lang="{{ LANGUAGE_CODE |default:'en'}}" {% block extrahtml %}{% endblock %}>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+{% load static wagtailuserbar %}
 
-  <meta name="author" content="HPTX"/>
+<!DOCTYPE html>
+<html class="no-js" lang="{{ LANGUAGE_CODE |default:'en'}}" {% block extrahtml %}{% endblock %}>
+  <head>
+      <meta charset="utf-8" />
+      <title>
+          {% block title %}
+              {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+          {% endblock %}
+          {% block title_suffix %}
+              {% with self.get_site.site_name as site_name %}
+                  {% if site_name %}- {{ site_name }}{% endif %}
+              {% endwith %}
+          {% endblock %}
+      </title>
+      <meta name="description" content="" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-</head>
-<body class="{% block body-class %}{% endblock %}">
-  <div {% block vue_app %}id="app"{% endblock %}>
-    {% block layout %}{% endblock layout %}
-  </div>
+      {# Global stylesheets #}
+      <link rel="stylesheet" type="text/css" href="{% static 'css/hptx.css' %}">
 
-  {% block scripts %}
+      {% block extra_css %}
+          {# Override this in templates to add extra stylesheets #}
+      {% endblock %}
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    <div {% block vue_app %}id="app"{% endblock %}>
+      <header class="header">
+        {% wagtailuserbar %}
+        <h1 style="display: inline-block;">HEADER</h1>
+        <table style="float: right;">
+          <tr>
+            {% if not user.is_authenticated %}
+            <td><a href="{% url 'user:signup'%}">Sign up</a></td>
+            <td><a href="{% url 'user:login'%}"> | Log in</a></td>
+            {% else %}
+            <td>Hello, {{ user.first_name }} {{ user.last_name }}</td>
+            <td><a href="{% url 'user:logout'%}"> | Log out</a></td>
+            {% endif %}
+            <td><a href="{% url 'plans'%}"> | Plans</a></td>
+          </tr>
+        </table>
+      </header>
+      <section class="content">
+        <section class="left-sidebar">
+          <h1>LEFT SIDEBAR</h1>
+          {% block left-sidebar-content %}
+          {% endblock left-sidebar-content %}
+        </section>
+        <section class="main-content">
+          {% block content %}{% endblock %}
+        </section>
+        <section class="right-sidebar">
+          <h1>RIGHT SIDEBAR</h1>
+          {% block right-sidebar-content %}
+          {% endblock right-sidebar-content %}
+        </section>
+      </section>
+      <section class="footer">
+          <h1>FOOTER</h1>
+      </section>
+    </div>
 
-  <!-- VUE SCRIPT -->
-  {% if debug %}
-  <script src="http://localhost:9000/static/js/app.buildVue.js"></script>
-  {% else %}
-  <script src="{% static 'js/app.buildVue.js' %}"></script>
-  {% endif %}
+    {# Global javascript #}
+    <script type="text/javascript" src="{% static 'js/hptx.js' %}"></script>
 
-  {% endblock scripts %}
-</body>
+    {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+    {% endblock %}
+
+    <!-- VUE SCRIPT -->
+    {% if debug %}
+    <script src="http://localhost:9000/static/js/app.buildVue.js"></script>
+    {% else %}
+    <script src="{% static 'js/app.buildVue.js' %}"></script>
+    {% endif %}
+  </body>
 </html>

@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+
+{% load stripe_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+  <ul>
+  {% for plan in plans %}
+    <li>{{ plan.nickname }}</li>
+    <li>$ {{ plan.amount }}</li>
+    <li>
+      <stripe-button
+        public-key="{{ STRIPE_PUBLIC_KEY }}"
+        name="Houston Preeminence Media Incorporated"
+        image="https://hptx.us/images/hptx/HP-logo-9.png"
+        description="{{ plan.nickname }}"
+        :amount="{{ plan.amount|stripe_amount }}"
+        email="{{ user.email }}"
+        payment-url="{% url 'payment:rest:subscribe' %}"
+        :payment-payload="{'plan': '{{plan.stripe_id}}'}"
+        success-url="{% url 'payment:subscription_success' %}">
+          Subscribe
+      </stripe-button>
+    </li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="https://checkout.stripe.com/checkout.js"></script>
+{% endblock %}

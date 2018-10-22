@@ -2,16 +2,18 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
+
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
-from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
-
+from payment import views as payment_views
 from search import views as search_views
 from user import urls as user_urls
 
 urlpatterns = [
+    url(r'^stripe/', include('djstripe.urls', namespace='djstripe')),
     url(r'^django-admin/', admin.site.urls),
 
     url(r'^admin/autocomplete/', include(autocomplete_admin_urls)),
@@ -20,6 +22,11 @@ urlpatterns = [
     url(r'^community/', include(user_urls)),
 
     url(r'^search/$', search_views.search, name='search'),
+    url(r'^plans/$', payment_views.PlansView.as_view(), name='plans'),
+    url(r'^user/', include(('user.urls', 'user'), namespace="user")),
+    url(
+        r'^payment/',
+        include(('payment.urls', 'payment'), namespace="payment")),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in

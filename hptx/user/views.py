@@ -1,7 +1,38 @@
+from django.contrib.auth import views as auth_views
+from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView
+from django.views.generic import FormView, TemplateView
+from django.urls import reverse
 
+from user.forms import SignUpForm
 from user.models import User
+
+
+# Create your views here.
+class LoginView(auth_views.LoginView):
+    redirect_authenticated_user = True
+    template_name = "user/auth/login.html"
+
+    def get_success_url(self):
+        url = self.get_redirect_url()
+        return url or reverse('plans')
+
+
+class SignupView(FormView):
+    form_class = SignUpForm
+    success_url = '/plans'
+    template_name = "user/auth/signup.html"
+
+    def form_valid(self, form):
+        user = form.save()
+        raw_password = form.cleaned_data.get('password1')
+        user = authenticate(username=user.username, password=raw_password)
+        login(self.request, user)
+        return super().form_valid(form)
+
+
+class LogoutView(auth_views.LogoutView):
+    next_page = "/"
 
 
 class ProfileView(TemplateView):

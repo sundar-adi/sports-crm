@@ -46,7 +46,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        query: {
+          presets: ['stage-2', ]
+        }
       },
       {
         test: /\.(woff|woff2?|eot|ttf|otf)(\?.*)?$/,
