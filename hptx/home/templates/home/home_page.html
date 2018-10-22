@@ -1,11 +1,29 @@
 {% extends "base/base.html" %}
 
+{% load wagtailcore_tags %}
+
 {% block body_class %}template-homepage{% endblock %}
 
+{% block left-sidebar-content %}
+<ul>
+{% for link in page.left_menu.all %}
+<li><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock left-sidebar-content %}
+
+{% block right-sidebar-content %}
+{% if page.twitter_handler %}
+<a class="twitter-timeline" href="https://twitter.com/{{ page.twitter_handler }}">Tweets by {{ page.twitter_handler }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+{% endif %}
+{% endblock %}
+
 {% block content %}
-    <h1>Welcome to your new Wagtail site!</h1>
+<ul>
+{% for link in page.top_menu.all %}
+<li><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
+{% endfor %}
+</ul>
 
-    <p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a> (make sure you have run "./manage.py createsuperuser" in the console first).</p>
-
-    <p>If you haven't already given the documentation a read, head over to <a href="http://docs.wagtail.io/">http://docs.wagtail.io</a> to start building on Wagtail</p>
+  {{ page.body|richtext }}
 {% endblock %}

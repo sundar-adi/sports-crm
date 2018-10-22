@@ -26,8 +26,9 @@
   </head>
   <body class="{% block body_class %}{% endblock %}">
     <div {% block vue_app %}id="app"{% endblock %}>
-      <header style="float: right;">
-        <table>
+      <header class="header">
+        <h1>HEADER</h1>
+        <table style="float: right;">
           <tr>
             {% if not user.is_authenticated %}
             <td><a href="{% url 'user:signup'%}">Sign up</a></td>
@@ -40,23 +41,41 @@
           </tr>
         </table>
       </header>
+      <section class="content">
+        <section class="left-sidebar">
+          <h1>LEFT SIDEBAR</h1>
+          {% block left-sidebar-content %}
+          {% endblock left-sidebar-content %}
+        </section>
+        <section class="main-content">
+          {% block content %}{% endblock %}
+        </section>
+        <section class="right-sidebar">
+          <h1>RIGHT SIDEBAR</h1>
+          {% block right-sidebar-content %}
+          {% endblock right-sidebar-content %}
+        </section>
+      </section>
+      <section class="footer">
+          <h1>FOOTER</h1>
+      </section>
       {% wagtailuserbar %}
 
       {% block content %}{% endblock %}
     </div>
 
-      {# Global javascript #}
-      <script type="text/javascript" src="{% static 'js/hptx.js' %}"></script>
+    {# Global javascript #}
+    <script type="text/javascript" src="{% static 'js/hptx.js' %}"></script>
 
-      {% block extra_js %}
-          {# Override this in templates to add extra javascript #}
-      {% endblock %}
+    {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+    {% endblock %}
 
-      <!-- VUE SCRIPT -->
-      {% if debug %}
-      <script src="http://localhost:9000/static/js/app.buildVue.js"></script>
-      {% else %}
-      <script src="{% static 'js/app.buildVue.js' %}"></script>
-      {% endif %}
+    <!-- VUE SCRIPT -->
+    {% if debug %}
+    <script src="http://localhost:9000/static/js/app.buildVue.js"></script>
+    {% else %}
+    <script src="{% static 'js/app.buildVue.js' %}"></script>
+    {% endif %}
   </body>
 </html>

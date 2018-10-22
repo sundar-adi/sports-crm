@@ -2,19 +2,24 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
+
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from payment import views as payment_views
 from search import views as search_views
+from user import urls as user_urls
 
 urlpatterns = [
     url(r'^stripe/', include('djstripe.urls', namespace='djstripe')),
     url(r'^django-admin/', admin.site.urls),
 
+    url(r'^admin/autocomplete/', include(autocomplete_admin_urls)),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+    url(r'^community/', include(user_urls)),
 
     url(r'^search/$', search_views.search, name='search'),
     url(r'^plans/$', payment_views.PlansView.as_view(), name='plans'),
@@ -40,4 +45,5 @@ if settings.DEBUG:
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

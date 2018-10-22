@@ -1,0 +1,60 @@
+{% load static wagtailuserbar %}
+
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}
+                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+                {% with self.get_site.site_name as site_name %}
+                    {% if site_name %}- {{ site_name }}{% endif %}
+                {% endwith %}
+            {% endblock %}
+        </title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/hptx.css' %}">
+
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+
+        <section class="header">
+          <h1>HEADER</h1>
+        </section>
+        <section class="content">
+          <section class="left-sidebar">
+            <h1>LEFT SIDEBAR</h1>
+            {% block left-sidebar-content %}
+            {% endblock left-sidebar-content %}
+          </section>
+          <section class="main-content">
+            {% block content %}{% endblock %}
+          </section>
+          <section class="right-sidebar">
+            <h1>RIGHT SIDEBAR</h1>
+            {% block right-sidebar-content %}
+            {% endblock right-sidebar-content %}
+          </section>
+        </section>
+        <section class="footer">
+            <h1>FOOTER</h1>
+        </section>
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/hptx.js' %}"></script>
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+    </body>
+</html>
