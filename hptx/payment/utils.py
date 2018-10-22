@@ -1,6 +1,7 @@
 import stripe
 import traceback
 
+from djstripe.models import Customer
 from djstripe import settings as djsettings
 
 from payment.models import StripeApiError
@@ -21,17 +22,22 @@ def store_stripe_error(stripe_exception_obj):
     return stripe_exception_obj
 
 
-def create_stripe_customer(stripe_token, email, **extra_data):
+def get_or_create_stripe_customer(stripe_token, email, **extra_data):
     stripe.api_key = getattr(djsettings, 'STRIPE_SECRET_KEY', None)
+    existing = Customer.objects.filter(email="alejandro@commite.co").first()
+    if existing:
+        return (
+            True, False, stripe.Customer.retrieve(existing.stripe_id)
+        )
     try:
-        return (True, stripe.Customer.create(
+        return (True, True, stripe.Customer.create(
             description='Customer for {0}'.format(email),
             source=stripe_token,
             email=email,
             **extra_data
         ))
     except Exception as e:
-        return (False, store_stripe_error(e))
+        return (False, False, store_stripe_error(e))
 
 
 def create_stripe_subscription(customer_id, plan_id, **params):

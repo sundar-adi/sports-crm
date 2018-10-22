@@ -6,7 +6,8 @@ from rest_framework.views import APIView
 from djstripe.models import Customer
 
 from payment.serializers import SubscribeSerializer
-from payment.utils import create_stripe_customer, create_stripe_subscription
+from payment.utils import (
+    get_or_create_stripe_customer, create_stripe_subscription)
 
 
 class SubscribeView(APIView):
@@ -21,7 +22,7 @@ class SubscribeView(APIView):
         serializer = SubscribeSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        res, customer = create_stripe_customer(
+        res, created, customer = get_or_create_stripe_customer(
             serializer.data.get('token'),
             self.request.user.email
         )
