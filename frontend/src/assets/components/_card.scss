@@ -1,0 +1,8 @@
+$card-body-padding-vertical: round($global-medium-gutter / 2);
+$card-body-padding-vertical-l: round($global-gutter / 2);
+$card-default-box-shadow: none;
+
+
+.uk-card-default {
+  border-radius: $border-rounded-border-radius;
+}

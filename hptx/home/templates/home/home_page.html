@@ -4,20 +4,6 @@
 
 {% block body_class %}template-homepage{% endblock %}
 
-{% block left-sidebar-content %}
-<ul>
-{% for link in page.left_menu.all %}
-<li><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
-{% endfor %}
-</ul>
-{% endblock left-sidebar-content %}
-
-{% block right-sidebar-content %}
-{% if page.twitter_handler %}
-<a class="twitter-timeline" href="https://twitter.com/{{ page.twitter_handler }}">Tweets by {{ page.twitter_handler }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-{% endif %}
-{% endblock %}
-
 {% block content %}
 <ul>
 {% for link in page.top_menu.all %}

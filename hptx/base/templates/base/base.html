@@ -43,11 +43,9 @@
       <div class="uk-container">
         <div class="uk-grid-small" uk-grid>
           <aside class="uk-width-1-5">
-            <div class="uk-card uk-card-default">
-              <h1>LEFT SIDEBAR</h1>
               {% block left-sidebar-content %}
+              {% include "base/left-bar.html" %}
               {% endblock left-sidebar-content %}
-            </div>
           </aside>
           <main class="uk-width-expand">
             <div class="uk-card uk-card-default">
@@ -59,9 +57,9 @@
             <div class="uk-card uk-card-default">
               <h1>RIGHT SIDEBAR</h1>
               {% block right-sidebar-content %}
+              {% include "base/right-bar.html" %}
               {% endblock right-sidebar-content %}
             </div>
-
           </aside>
         </div>
       </div>
@@ -85,6 +83,10 @@
 
     {# Global javascript #}
     <script type="text/javascript" src="{% static 'js/hptx.js' %}"></script>
+
+    {% if page and page.twitter_handler %}
+     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    {% endif %}
 
     {% block extra_js %}
         {# Override this in templates to add extra javascript #}
