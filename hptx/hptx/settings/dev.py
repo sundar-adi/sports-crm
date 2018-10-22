@@ -7,10 +7,19 @@ DEBUG = True
 SECRET_KEY = '&010bv8s9rxfbp9w%!rt0_vn&fbbbag4u46rt25g+zttvd1)zy'
 
 # SECURITY WARNING: define the correct hosts in production!
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+INSTALLED_APPS += [
+    'livereload',
+]
+
+MIDDLEWARE += [
+    'livereload.middleware.LiveReloadScript',
+]
+
+LIVERELOAD_HOST = "0.0.0.0"
 
 try:
     from .local import *
