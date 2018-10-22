@@ -1,7 +1,14 @@
 <template>
-  <button v-if="!loading" type="button" @click="open"><slot></slot></button>
+  <button class="uk-button uk-button-default" v-if="!loading" type="button" @click="open"><slot></slot></button>
   <span v-else>We're processing your payment. Please, wait...</span>
 </template>
+
+<style lang="scss" scoped>
+
+  .uk-button {
+    font-weight: bold;
+  }
+</style>
 
 <script>
 export default {

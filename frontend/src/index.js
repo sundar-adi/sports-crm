@@ -1,3 +1,8 @@
+// UIKIT
+import UIkit from 'uikit';
+import './assets/app.scss'; 
+// VUE
+
 import Vue from 'vue'
 
 import Components from './components'
