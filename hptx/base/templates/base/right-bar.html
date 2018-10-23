@@ -1,9 +1,7 @@
 {% load wagtailcore_tags %}
 
 <div class="uk-card uk-card-default uk-margin-bottom">
-  <div class="uk-card-header">
-    <h3 class="uk-card-title">+ Tweets by {{ page.twitter_handler }}</h3>
-  </div>
+  <h3 class="uk-card-title">+ Tweets by {{ page.twitter_handler }}</h3>
   <div class="uk-card-body">
     {% if page.twitter_handler %}
     <a class="twitter-timeline" data-chrome="noheader" href="https://twitter.com/{{ page.twitter_handler }}"></a>
