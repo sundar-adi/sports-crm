@@ -24,8 +24,14 @@ $brand-action-gradient: linear-gradient(153.43deg, #FF7800 0%, $orange 100%);
 $font-primary: "Avenir", sans-serif;
 $font-title: "DIN Condensed Bold", sans-serif;
 
-$fs-xl: 2rem; // 36px
+$fs-xl: 1.75rem; // 28px
 $fs-lg: 1.5rem; // 24px
 $fs-md: 1.25rem; // 20px
-$fs-sm: 0.75rem; // 12px
-$fs-xs: 0.5rem; // 8px
+$fs-sm: 0.875rem; // 14px
+$fs-xs: 0.75rem; // 12px
+$fs-xxs: 0.5rem; // 8px
+
+$fw-bold: 900;
+$fw-medium: 500;
+$fw-regular: 400;
+$fw-light: 300;
