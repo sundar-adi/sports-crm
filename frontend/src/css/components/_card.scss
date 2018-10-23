@@ -8,3 +8,9 @@ $card-default-box-shadow: none;
 .uk-card-default {
   border-radius: $border-rounded-border-radius;
 }
+
+.uk-card--twitter-feed {
+  .uk-card-body {
+    padding-top: 0.5rem;
+  }
+}

@@ -1,0 +1,9 @@
+$button-primary-background: $orange;
+$button-primary-color: $white;
+
+@mixin hook-button-primary {
+  background-image: $brand-action-gradient;
+  border-radius: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
