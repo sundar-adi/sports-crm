@@ -5,6 +5,10 @@ import './css/app.scss';
 
 // Assets
 import './assets'
+
+// Fonts
+import './fonts'
+
 // VUE
 
 import Vue from 'vue'

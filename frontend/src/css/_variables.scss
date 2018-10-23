@@ -1,3 +1,25 @@
-$blue: #121E4E;
+// Colors
+$navy: #121E4E;
+$orange: #FF4300;
 
+$facebook: #3B5998;
+$twitter: #00ACED;
+$instagram: #E4405F; 
+
+// Greys
 $grey: #E9ECEF;
+
+// Theme
+$brand-primary-color: $orange;
+$brand-secondary-color: $navy;
+
+
+// Fonts
+$font-primary: "Avenir", sans-serif;
+$font-title: "DIN Condensed Bold", sans-serif;
+
+$fs-xl: 2rem; // 36px
+$fs-lg: 1.5rem; // 24px
+$fs-md: 1.25rem; // 20px
+$fs-sm: 0.75rem; // 12px
+$fs-xs: 0.5rem; // 8px

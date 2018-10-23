@@ -54,10 +54,10 @@ module.exports = {
         }
       },
       {
-        test: /\.(woff|woff2?|eot|ttf|otf)(\?.*)?$/,
+        test: /\.(woff|woff2?|eot|ttf|otf|ttc)(\?.*)?$/,
         loader: 'file-loader',
         options: {
-          name: 'fonts/[name].[ext]?[hash]'
+          name: '[path][name].[ext]?[hash]'
         }
       },
       {
