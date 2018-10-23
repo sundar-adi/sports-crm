@@ -49,6 +49,27 @@ $card-primary-color: $brand-secondary;
     font-size: $fs-xs;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
+    padding-bottom: 0.75rem;
+
+    .uk-hp-article-image {
+      min-width: 100%;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+      position: relative;
+
+      &::after {
+        border-bottom: 1px solid $global-border;
+        bottom: 0;
+        content: "";
+        display: inline-block;
+        height: 1px;
+        left: 0.125rem;
+        right: 0.125rem;
+        width: 100%;
+      }
+    }
   }
 
   .uk-hp-card-primary-intro {

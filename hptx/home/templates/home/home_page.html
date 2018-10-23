@@ -5,6 +5,26 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
+<article class="uk-card uk-card-primary">
+  <div class="uk-card-header">
+    Most recent
+  </div>
+  <div class="uk-card-body">
+    <h3 class="uk-card-title">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
+    <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top"><span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span><span><span class="uk-margin-right">Views 8108</span> <a href="" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a></span></p>
+    <div>
+      <img class="uk-hp-article-image" src="http://e00-marca.uecdn.es/assets/multimedia/imagenes/2016/12/19/14821849138432.jpg" />
+      <p class="uk-hp-card-primary-intro">Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts....</p>
+    </div>
+  </div>
+  <div class="uk-card-body">
+    <h3 class="uk-card-title">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
+    <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top"><span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span><span><span class="uk-margin-right">Views 8108</span> <a href="" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a></span></p>
+    <div>
+      <p class="uk-hp-card-primary-intro">Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts....</p>
+    </div>
+  </div>
+</article>
 <ul>
 {% for link in page.top_menu.all %}
 <li><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>

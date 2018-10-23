@@ -1,22 +1,26 @@
+{% load staticfiles %}
 {% load wagtailcore_tags %}
 
 <div class="uk-card uk-card-default uk-margin-bottom">
-  <div class="uk-card-header">
-    <h3 class="uk-card-title">+ Topics</h3>
-  </div>
   <div class="uk-card-body">
-    <ul class="uk-list">
-      <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge">+</span> Facebook</li>
-      <li>Twitter</li>
+    <ul class="uk-list uk-list--menu uk-list--primary">
+      <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge fc-brand-primary">+</span><span class="fc-brand-secondary-lighter">Topics</span></li>
+    </ul>
+  </div>
+  <hr class="hptx-divider-nogutter">
+  <div class="uk-card-body">
+    <ul class="uk-list uk-list--menu uk-list--primary">
+      <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge">+</span><span>Facebook</span></li>
+      <li class="uk-flex uk-flex-middle"><img class="uk-list__hp-badge" src="{% static 'src/assets/Popular topics/NFL Icon.png'%}" alt="" /><span>Twitter</span></li>
       <li>Instagram</li>
       {% for link in page.left_menu.all %}
-      <li><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
+      <li><a class="hp-link-primary" href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
       {% endfor %}
     </ul>
   </div>
-  <hr class="hptx-divider-quarter">
+  <hr class="hptx-divider-nogutter">
   <div class="uk-card-body">
-    <ul class="uk-list">
+    <ul class="uk-list uk-list--menu">
       <li>Facebook</li>
       <li>Twitter</li>
       <li>Instagram</li>
@@ -25,10 +29,10 @@
 </div>
 <div class="uk-card uk-card-default">
   <div class="uk-card-body">
-    <ul class="uk-list">
-      <li>Facebook</li>
-      <li>Twitter</li>
-      <li>Instagram</li>
+    <ul class="uk-list uk-list--menu">
+      <li><span class="uk-list__hp-badge fc-facebook"><i class="fab fa-facebook"></i></span>Facebook</li>
+      <li><span class="uk-list__hp-badge fc-twitter"><i class="fab fa-twitter"></i></span>Twitter</li>
+      <li><span class="uk-list__hp-badge fc-instagram"><i class="fab fa-instagram"></i></span>Instagram</li>
     </ul>
   </div>
 </div>
