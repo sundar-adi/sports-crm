@@ -1,8 +1,10 @@
 // UIKIT
 import UIkit from 'uikit';
+
 import './css/app.scss';
 
-require("./assets/Feed/LogoHP.png");
+// Assets
+import './assets'
 // VUE
 
 import Vue from 'vue'

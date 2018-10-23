@@ -1,4 +1,5 @@
 const WriteFilePlugin = require('write-file-webpack-plugin');
+const os = require('os');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -129,6 +130,11 @@ module.exports = {
     })
   ],
 };
+
+if(os.platform() !== "darwin")
+  module.exports.node = {
+    "fs": "empty",
+  }
 
 
 if (process.env.NODE_ENV === 'production') {
