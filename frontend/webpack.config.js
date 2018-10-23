@@ -1,3 +1,4 @@
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -62,7 +63,7 @@ module.exports = {
         test: /\.(png|jpg|gif)$/,
         loader: 'file-loader',
         options: {
-          name: 'img/[name].[ext]?[hash]'
+          name: '[path][name].[ext]?[hash]'
         }
       },
       {
@@ -100,11 +101,12 @@ module.exports = {
     app: './src/index.js',
   },
   output: {
-    publicPath: 'http://localhost:9000/static/js/',
+    path: path.resolve(__dirname, '../hptx/hptx/static'),
+    publicPath: 'http://localhost:9000/static/',
     filename: '[name].buildVue.js',
   },
   devServer: {
-    publicPath: 'http://localhost:9000/static/js/',
+    publicPath: 'http://localhost:9000/static/',
     port: 9000,
     hot: true,
     headers: {
@@ -121,6 +123,10 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new WriteFilePlugin({
+        test: (val) => val.indexOf("hot-update") == -1,
+        useHashIndex: true
+    })
   ],
 };
 
@@ -131,8 +137,8 @@ if (process.env.NODE_ENV === 'production') {
 
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.output = {
-    path: path.resolve(__dirname, '../hptx/hptx/static/js'),
-    publicPath: '/static/js',
+    path: path.resolve(__dirname, '../hptx/hptx/static'),
+    publicPath: '/static',
     filename: '[name].buildVue.js'
   };
 

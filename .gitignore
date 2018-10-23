@@ -59,7 +59,7 @@ hptx/media_root/
 hptx/media/
 
 # Static directory
-hptx/static
+hptx/hptx/static
 frontend/styleguide/static
 frontend/styleguide/web/static
 

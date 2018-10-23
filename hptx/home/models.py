@@ -82,6 +82,7 @@ class Tag(Orderable, TagBase):
     )
 
     panels = [
+        FieldPanel('name'),
         FieldPanel('description'),
         MultiFieldPanel([
             FieldPanel('primary_color'),
