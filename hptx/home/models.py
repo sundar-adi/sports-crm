@@ -111,6 +111,13 @@ class TagLinkTopMenu(Orderable, models.Model):
         max_length=255,
         verbose_name=_('name'),
     )
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_('image'),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
     tag = models.ForeignKey(
         'home.Tag',
         on_delete=models.CASCADE
@@ -131,6 +138,38 @@ class TagLinkLeftMenu(Orderable, models.Model):
     name = models.CharField(
         max_length=255,
         verbose_name=_('name'),
+    )
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_('image'),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+    tag = models.ForeignKey(
+        'home.Tag',
+        on_delete=models.CASCADE
+    )
+
+    panels = [
+        FieldPanel('name'),
+        ModelChooserPanel('tag'),
+    ]
+
+
+class TagLinkLeftSubMenu(Orderable, models.Model):
+    page = ParentalKey(
+        'home.HomePage',
+        on_delete=models.CASCADE,
+        related_name='left_submenu',
+    )
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_('name'),
+    )
+    icon = models.CharField(
+        max_length=255,
+        verbose_name=_('icon'),
     )
     tag = models.ForeignKey(
         'home.Tag',
@@ -154,5 +193,6 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         InlinePanel('top_menu', label='Top menu'),
         InlinePanel('left_menu', label='Left menu'),
+        InlinePanel('left_submenu', label='Left submenu'),
         FieldPanel('twitter_handler'),
     ]
