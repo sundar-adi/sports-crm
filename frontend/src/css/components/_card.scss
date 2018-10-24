@@ -79,9 +79,20 @@ $card-primary-color: $brand-secondary;
 }
 
 @mixin hook-card-primary-title {
+  &.uk-card-title--important {
+    font-size: $fs-xl;
+  }
+
   color: $brand-secondary;
   font-family: $font-title;
-  font-size: $fs-xl;
+  font-size: $fs-lg;
   font-weight: 900;
   margin-bottom: 0.5rem;
+}
+
+.uk-hp-card-content {
+  display: flex;
+  flex-flow: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
