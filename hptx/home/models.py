@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.admin.edit_handlers import (
@@ -125,6 +126,7 @@ class TagLinkTopMenu(Orderable, models.Model):
 
     panels = [
         FieldPanel('name'),
+        ImageChooserPanel('image'),
         ModelChooserPanel('tag'),
     ]
 
@@ -153,6 +155,7 @@ class TagLinkLeftMenu(Orderable, models.Model):
 
     panels = [
         FieldPanel('name'),
+        ImageChooserPanel('image'),
         ModelChooserPanel('tag'),
     ]
 
@@ -170,6 +173,10 @@ class TagLinkLeftSubMenu(Orderable, models.Model):
     icon = models.CharField(
         max_length=255,
         verbose_name=_('icon'),
+        help_text=mark_safe(
+            'You should use icon\'s names from Font Awesome. You can check '
+            'the list here: <a href="https://fontawesome.com/icons?d=gallery" '
+            'target="_blank">Icon Gallery</a>.'),
     )
     tag = models.ForeignKey(
         'home.Tag',
@@ -178,6 +185,7 @@ class TagLinkLeftSubMenu(Orderable, models.Model):
 
     panels = [
         FieldPanel('name'),
+        FieldPanel('icon'),
         ModelChooserPanel('tag'),
     ]
 
