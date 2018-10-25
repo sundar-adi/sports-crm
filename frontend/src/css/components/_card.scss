@@ -51,6 +51,16 @@ $card-primary-color: $brand-secondary;
     }
   }
 
+  .uk-card-header--profile {
+    background-image: url('../assets/Feed/header-bg-big.png');
+    border-radius: $border-rounded-border-radius;
+    padding: 2rem;
+
+    &::before {
+      display: none;
+    }
+  }
+
   .uk-card-body {
     font-size: $fs-xs;
     padding-left: 1.25rem;
@@ -81,6 +91,10 @@ $card-primary-color: $brand-secondary;
   .uk-hp-card-primary-intro {
     color: $brand-secondary-lighter;
     font-size: $fs-sm;
+  }
+
+  .uk-hp-card-primary-wrapper {
+    padding: 0.5rem 0.5rem 0 0.5rem;
   }
 }
 
@@ -119,3 +133,4 @@ $card-secondary-color: $brand-secondary;
 @mixin hook-card-secondary-title {
   @include hook-card-primary-title()
 }
+

@@ -1,9 +1,29 @@
 {% extends "base/base.html" %}
 {% load wagtailcore_tags %}
 
+{% block body_class %}template-public-profile{% endblock %}
 {% block content %}
 
-  <h1>{{ user.get_fullname }}</h1>
-  <h2>{{ user.username }}</h2>
+<div class="uk-card uk-card-primary">
+  <div class="uk-hp-card-primary-wrapper">
+    <div class="uk-card-header uk-card-header--profile">
+        <img class="uk-align-left hptx-avatar hptx-avatar--rounded" data-src="https://images.unsplash.com/photo-1522201949034-507737bce479?fit=crop&w=80&h=80&q=80"
+        data-srcset="https://images.unsplash.com/photo-1522201949034-507737bce479?fit=crop&w=80&h=80&q=80 650w,
+                      https://images.unsplash.com/photo-1522201949034-507737bce479?fit=crop&w=80&h=80&q=80 1300w"
+        sizes="(min-width: 80px) 650px, 100vw" width="80" height="80" alt="{{ user.username }}" uk-img>
+        <h3 class="uk-card-title">{{ user.username }}</h3>
+    </div>
+  </div>
+  <div class="uk-card-body">
+      <a href="" uk-icon="twitter">@JosephSilva</a>
+      <a href="" uk-icon="location">Austin, Tx</a>
+  </div>
+  <hr class="uk-divider-icon">
+  <div class="uk-card-footer uk-card-footer--profile">
+    <p class=".uk-text-small">National Emmy award winning television sports journalist and author. Passionate about family, politics, fast cars and of course all sports!</p>
+  </div>
+</div>
+
+
 
 {% endblock %}

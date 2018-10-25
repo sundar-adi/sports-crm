@@ -1,0 +1,17 @@
+.hptx-avatar {
+    width: 80px;
+    height: 80px;
+
+    &.hptx-avatar--small {
+        width: 2rem;
+        height: 2rem;
+    }
+    
+    &.hptx-avatar--rounded {
+        border-radius: 2*$border-rounded-border-radius;
+    }
+
+    &.hptx-avatar--circle {
+        border-radius: 50%;
+    }
+}
