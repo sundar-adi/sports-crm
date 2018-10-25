@@ -2,6 +2,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
 from django.views.generic import FormView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
 from user.forms import SignUpForm
@@ -33,6 +34,18 @@ class SignupView(FormView):
 
 class LogoutView(auth_views.LogoutView):
     next_page = "/"
+
+
+class ProfileEditView(LoginRequiredMixin, TemplateView):
+    template_name = 'user/edit_profile.html'
+
+    def get_context_data(self, *args, **kwargs):
+        user = self.request.user
+        context = super().get_context_data(*args, **kwargs)
+        context.update({
+            'user': user
+        })
+        return context
 
 
 class ProfileView(TemplateView):
