@@ -1,0 +1,9 @@
+{% extends "base/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+  <h1>{{ user.get_fullname }}</h1>
+  <h2>{{ user.username }}</h2>
+
+{% endblock %}

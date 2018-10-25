@@ -28,6 +28,10 @@
 }
 
 // weights
+.fw-black {
+  font-weight: $fw-black;
+}
+
 .fw-bold {
   font-weight: $fw-bold;
 }
@@ -39,11 +43,6 @@
 .fw-regular {
    font-weight: $fw-regular;
  }
-
-.fw-light {
-   font-weight: $fw-light;
- }
-
 
 //sizes
 .fs-xl {

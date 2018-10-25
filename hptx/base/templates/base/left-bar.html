@@ -13,7 +13,7 @@
       <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge">+</span><span>Facebook</span></li>
       <li class="uk-flex uk-flex-middle"><img class="uk-list__hp-badge" src="{% static 'src/assets/Popular topics/NFL Icon.png'%}" alt="" /><span>Twitter</span></li>
       <li>Instagram</li>
-      {% for link in HOME_PAGE.left_menu.all %}
+      {% for link in homepage.left_menu.all %}
       <li><a class="hp-link-primary" href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
       {% endfor %}
     </ul>
@@ -24,6 +24,9 @@
       <li>Facebook</li>
       <li>Twitter</li>
       <li>Instagram</li>
+      {% for link in homepage.left_submenu.all %}
+      <li><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
+      {% endfor %}
     </ul>
   </div>
 </div>

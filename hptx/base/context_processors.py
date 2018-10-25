@@ -1,8 +1,17 @@
-def wagtail_home_page(request):
-    """
-    Add static-related context variables to the context.
-    """
-    if hasattr(request, 'site') and hasattr(request.site, 'root_page') \
-            and hasattr(request.site.root_page, 'homepage'):
-        return {'HOME_PAGE': request.site.root_page.homepage}
-    return {}
+# -*- coding: utf-8 -*-
+from home.models import HomePage
+
+
+def homepage(request):
+    site = request.site
+    root = site and site.root_page
+    if not root:
+        homepage = None
+    else:
+        try:
+            homepage = root.homepage
+        except HomePage.DoesNotExist:
+            homepage = None
+    return {
+        'homepage': homepage
+    }
