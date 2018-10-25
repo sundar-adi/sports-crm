@@ -25,12 +25,14 @@
     </ul>
   </div>
 </div>
+{% if homepage.has_social_links %}
 <div class="uk-card uk-card-default">
   <div class="uk-card-body">
     <ul class="uk-list uk-list--menu">
-      <li><span class="uk-list__hp-badge fc-facebook"><i class="fab fa-facebook"></i></span>Facebook</li>
-      <li><span class="uk-list__hp-badge fc-twitter"><i class="fab fa-twitter"></i></span>Twitter</li>
-      <li><span class="uk-list__hp-badge fc-instagram"><i class="fab fa-instagram"></i></span>Instagram</li>
+      {% if homepage.facebook_link %}<li><a href="{{ homepage.facebook_link }}"><span class="uk-list__hp-badge fc-facebook"><i class="fab fa-facebook"></i></span>Facebook</a></li>{% endif %}
+      {% if homepage.twitter_link %}<li><a href="{{ homepage.twitter_link }}"><span class="uk-list__hp-badge fc-twitter"><i class="fab fa-twitter"></i></span>Twitter</a></li>{% endif %}
+      {% if homepage.instagram_link %}<li><a href="{{ homepage.instagram_link }}"><span class="uk-list__hp-badge fc-instagram"><i class="fab fa-instagram"></i></span>Instagram</a></li>{% endif %}
     </ul>
   </div>
 </div>
+{% endif %}

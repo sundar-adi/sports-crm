@@ -193,9 +193,22 @@ class TagLinkLeftSubMenu(Orderable, models.Model):
 
 class HomePage(Page):
 
+    facebook_link = models.URLField(
+        verbose_name=_('facebook_link'),
+        blank=True,
+    )
+    twitter_link = models.URLField(
+        verbose_name=_('twitter_link'),
+        blank=True,
+    )
+    instagram_link = models.URLField(
+        verbose_name=_('instagram_link'),
+        blank=True,
+    )
     twitter_handler = models.CharField(
         max_length=255,
         verbose_name=_('twitter handler'),
+        help_text=_('For rendering the twitter timeline'),
         blank=True,
     )
 
@@ -203,5 +216,13 @@ class HomePage(Page):
         InlinePanel('top_menu', label='Top menu'),
         InlinePanel('left_menu', label='Left menu'),
         InlinePanel('left_submenu', label='Left submenu'),
-        FieldPanel('twitter_handler'),
+        MultiFieldPanel([
+            FieldPanel('facebook_link'),
+            FieldPanel('twitter_link'),
+            FieldPanel('instagram_link'),
+            FieldPanel('twitter_handler'),
+        ], heading=_('Social media')),
     ]
+
+    def has_social_links(self):
+        return any((self.facebook_link, self.twitter_link, self.instagram_link))
