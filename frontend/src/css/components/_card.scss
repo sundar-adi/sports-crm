@@ -15,6 +15,13 @@ $card-default-box-shadow: none;
   }
 }
 
+.uk-card-body {
+  &.uk-card-body--slim {
+    padding-bottom: 0.75rem;
+    padding-top: 0.75rem;
+  }
+}
+
 $card-primary-color-mode: "none";
 $card-primary-color: $brand-secondary;
 

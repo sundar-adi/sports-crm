@@ -1,8 +1,9 @@
 {% load staticfiles %}
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 
 <div class="uk-card uk-card-default uk-margin-bottom">
-  <div class="uk-card-body">
+  <div class="uk-card-body uk-card-body--slim">
     <ul class="uk-list uk-list--menu uk-list--primary">
       <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge fc-brand-primary">+</span><span class="fc-brand-secondary-lighter">Topics</span></li>
     </ul>
@@ -10,22 +11,16 @@
   <hr class="hptx-divider-nogutter">
   <div class="uk-card-body">
     <ul class="uk-list uk-list--menu uk-list--primary">
-      <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge">+</span><span>Facebook</span></li>
-      <li class="uk-flex uk-flex-middle"><img class="uk-list__hp-badge" src="{% static 'src/assets/Popular topics/NFL Icon.png'%}" alt="" /><span>Twitter</span></li>
-      <li>Instagram</li>
       {% for link in homepage.left_menu.all %}
-      <li><a class="hp-link-primary" href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
+        <li class="uk-flex uk-flex-middle">{% if link.image %}{% image link.image fill-20x20 class="uk-list__hp-badge" alt="" %}{% else %}<span class="uk-list__hp-badge"><i class="fas fa-tag }}"></i></span>{% endif%}<a class="hp-link-primary" href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
       {% endfor %}
     </ul>
   </div>
   <hr class="hptx-divider-nogutter">
   <div class="uk-card-body">
     <ul class="uk-list uk-list--menu">
-      <li>Facebook</li>
-      <li>Twitter</li>
-      <li>Instagram</li>
       {% for link in homepage.left_submenu.all %}
-      <li><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
+      <li><span class="uk-list__hp-badge"><i class="fas fa-{{ link.icon|default:'tag' }}"></i></span><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
       {% endfor %}
     </ul>
   </div>
