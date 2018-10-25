@@ -9,13 +9,29 @@
   &.uk-list--menu {
 
     a, .uk-link {
-      color: $global-color;
+      color: $brand-secondary;
     }
 
     .uk-list__hp-badge {
       margin-right: round($global-medium-gutter / 4);
       text-align: center;
       width: 1.25rem;
+    }
+  }
+
+  &.uk-list--top-menu {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+
+    a, .uk-link {
+      color: $white;
+    }
+
+    .uk-list__hp-badge {
+      margin-right: round($global-medium-gutter / 4);
+      text-align: center;
+      width: 1.5rem;
     }
   }
 
