@@ -6,4 +6,4 @@ ipdb==0.11
 ipython==7.0.1
 
 
-django-livereload-server-0.3.2
+django-livereload-server==0.3.2
