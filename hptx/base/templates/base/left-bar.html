@@ -12,7 +12,7 @@
   <div class="uk-card-body">
     <ul class="uk-list uk-list--menu uk-list--primary">
       {% for link in homepage.left_menu.all %}
-        <li class="uk-flex uk-flex-middle">{% if link.image %}{% image link.image fill-20x20 class="uk-list__hp-badge" alt="" %}{% else %}<span class="uk-list__hp-badge"><i class="fas fa-tag }}"></i></span>{% endif%}<a class="hp-link-primary" href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
+        <li class="uk-flex uk-flex-middle">{% if link.image %}{% image link.image fill-20x20 class="uk-list__hp-badge" alt="" %}{% else %}<span class="uk-list__hp-badge"><i class="fas fa-tag }}"></i></span>{% endif%}<a class="hp-link-primary" href="{% slugurl 'articles' %}{{ link.tag }}/">{{ link.name }}</a></li>
       {% endfor %}
     </ul>
   </div>
@@ -20,7 +20,7 @@
   <div class="uk-card-body">
     <ul class="uk-list uk-list--menu">
       {% for link in homepage.left_submenu.all %}
-      <li><span class="uk-list__hp-badge"><i class="fas fa-{{ link.icon|default:'tag' }}"></i></span><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
+      <li><span class="uk-list__hp-badge"><i class="fas fa-{{ link.icon|default:'tag' }}"></i></span><a href="{% slugurl 'articles' %}{{ link.tag }}/">{{ link.name }}</a></li>
       {% endfor %}
     </ul>
   </div>

@@ -1,4 +1,4 @@
-{% load static wagtailuserbar %}
+{% load static wagtailuserbar wagtailcore_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="{{ LANGUAGE_CODE |default:'en'}}" {% block extrahtml %}{% endblock %}>
@@ -32,7 +32,7 @@
         <div class="uk-navbar-container">
           <div class="uk-container" uk-navbar>
             <div class="uk-navbar-left">
-                <a href="" class="uk-navbar-item uk-logo"><img src="{% static 'src/assets/Navbar/Logo.png'%}" alt="Houston Prominence" /></a>
+              <a href="{% pageurl homepage %}" class="uk-navbar-item uk-logo"><img src="{% static 'src/assets/Navbar/Logo.png'%}" alt="Houston Prominence" /></a>
             </div>
             <div class="uk-navbar-right">
                 <div class="uk-navbar-item">

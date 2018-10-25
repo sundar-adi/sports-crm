@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.admin.edit_handlers import (
@@ -7,9 +8,10 @@ from wagtail.admin.edit_handlers import (
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
+from wagtail.core.url_routing import RouteResult
+from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.embeds.blocks import EmbedBlock
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
@@ -95,16 +97,24 @@ class ArticlePage(Page):
 
 class ArticleTagIndexPage(Page):
 
-    def get_context(self, request):
+    def route(self, request, path_components):
+        if path_components:
+            self.tag_name = path_components[0]
+        else:
+            self.tag_name = ''
+        if self.live:
+            return RouteResult(self)
+        else:
+            raise Http404
 
-        tag = request.GET.get('tag')
+    def get_context(self, request):
         articles = ArticlePage.objects.filter(
-            tags__name__iexact=tag).live()
+            tags__name__iexact=self.tag_name).live()
 
         context = super().get_context(request)
         context['articles'] = articles
         try:
-            context['tag'] = Tag.objects.get(name__iexact=tag)
+            context['tag'] = Tag.objects.get(name__iexact=self.tag_name)
         except Tag.DoesNotExist:
             pass
         return context

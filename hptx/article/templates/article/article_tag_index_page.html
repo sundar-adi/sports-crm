@@ -7,8 +7,8 @@
 {% block content %}
 <div class="uk-card uk-card-secondary">
   <div class="uk-card-header">
-    {% if request.GET.tag|length %}
-        <h2>{{ request.GET.tag }}</h2>
+    {% if tag %}
+        <h2>{{ tag }}</h2>
     {% endif %}
     <img class="uk-hp-card-header__badge" src="{% static 'src/assets/Navbar/Navbar items [40h]/Astros/Astros@2x.png' %}" />
   </div>
