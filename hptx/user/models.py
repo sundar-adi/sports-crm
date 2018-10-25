@@ -42,3 +42,11 @@ class Profile(SimpleModel):
         verbose_name=_(u'bio'),
         blank=True,
     )
+    photo = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_('Photo'),
+        related_name='photo_of',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )

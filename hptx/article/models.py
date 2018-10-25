@@ -8,6 +8,7 @@ from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.embeds.blocks import EmbedBlock
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -53,6 +54,15 @@ class ArticlePage(Page):
     publication_date = models.DateField(
         verbose_name='publication date',
     )
+
+    featured_image = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_('Featured Image'),
+        related_name='featured_image_on',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
@@ -76,7 +86,10 @@ class ArticlePage(Page):
                 'contributors', page_type=settings.AUTH_USER_MODEL,
                 is_single=False),
         ], heading=_('People')),
-        StreamFieldPanel('body'),
+        MultiFieldPanel([
+            ImageChooserPanel('featured_image'),
+            StreamFieldPanel('body'),
+        ], heading=_('Content')),
     ]
 
 

@@ -1,9 +1,9 @@
 from django.db import models
+from django.utils.text import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.admin.edit_handlers import (
     FieldPanel, MultiFieldPanel, InlinePanel)
-from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 
@@ -113,6 +113,13 @@ class TagLinkTopMenu(Orderable, models.Model):
         max_length=255,
         verbose_name=_('name'),
     )
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_('image'),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
     tag = models.ForeignKey(
         'home.Tag',
         on_delete=models.CASCADE
@@ -120,6 +127,7 @@ class TagLinkTopMenu(Orderable, models.Model):
 
     panels = [
         FieldPanel('name'),
+        ImageChooserPanel('image'),
         ModelChooserPanel('tag'),
     ]
 
@@ -134,6 +142,13 @@ class TagLinkLeftMenu(Orderable, models.Model):
         max_length=255,
         verbose_name=_('name'),
     )
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_('image'),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
     tag = models.ForeignKey(
         'home.Tag',
         on_delete=models.CASCADE
@@ -141,6 +156,37 @@ class TagLinkLeftMenu(Orderable, models.Model):
 
     panels = [
         FieldPanel('name'),
+        ImageChooserPanel('image'),
+        ModelChooserPanel('tag'),
+    ]
+
+
+class TagLinkLeftSubMenu(Orderable, models.Model):
+    page = ParentalKey(
+        'home.HomePage',
+        on_delete=models.CASCADE,
+        related_name='left_submenu',
+    )
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_('name'),
+    )
+    icon = models.CharField(
+        max_length=255,
+        verbose_name=_('icon'),
+        help_text=mark_safe(
+            'You should use icon\'s names from Font Awesome. You can check '
+            'the list here: <a href="https://fontawesome.com/icons?d=gallery" '
+            'target="_blank">Icon Gallery</a>.'),
+    )
+    tag = models.ForeignKey(
+        'home.Tag',
+        on_delete=models.CASCADE
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('icon'),
         ModelChooserPanel('tag'),
     ]
 
@@ -156,5 +202,6 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         InlinePanel('top_menu', label='Top menu'),
         InlinePanel('left_menu', label='Left menu'),
+        InlinePanel('left_submenu', label='Left submenu'),
         FieldPanel('twitter_handler'),
     ]
