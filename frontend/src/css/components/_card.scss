@@ -51,13 +51,16 @@ $card-primary-color: $brand-secondary;
     }
   }
 
-  .uk-card-header--profile {
-    background-image: url('../assets/Feed/header-bg-big.png');
-    border-radius: $border-rounded-border-radius;
-    padding: 2rem;
-
-    &::before {
-      display: none;
+  &.uk-card-primary--profile {
+    .uk-card-header {
+      background-image: url('../assets/Feed/header-bg-big.png');
+      border-radius: $border-rounded-border-radius;
+      margin: 0;
+      padding: 0;
+  
+      &::before {
+        display: none;
+      }
     }
   }
 
