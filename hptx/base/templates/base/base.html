@@ -55,7 +55,7 @@
                   {% else %}
                   <li class="uk-flex uk-flex-middle">
                     <a href="#">
-                      <div class="hp-profile">{% if link.image %}{% image user.profile.photo fill-32x32 class="mr-xs hp-profile__image" alt="" %}{% else %}<img class=" hp-profile__image" src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" alt="" />{% endif %}</div>
+                      <div class="hptx-avatar hptx-avatar--small hptx-avatar--rounded">{% if link.image %}{% image user.profile.photo fill-32x32 class="mr-xs hptx-avatar__image" alt="" %}{% else %}<img class=" hptx-avatar__image" src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" alt="" />{% endif %}</div>
                     </a>
                     <div class="" uk-dropdown="mode: click; pos:bottom-right;">
                       <div class="fw-black fs-sm">{{ user.first_name }} {{ user.last_name }}</div>
