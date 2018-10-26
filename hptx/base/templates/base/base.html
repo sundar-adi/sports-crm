@@ -1,4 +1,4 @@
-{% load static wagtailuserbar wagtailcore_tags %}
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="{{ LANGUAGE_CODE |default:'en'}}" {% block extrahtml %}{% endblock %}>
@@ -37,7 +37,7 @@
             <div class="uk-navbar-right">
                 {% for link in homepage.top_menu.all %}
                 <div class="uk-navbar-item uk-flex uk-flex-middle">
-                  {% if link.image %}{% image link.image max-24x24 class="mr-xs" alt="" %}{% else %}<span class="mr-xs"><i class="fas fa-tag }}"></i></span>{% endif%}<a class="fw-black fc-white" href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name|upper }}</a>
+                  {% if link.image %}{% image link.image max-24x24 class="mr-xs" alt="" %}{% else %}<span class="mr-xs"><i class="fas fa-tag }}"></i></span>{% endif%}<a class="fw-black fc-white" href="{% slugurl 'articles' %}{{ link.tag }}/">{{ link.name|upper }}</a>
                 </div>
                 {% endfor %}
                 <div class="uk-navbar-item">
