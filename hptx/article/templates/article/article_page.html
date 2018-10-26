@@ -1,12 +1,14 @@
 {% extends "base/base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags hitcount_tags %}
 
 {% block body_class %}article_page{% endblock %}
 
 {% block content %}
     <h1>{{ page.title }}</h1>
     {% image page.featured_image fill-600x400-c0 %}
+
+    <strong>{% get_hit_count for page %}</strong>
 
     <p class="meta">{{ page.publication_date }}</p>
 

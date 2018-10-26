@@ -18,6 +18,10 @@ from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from taggit.models import TaggedItemBase
 from wagtailautocomplete.edit_handlers import AutocompletePanel
 
+from hitcount.models import HitCount
+from hitcount.views import HitCountMixin
+
+
 from home.models import Tag
 
 
@@ -96,6 +100,11 @@ class ArticlePage(Page):
             StreamFieldPanel('body'),
         ], heading=_('Content')),
     ]
+
+    def serve(self, request, *args, **kwargs):
+        hit_count = HitCount.objects.get_for_object(self)
+        HitCountMixin.hit_count(request, hit_count)
+        return super().serve(request, *args, **kwargs)
 
 
 class PodcastPage(ArticlePage):
