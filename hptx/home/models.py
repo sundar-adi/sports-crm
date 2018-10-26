@@ -192,6 +192,8 @@ class TagLinkLeftSubMenu(Orderable, models.Model):
 
 
 class HomePage(Page):
+    parent_page_types = ['wagtailcore.Page']
+    subpage_types = ['article.ArticleTagIndexPage']
 
     facebook_link = models.URLField(
         verbose_name=_('facebook_link'),
@@ -225,4 +227,7 @@ class HomePage(Page):
     ]
 
     def has_social_links(self):
-        return any((self.facebook_link, self.twitter_link, self.instagram_link))
+        return any(
+            (self.facebook_link,
+             self.twitter_link,
+             self.instagram_link))

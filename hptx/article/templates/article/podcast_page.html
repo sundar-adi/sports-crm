@@ -2,7 +2,7 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}article_page{% endblock %}
+{% block body_class %}podcast_page{% endblock %}
 
 {% block content %}
     <h1>{{ page.title }}</h1>
@@ -57,5 +57,12 @@
             </section>
         {% endif %}
     {% endfor %}
+
+    <h2>Episodes</h2>
+    <ul>
+    {% for episode in page.get_descendants %}
+      <li><a href="{% pageurl episode %}">{{ episode.title }}</a></li>
+    {% endfor %}
+    </ul>
 
 {% endblock %}

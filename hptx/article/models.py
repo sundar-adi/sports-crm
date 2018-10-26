@@ -33,6 +33,9 @@ class ArticleTag(TaggedItemBase):
 
 
 class ArticlePage(Page):
+    parent_page_types = ['article.ArticleTagIndexPage']
+    subpage_types = []
+
     tags = ClusterTaggableManager(through=ArticleTag, blank=True)
 
     authors = ParentalManyToManyField(
@@ -95,13 +98,31 @@ class ArticlePage(Page):
     ]
 
 
+class PodcastPage(ArticlePage):
+    parent_page_types = ['article.ArticleTagIndexPage']
+    subpage_types = ['article.PodcastEpisodePage']
+
+
+class VideoPage(ArticlePage):
+    parent_page_types = ['article.ArticleTagIndexPage']
+    subpage_types = []
+
+
+class PodcastEpisodePage(ArticlePage):
+    parent_page_types = ['article.PodcastPage']
+    subpage_types = []
+
+
 class ArticleTagIndexPage(Page):
+    parent_page_types = ['home.Homepage']
 
     def route(self, request, path_components):
-        if path_components:
-            self.tag_name = path_components[0]
+        if (path_components and len(path_components) == 2 and
+                path_components[0] == 'tag'):
+            self.tag_name = path_components[1]
         else:
             self.tag_name = ''
+            return super().route(request, path_components)
         if self.live:
             return RouteResult(self)
         else:
