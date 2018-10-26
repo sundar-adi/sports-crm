@@ -35,17 +35,39 @@
               <a href="{% pageurl homepage %}" class="uk-navbar-item uk-logo"><img src="{% static 'src/assets/Navbar/Logo.png'%}" alt="Houston Prominence" /></a>
             </div>
             <div class="uk-navbar-right">
-                {% for link in homepage.top_menu.all %}
-                <div class="uk-navbar-item uk-flex uk-flex-middle">
-                  {% if link.image %}{% image link.image max-24x24 class="mr-xs" alt="" %}{% else %}<span class="mr-xs"><i class="fas fa-tag }}"></i></span>{% endif%}<a class="fw-black fc-white" href="{% slugurl 'articles' %}{{ link.tag }}/">{{ link.name|upper }}</a>
-                </div>
-                {% endfor %}
-                <div class="uk-navbar-item">
-                  <a href="" class="uk-button uk-button-primary">Subscribe now</a>
-                </div>
-                <div class="uk-navbar-item">
-                  <a href="" class="hp-link-primary fs-sm uk-margin-small-right">Log in</a>
-                </div>
+                <ul class="uk-navbar-nav">
+                  {% for link in homepage.top_menu.all %}
+                  <li>
+                    <div class="uk-navbar-item uk-flex uk-flex-middle">{% if link.image %}{% image link.image max-24x24 class="mr-xs" alt="" %}{% else %}<span class="mr-xs"><i class="fas fa-tag }}"></i></span>{% endif%}<a class="fw-black fc-white" href="{% slugurl 'articles' %}{{ link.tag }}/">{{ link.name|upper }}</a></div>
+                  </li>
+                  {% endfor %}
+                  {% if not user.is_authenticated %}
+                  <li class="uk-flex uk-flex-middle uk-margin-right">
+                    <div>
+                      <a href="" class="uk-button uk-hp-button-ghost">Log in</a>
+                    </div>
+                  </li>
+                  <li class="uk-flex uk-flex-middle">
+                    <div>
+                      <a href="" class="uk-button uk-button-primary uk-margin-small-right">Subscribe now</a>
+                    </div>
+                  </li>
+                  {% else %}
+                  <li class="uk-flex uk-flex-middle">
+                    <a href="#">
+                      <div class="hp-profile">{% if link.image %}{% image user.profile.photo fill-32x32 class="mr-xs hp-profile__image" alt="" %}{% else %}<img class=" hp-profile__image" src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" alt="" />{% endif %}</div>
+                    </a>
+                    <div class="" uk-dropdown="mode: click; pos:bottom-right;">
+                      <div class="fw-black fs-sm">{{ user.first_name }} {{ user.last_name }}</div>
+                      <div class="fs-xs">{{ user.email }}</div>
+                      <hr>
+                      <div class="uk-margin-small-bottom"><a href="" class="fw-light fs-sm fc-brand-secondary">Edit profile</a></div>
+                      <div class="uk-margin-small-bottom"><a href="" class="fw-light fs-sm fc-brand-secondary">Publications</a></div>
+                      <div><a href="" class="fw-light fs-sm fc-brand-secondary">Log out</a></div>
+                    </div>
+                  </li>
+                  {% endif %}
+                </ul>
             </div>
           </div>
         </div>
