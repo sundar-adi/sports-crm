@@ -28,13 +28,18 @@
   <body class="{% block body_class %}{% endblock %}">
     {% wagtailuserbar %}
     <div {% block vue_app %}id="app"{% endblock %}>
-      <header class="header uk-margin-bottom">
+      <header class="header">
         <div class="uk-navbar-container">
           <div class="uk-container" uk-navbar>
             <div class="uk-navbar-left">
               <a href="{% pageurl homepage %}" class="uk-navbar-item uk-logo"><img src="{% static 'src/assets/Navbar/Logo.png'%}" alt="Houston Prominence" /></a>
             </div>
             <div class="uk-navbar-right">
+                {% for link in homepage.top_menu.all %}
+                <div class="uk-navbar-item uk-flex uk-flex-middle">
+                  {% if link.image %}{% image link.image max-24x24 class="mr-xs" alt="" %}{% else %}<span class="mr-xs"><i class="fas fa-tag }}"></i></span>{% endif%}<a class="fw-black fc-white" href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name|upper }}</a>
+                </div>
+                {% endfor %}
                 <div class="uk-navbar-item">
                   <a href="" class="uk-button uk-button-primary">Subscribe now</a>
                 </div>
@@ -45,7 +50,7 @@
           </div>
         </div>
       </header>
-      <div class="uk-container">
+      <div class="uk-container uk-margin-top">
         <div class="uk-grid-small" uk-grid>
           <aside class="uk-width-1-6">
               {% block left-sidebar-content %}

@@ -2,15 +2,19 @@
 
 {% load static %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block page_background %}
+<div>
+  {% image tag.main_image original class="body-page-background" alt="" %}
+</div>
+{% endblock page_background %}
 
 {% block content %}
 <div class="uk-card uk-card-secondary">
   <div class="uk-card-header">
-    {% if tag %}
-        <h2>{{ tag }}</h2>
-    {% endif %}
-    <img class="uk-hp-card-header__badge" src="{% static 'src/assets/Navbar/Navbar items [40h]/Astros/Astros@2x.png' %}" />
+    <h2>{{ tag.name }}</h2>
+    {% if tag.secondary_image %}{% image tag.secondary_image max-30x30 class="uk-hp-card-header__badge" alt="" %}{% endif %}
   </div>
   <article class="uk-card-body">
     <h3 class="uk-card-title uk-card-title--important">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
