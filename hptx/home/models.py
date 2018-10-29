@@ -248,7 +248,15 @@ class GlobalSettings(BaseSetting):
         help_text='Show the hit counter for each article',
         default=False,
     )
+    enable_paywall = models.BooleanField(
+        verbose_name=_('enable paywall'),
+        help_text=(
+            'Enable the paywall, UI blocker for AVP pages '
+            'if the user is not suscribed'),
+        default=False,
+    )
 
     panels = [
-        FieldPanel('show_view_count')
+        FieldPanel('show_view_count'),
+        FieldPanel('enable_paywall')
     ]
