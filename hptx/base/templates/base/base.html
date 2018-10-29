@@ -83,11 +83,9 @@
             {% block content %}{% endblock %}
           </main>
           <aside class="uk-width-1-4">
-            <div class="uk-card uk-card-default">
               {% block right-sidebar-content %}
               {% include "base/right-bar.html" %}
               {% endblock right-sidebar-content %}
-            </div>
           </aside>
         </div>
       </div>
@@ -104,9 +102,6 @@
             <td><a href="{% url 'plans'%}"> | Plans</a></td>
           </tr>
         </table> -->
-      <section class="footer">
-          <h1>FOOTER</h1>
-      </section>
     </div>
 
     {# Global javascript #}

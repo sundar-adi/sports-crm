@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils.text import mark_safe
 from django.utils.translation import ugettext_lazy as _
@@ -9,8 +10,9 @@ from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from modelcluster.fields import ParentalKey
-from wagtailmodelchooser import register_model_chooser
 from taggit.models import TagBase
+from wagtailautocomplete.edit_handlers import AutocompletePanel
+from wagtailmodelchooser import register_model_chooser
 from wagtailmodelchooser.edit_handlers import ModelChooserPanel
 
 
@@ -214,8 +216,18 @@ class HomePage(Page):
         help_text=_('For rendering the twitter timeline'),
         blank=True,
     )
+    talent_of_the_week = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        verbose_name=_('talent of the week'),
+        related_name='talented_at',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
 
     content_panels = Page.content_panels + [
+        AutocompletePanel(
+            'talent_of_the_week', page_type=settings.AUTH_USER_MODEL),
         InlinePanel('top_menu', label='Top menu'),
         InlinePanel('left_menu', label='Left menu'),
         InlinePanel('left_submenu', label='Left submenu'),
