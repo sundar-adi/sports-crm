@@ -12,20 +12,18 @@ def first_paragraph_value(article):
 
 
 @register.filter
-def soundcloud_link(article):
+def soundcloud_block(article):
     for block in article.body:
-        print(block.block_type)
         if(block.block_type == "embed" and "soundcloud" in block.value.url):
-            return block.value.url
+            return block.value
     return ""
 
 
 @register.filter
-def youtube_link(article):
+def youtube_block(article):
     for block in article.body:
-        print(block.block_type)
         if(block.block_type == "embed" and "youtube" in block.value.url):
-            return block.value.url
+            return block.value
     return ""
 
 

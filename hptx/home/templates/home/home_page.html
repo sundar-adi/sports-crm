@@ -45,9 +45,9 @@
             {% if page_type == "Article page" and article.featured_image %}
               <div class="uk-width-2-5">{% image article.featured_image original alt="" %}</div>
             {% elif page_type == "Video page" %}
-              <div class="uk-width-2-5"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/UOX4bAS3C04" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+              <div class="uk-width-2-5 uk-hp-card-primary-smallmedia">{{ article|youtube_block }}</div>
             {% elif page_type == "Podcast page" %}
-              <div class="uk-width-1-4"><iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/8598985&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe></div>
+              <div class="uk-width-1-4 uk-hp-card-primary-smallmedia">{{ article|soundcloud_block }}</div>
             {% endif %}
           {% endwith %}
         {% endif %}

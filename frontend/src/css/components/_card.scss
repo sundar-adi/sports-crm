@@ -108,6 +108,13 @@ $card-primary-color: $brand-secondary;
     }
   }
 
+  .uk-hp-card-primary-smallmedia {
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
   .uk-hp-card-primary-wrapper {
     padding: 0.5rem 0.5rem 0 0.5rem;
   }
