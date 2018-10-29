@@ -1,0 +1,22 @@
+.rating {
+    .rating-star {
+        margin-right: $global-margin/2;
+        font-size: 0.75rem;
+        color: $white;
+
+        &.rating-star--full {
+            .half, 
+            .empty {display: none;}
+        }
+
+        &.rating-star--half {
+            .full, 
+            .empty {display: none;}
+        }
+        
+        &.rating-star--empty {
+            .half, 
+            .full {display: none;}
+        }
+    }
+}

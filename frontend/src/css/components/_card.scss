@@ -58,19 +58,6 @@ $card-primary-color: $brand-secondary;
     }
   }
 
-  &.uk-card-primary--profile {
-    .uk-card-header {
-      background-image: url('../assets/Feed/header-bg-big.png');
-      border-radius: $border-rounded-border-radius;
-      margin: 0;
-      padding: 0;
-  
-      &::before {
-        display: none;
-      }
-    }
-  }
-
   .uk-card-body {
     font-size: $fs-xs;
     padding-left: 1.25rem;
@@ -105,6 +92,45 @@ $card-primary-color: $brand-secondary;
 
   .uk-hp-card-primary-wrapper {
     padding: 0.5rem 0.5rem 0 0.5rem;
+  }
+
+  &.uk-card-primary--profile {
+    .uk-card-header {
+      background-image: url('../assets/Feed/header-bg-big.png');
+      border-radius: $border-rounded-border-radius;
+      margin: 0;
+      padding: 0;
+      color: $white;
+  
+      &::before {
+        display: none;
+      }
+
+      .uk-card-title {
+        color: $white;
+        font-family: $font-primary;
+        font-weight: $fw-bold;
+      }
+    }
+
+    .uk-card-body {
+      padding: 2rem;
+      margin: 0;
+
+      &:after {
+        display: none;
+      }
+
+      .uk-link-text {
+        color: $brand-primary;
+      }
+
+      .uk-hp-user-location {
+        opacity: 0.8;
+
+        i { opacity: 0.5; }
+      }
+    }
   }
 }
 
@@ -142,5 +168,35 @@ $card-secondary-color: $brand-secondary;
 
 @mixin hook-card-secondary-title {
   @include hook-card-primary-title()
+}
+
+.uk-hp-card-muted {
+  background: $white;
+  border-radius: $border-rounded-border-radius;
+
+  .uk-card-header {
+    background-color: $grey;
+    position: relative;
+    border-top-left-radius: $border-rounded-border-radius;
+    border-top-right-radius: $border-rounded-border-radius;
+
+    &::before {
+      background-image: url('../assets/Feed/LogoHP.png');
+      content: " ";
+      display: inline-block;
+      height: 1.75rem;
+      left: 0.625rem;
+      position: absolute;
+      width: 1.875rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .uk-card-title {
+    font-family: $font-title;
+    font-weight: $fw-bold;
+    color: $brand-secondary;
+  }
 }
 
