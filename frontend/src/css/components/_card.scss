@@ -101,7 +101,11 @@ $card-primary-color: $brand-secondary;
   .uk-hp-card-primary-intro {
     color: $brand-secondary-lighter;
     font-size: $fs-sm;
-    max-height: 4rem;
+    max-height: 6rem;
+
+    &.uk-hp-card-primary-intro--has-media {
+      max-height: 10rem;
+    }
   }
 
   .uk-hp-card-primary-wrapper {
