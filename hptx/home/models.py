@@ -231,3 +231,10 @@ class HomePage(Page):
             (self.facebook_link,
              self.twitter_link,
              self.instagram_link))
+
+    def get_context(self, request):
+        from article.models import ArticlePage
+        context = super().get_context(request)
+        context['most_recent_articles'] = ArticlePage.objects.order_by(
+            '-publication_date')[:5]
+        return context
