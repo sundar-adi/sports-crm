@@ -4,6 +4,8 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% load article_tags %}
+
 {% block page_background %}
 <div>
   {% image tag.main_image original class="body-page-background" alt="" %}
@@ -16,36 +18,46 @@
     <h2>{{ tag.name }}</h2>
     {% if tag.secondary_image %}{% image tag.secondary_image max-30x30 class="uk-hp-card-header__badge" alt="" %}{% endif %}
   </div>
+  {% for article in articles %}
   <article class="uk-card-body">
-    <h3 class="uk-card-title uk-card-title--important">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
-    <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top"><span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span><span><span class="uk-margin-right">Views 8108</span> <a href="" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a></span></p>
+    <h3 class="uk-card-title {% if forloop.first %}uk-card-title--important{% endif %}">{{article.title}}</h3>
+    <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top">
+        <span>
+          {% for author in article.authors.all %}
+            <a href="" class="hp-link-primary">{{ author.first_name }} {{ author.last_name }}</a> {% if not forloop.last %}, {% endif %}
+          {% empty %}
+          HPTX
+          {% endfor %}
+          on {{ article.publication_date|date }}</span>
+        <span>
+          <span class="uk-margin-right">Views 8108</span>
+          {% if homepage.has_social_links %}
+          {% share article %}
+          {% endif %}
+        </span>
+    </p>
     <div>
-      <img class="uk-hp-article-image" src="http://e00-marca.uecdn.es/assets/multimedia/imagenes/2016/12/19/14821849138432.jpg" />
-      <p class="uk-hp-card-primary-intro">Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts....</p>
+      {% if forloop.first and article.featured_image %}{% image article.featured_image original alt="" class="uk-hp-article-image" %}{% endif %}
+      <div uk-grid class="uk-grid-small uk-margin-small-top">
+        {% if not forloop.first %}
+          {% with article.specific.get_verbose_name as page_type %}
+            {% if page_type == "Article page" and article.featured_image %}
+              <div class="uk-width-2-5">{% image article.featured_image original alt="" %}</div>
+            {% elif page_type == "Video page" %}
+              <div class="uk-width-2-5 uk-hp-card-primary-smallmedia">{{ article|youtube_block }}</div>
+            {% elif page_type == "Podcast page" %}
+              <div class="uk-width-1-4 uk-hp-card-primary-smallmedia">{{ article|soundcloud_block }}</div>
+            {% endif %}
+          {% endwith %}
+        {% endif %}
+        <div class="uk-width-expand uk-hp-card-primary-intro {% if not forloop.first and article|has_media %}uk-hp-card-primary-intro--has-media{% endif %}">
+          <ellipsis>
+            {{ article|first_paragraph_value }}
+          </ellipsis>
+        </div>
+      </div>
     </div>
   </article>
-  <article class="uk-card-body">
-    <h3 class="uk-card-title">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
-    <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top"><span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span><span><span class="uk-margin-right">Views 8108</span> <a href="" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a></span></p>
-    <div>
-      <p class="uk-hp-card-primary-intro">Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts....</p>
-    </div>
-  </article>
-  <article class="uk-card-body">
-    <h3 class="uk-card-title">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
-    <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top"><span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span><span><span class="uk-margin-right">Views 8108</span> <a href="" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a></span></p>
-    <div uk-grid class="uk-grid-small">
-      <div class="uk-width-2-5"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/UOX4bAS3C04" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-      <p class="uk-width-expand uk-hp-card-primary-intro">Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts....</p>
-    </div>
-  </article>
-  <article class="uk-card-body">
-    <h3 class="uk-card-title">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
-    <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top"><span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span><span><span class="uk-margin-right">Views 8108</span> <a href="" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a></span></p>
-    <div uk-grid class="uk-grid-small">
-      <div class="uk-width-1-4"><iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/8598985&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe></div>
-      <p class="uk-width-expand uk-hp-card-primary-intro">Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts....</p>
-    </div>
-  </article>
+  {% endfor %}
 </div>
 {% endblock %}
