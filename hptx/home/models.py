@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from wagtail.admin.edit_handlers import (
     FieldPanel, MultiFieldPanel, InlinePanel)
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 
@@ -238,3 +239,16 @@ class HomePage(Page):
         context['most_recent_articles'] = ArticlePage.objects.order_by(
             '-publication_date')[:5]
         return context
+
+
+@register_setting
+class GlobalSettings(BaseSetting):
+    show_view_count = models.BooleanField(
+        verbose_name=_('show view count'),
+        help_text='Show the hit counter for each article',
+        default=False,
+    )
+
+    panels = [
+        FieldPanel('show_view_count')
+    ]
