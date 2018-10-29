@@ -64,7 +64,7 @@ $card-primary-color: $brand-secondary;
       border-radius: $border-rounded-border-radius;
       margin: 0;
       padding: 0;
-  
+
       &::before {
         display: none;
       }
@@ -101,6 +101,7 @@ $card-primary-color: $brand-secondary;
   .uk-hp-card-primary-intro {
     color: $brand-secondary-lighter;
     font-size: $fs-sm;
+    max-height: 4rem;
   }
 
   .uk-hp-card-primary-wrapper {
@@ -143,4 +144,3 @@ $card-secondary-color: $brand-secondary;
 @mixin hook-card-secondary-title {
   @include hook-card-primary-title()
 }
-

@@ -1,6 +1,6 @@
 {% extends "base/base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -9,7 +9,51 @@
   <div class="uk-card-header">
     <h2>Most recent</h2>
   </div>
+  {% for article in most_recent_articles %}
   <article class="uk-card-body">
+    <h3 class="uk-card-title {% if forloop.first %}uk-card-title--important{% endif %}">{{article.title}}</h3>
+    <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top">
+        <span><a href="" class="hp-link-primary">{% if article.author %}{{ article.author.first_name }} {{ article.author.last_name }}{% else %}HPTX{% endif %}</a> on {{ article.publication_date|date }}</span>
+        <span>
+          <span class="uk-margin-right">Views 8108</span>
+          {% if homepage.has_social_links %}
+          <a href="#" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share
+          </a>
+          <div uk-dropdown="mode: click; pos:bottom-right;">
+            <ul class="uk-list uk-list--menu">
+              {% if homepage.facebook_link %}<li><a href="{{ homepage.facebook_link }}"><span class="uk-list__hp-badge fc-facebook"><i class="fab fa-facebook"></i></span>Facebook</a></li>{% endif %}
+              {% if homepage.twitter_link %}<li><a href="{{ homepage.twitter_link }}"><span class="uk-list__hp-badge fc-twitter"><i class="fab fa-twitter"></i></span>Twitter</a></li>{% endif %}
+              {% if homepage.instagram_link %}<li><a href="{{ homepage.instagram_link }}"><span class="uk-list__hp-badge fc-instagram"><i class="fab fa-instagram"></i></span>Instagram</a></li>{% endif %}
+            </ul>
+          </div>
+          {% endif %}
+        </span>
+    </p>
+    <div>
+      {% if forloop.first and article.featured_image %}{% image article.featured_image original alt="" class="uk-hp-article-image" %}{% endif %}
+      <div uk-grid class="uk-grid-small uk-margin-small-top">
+        {% if not forloop.first %}
+          {% with article.specific.get_verbose_name as page_type %}
+            {% if page_type == "Article page" and article.featured_image %}
+              <div class="uk-width-2-5">{% image article.featured_image original alt="" %}</div>
+            {% elif page_type == "Video page" %}
+              <div class="uk-width-2-5"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/UOX4bAS3C04" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+            {% elif page_type == "Podcast page" %}
+              <div class="uk-width-1-4"><iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/8598985&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe></div>
+            {% endif %}
+          {% endwith %}
+        {% endif %}
+        <p class="uk-width-expand uk-hp-card-primary-intro">
+          <ellipsis>
+            Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts.
+            Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts.
+          </ellipsis>
+        </p>
+      </div>
+    </div>
+  </article>
+  {% endfor %}
+  <!-- <article class="uk-card-body">
     <h3 class="uk-card-title uk-card-title--important">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
     <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top">
         <span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span>
@@ -37,7 +81,11 @@
     <h3 class="uk-card-title">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
     <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top"><span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span><span><span class="uk-margin-right">Views 8108</span> <a href="" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a></span></p>
     <div>
-      <p class="uk-hp-card-primary-intro">Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts....</p>
+      <p class="uk-hp-card-primary-intro">
+        <ellipsis>
+          Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts.
+          Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts.
+        </ellipsis></p>
     </div>
   </article>
   <article class="uk-card-body">
@@ -52,16 +100,9 @@
     <h3 class="uk-card-title">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
     <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top"><span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span><span><span class="uk-margin-right">Views 8108</span> <a href="" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a></span></p>
     <div uk-grid class="uk-grid-small">
-      <div class="uk-width-1-4"><iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/8598985&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe></div>
+
       <p class="uk-width-expand uk-hp-card-primary-intro">Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts....</p>
     </div>
-  </article>
+  </article> -->
 </div>
-<ul>
-{% for link in page.top_menu.all %}
-<li><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
-{% endfor %}
-</ul>
-
-  {{ page.body|richtext }}
 {% endblock %}
