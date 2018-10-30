@@ -5,7 +5,7 @@
 {% load article_tags %}
 
 <article class="uk-card-body">
-  <h3 class="uk-card-title {% if first %}uk-card-title--important{% endif %}">{{article.title}}</h3>
+  <a class="uk-card-title {% if first %}uk-card-title--important{% endif %}" href="{% pageurl article %}">{{article.title}}</a>
   <div class="uk-flex uk-flex-between fw-medium uk-margin-small-top mb-xs">
     <div>
       {% for author in article.authors.all %}
