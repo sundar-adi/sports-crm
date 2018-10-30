@@ -1,0 +1,8 @@
+@mixin hook-badge {
+    background: transparent;
+    border-radius: $border-rounded-border-radius;
+    border: 2px solid $white;
+    opacity: 0.8;
+    padding: 0.25rem 0.5rem;
+    height: 24px;
+}
