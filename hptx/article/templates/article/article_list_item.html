@@ -5,7 +5,7 @@
 {% load article_tags %}
 
 <article class="uk-card-body">
-  <h3 class="uk-card-title {% if first %}uk-card-title--important{% endif %}">{{article.title}}</h3>
+  <h3 class="uk-card-title {% if first %}uk-card-title--important{% endif %}"><a href="{% pageurl article %}">{{article.title}}</a></h3>
   <p class="uk-flex uk-flex-between fw-medium uk-margin-small-top">
   <span>
     {% for author in article.authors.all %}
@@ -27,7 +27,7 @@
   </span>
   </p>
   <div>
-    {% if first and article.featured_image %}{% image article.featured_image original alt="" class="uk-hp-article-image" %}{% endif %}
+    {% if first and article.featured_image %}{% image article.featured_image original alt="" class="uk-hp-article-main-media" %}{% endif %}
     <div uk-grid class="uk-grid-small uk-margin-small-top">
       {% if not first %}
       {% with article.specific.get_verbose_name as page_type %}
