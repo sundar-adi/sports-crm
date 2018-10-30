@@ -54,22 +54,72 @@
   <div class="uk-card-body uk-padding">
     <form>
       <legend class="uk-legend fw-bold">Name</legend>
-      <div class="uk-margin">
-        <input class="uk-input uk-form-danger" type="text" placeholder="{{ user.first_name }} {{ user.last_name }}">
+      <div class="uk-margin uk-margin-small-bottom">
+        <input class="uk-input" type="text" placeholder="">
+      </div>
+      <legend class="uk-legend fw-bold">Email Address</legend>
+      <div class="uk-margin uk-margin-small-bottom">
+        <input class="uk-input" type="text" placeholder="example@domain.com">
+      </div>
+      <div class="uk-flex uk-flex-between uk-flex-bottom">
+        <div class="uk-hp-select-inline">
+          <label class="uk-form-label" for="user-birthdate-month">Birthdate</label>
+          <div class="uk-form-controls uk-margin uk-margin-small-bottom">
+            <select class="uk-select" id="user-birthdate-month">
+                <option>Option 01</option>
+                <option>Option 02</option>
+            </select>
+          </div>
+        </div>
+        <div class="uk-hp-select-inline">
+          <div class="uk-form-controls uk-margin uk-margin-small-bottom">
+            <select class="uk-select" id="user-birthdate-day">
+                <option>Option 01</option>
+                <option>Option 02</option>
+            </select>
+          </div>
+        </div>
+        <div class="uk-hp-select-inline">
+          <div class="uk-form-controls uk-margin uk-margin-small-bottom">
+            <select class="uk-select" id="user-birthdate-year">
+                <option>Option 01</option>
+                <option>Option 02</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label class="uk-form-label" for="form-stacked-select">City</label>
+        <div class="uk-form-controls uk-margin uk-margin-small-bottom">
+          <select class="uk-select" id="form-stacked-select">
+            <option>Option 01</option>
+            <option>Option 02</option>
+          </select>
+        </div>
+      </div>
+      <div class="uk-flex uk-flex-column">
+        <label class="uk-form-label" for="user-city">City</label>
+        <div class="uk-search uk-search-default">
+          <span class="uk-search-icon-flip uk-hp-icon-locarion" uk-search-icon><i class="fas fa-map-marker"></i></span>
+          <input class="uk-search-input uk-margin uk-margin-small-bottom" type="search" placeholder="Search..." id="user-city">
+        </div>
+      </div>
+      <legend class="uk-legend fw-bold">Twitter Account</legend>
+      <div class="uk-margin uk-margin-small-bottom">
+        <input class="uk-input" type="text" placeholder="@twitter">
+      </div>
+      <legend class="uk-legend fw-bold">Short Bio</legend>
+      <div class="uk-margin uk-margin-small-bottom">
+          <textarea class="uk-textarea" rows="1" placeholder="140 Characters Max."></textarea>
       </div>
     </form>
-    <!-- <div class="uk-flex uk-flex-between uk-margin-small-bottom">
-      <a href="" class="uk-link-text fs-sm"><i class="fab fa-twitter uk-margin-right"></i>@JosephSilva</a>
-      <div class="fs-sm">24 Articles Published</div>
+    <div class="uk-flex uk-margin uk-margin-small-top uk-button-group uk-hp-button-group-spaced ">
+      <button class="uk-button uk-button-secondary">Save Changes</button>
+      <button class="uk-button uk-button-link"><i class="fas fa-power-off uk-hp-icon-left"></i>Logout</button>
     </div>
-    <div class="uk-flex">
-      <div class="uk-hp-user-location fs-sm"><i class="fas fa-map-marker uk-margin-right"></i>Austin, Tx</div>
-    </div> -->
+
+
   </div>
-  <!-- <div class="uk-divider-icon"></div>
-  <div class="uk-card-footer uk-padding">
-    <p class="fs-sm">National Emmy award winning television sports journalist and author. Passionate about family, politics, fast cars and of course all sports!</p>
-  </div> -->
 </div>
 
 {% endblock %}

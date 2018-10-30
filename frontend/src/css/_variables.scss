@@ -2,6 +2,7 @@
 $navy: #121E4E;
 $navy-light: #1C2A5E;
 $navy-lighter: #566187;
+$sky-blue: #1C7ED6 ;
 $orange: #FF4300;
 $white: #FFFFFF;
 
@@ -23,6 +24,7 @@ $brand-secondary-light: $navy-light;
 $brand-secondary-lighter: $navy-lighter;
 
 $brand-action-gradient: linear-gradient(153.43deg, #FF7800 0%, $orange 100%);
+$brand-secondary-action-gradient: linear-gradient(133deg, $navy 0%, $sky-blue 100%);
 
 // Fonts
 $font-primary: "Avenir", sans-serif;

@@ -1,12 +1,57 @@
 $button-line-height: 32px;
 $button-primary-background: $orange;
 $button-primary-color: $white;
+$button-primary-hover-color: $white;
+$button-secondary-background: $navy;
+$button-secondary-color: $white;
+$button-link-color: $navy;
+$button-link-hover-color: $navy;
+$button-link-hover-text-decoration: none;
+
+@mixin hook-button(){
+  transition: opacity 0.3s ease-in-out;
+}
+
+@mixin hook-button-hover(){
+  opacity: 0.8;
+}
 
 @mixin hook-button-primary {
   background-image: $brand-action-gradient;
   border-radius: 8px;
   font-weight: 900;
   text-transform: uppercase;
+  transition: opacity 0.3s ease-in-out;
+}
+
+@mixin hook-button-primary-hover(){
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out;
+}
+
+@mixin hook-button-secondary {
+  @include hook-button-primary();
+
+  background-image: $brand-secondary-action-gradient;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: $border-rounded-border-radius;
+}
+
+@mixin hook-button-secondary-hover(){
+  @include hook-button-primary-hover();
+}
+
+@mixin hook-button-link(){
+  font-weight: $fw-black;
+
+  & > .uk-hp-icon-left {
+    margin-right: 0.75rem;
+  }
+
+  & > .uk-hp-icon-right {
+    margin-left: 0.75rem;
+  }
 }
 
 .uk-button {
@@ -18,5 +63,13 @@ $button-primary-color: $white;
     font-weight: 900;
     line-height: 30px;
     text-transform: uppercase;
+  }
+}
+
+.uk-button-group{
+  &.uk-hp-button-group-spaced {
+    & > .uk-button:not(:last-child) {
+      margin-right: 20px;
+    }
   }
 }
