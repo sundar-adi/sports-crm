@@ -1,6 +1,20 @@
 .hp-link-primary {
   color: $brand-primary;
-  font-weight: 900;
+  font-weight: $fw-black;
+  &:hover{
+    color: $brand-primary;
+    opacity: 0.8;
+    text-decoration: none;
+  }
+}
+.hp-link-secondary {
+  color: $brand-secondary;
+  font-weight: $fw-black;
+  &:hover{
+    color: $brand-secondary;
+    opacity: 0.8;
+    text-decoration: none;
+  }
 }
 
 .tweet-this {
