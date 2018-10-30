@@ -1,12 +1,17 @@
 {% extends "base/base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags hitcount_tags %}
 
-{% block body_class %}template-blogpage{% endblock %}
+{% block body_class %}article_page{% endblock %}
 
 {% block content %}
+{% if user.is_anonymous and settings.home.GlobalSettings.enable_paywall %}
+<h1>QUE NO!</h1>
+{% else %}
     <h1>{{ page.title }}</h1>
     {% image page.featured_image fill-600x400-c0 %}
+
+    <strong>{% get_hit_count for page %}</strong>
 
     <p class="meta">{{ page.publication_date }}</p>
 
@@ -57,7 +62,5 @@
             </section>
         {% endif %}
     {% endfor %}
-
-    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
-
+{% endif %}
 {% endblock %}

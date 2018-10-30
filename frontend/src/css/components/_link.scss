@@ -1,0 +1,46 @@
+.hp-link-primary {
+  color: $brand-primary;
+  font-weight: 900;
+}
+
+.tweet-this {
+  a {
+    background-color: $twitter;
+    border-radius: $border-rounded-border-radius;
+    color: $white;
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding: 0.25rem 0.5rem;
+    i {
+      color: $white;
+      margin-right: 0.5rem;
+    }
+    &:hover {
+      color: $white;
+      background-color: darken($twitter, 5%);
+      text-decoration: none;
+    }
+  }
+}
+
+.facebook-this {
+  a {
+    background-color: $facebook;
+    border-radius: $border-rounded-border-radius;
+    color: $white;
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding: 0.25rem 0.5rem;
+    i {
+      color: $white;
+      margin-right: 0.5rem;
+    }
+    &:hover {
+      color: $white;
+      background-color: darken($facebook, 5%);
+      text-decoration: none;
+    }
+  }
+}

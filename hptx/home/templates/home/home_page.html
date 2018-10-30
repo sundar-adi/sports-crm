@@ -1,29 +1,18 @@
 {% extends "base/base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags hitcount_tags %}
+
+{% load article_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
-{% block left-sidebar-content %}
-<ul>
-{% for link in page.left_menu.all %}
-<li><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
-{% endfor %}
-</ul>
-{% endblock left-sidebar-content %}
-
-{% block right-sidebar-content %}
-{% if page.twitter_handler %}
-<a class="twitter-timeline" href="https://twitter.com/{{ page.twitter_handler }}">Tweets by {{ page.twitter_handler }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-{% endif %}
-{% endblock %}
-
 {% block content %}
-<ul>
-{% for link in page.top_menu.all %}
-<li><a href="{% slugurl 'articles' %}?tag={{ link.tag }}">{{ link.name }}</a></li>
-{% endfor %}
-</ul>
-
-  {{ page.body|richtext }}
+<div class="uk-card uk-card-primary">
+  <div class="uk-card-header">
+    <h2>Most recent</h2>
+  </div>
+  {% for article in most_recent_articles %}
+    {% include "article/article_list_item.html" with article=article first=forloop.first %}
+  {% endfor %}
+</div>
 {% endblock %}

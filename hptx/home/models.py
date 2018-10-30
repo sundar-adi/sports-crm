@@ -1,15 +1,18 @@
+from django.conf import settings
 from django.db import models
 from django.utils.text import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.admin.edit_handlers import (
     FieldPanel, MultiFieldPanel, InlinePanel)
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from modelcluster.fields import ParentalKey
-from wagtailmodelchooser import register_model_chooser
 from taggit.models import TagBase
+from wagtailautocomplete.edit_handlers import AutocompletePanel
+from wagtailmodelchooser import register_model_chooser
 from wagtailmodelchooser.edit_handlers import ModelChooserPanel
 
 
@@ -82,6 +85,7 @@ class Tag(Orderable, TagBase):
     )
 
     panels = [
+        FieldPanel('name'),
         FieldPanel('description'),
         MultiFieldPanel([
             FieldPanel('primary_color'),
@@ -191,16 +195,80 @@ class TagLinkLeftSubMenu(Orderable, models.Model):
 
 
 class HomePage(Page):
+    parent_page_types = ['wagtailcore.Page']
+    subpage_types = ['article.ArticleTagIndexPage']
 
+    facebook_link = models.URLField(
+        verbose_name=_('facebook_link'),
+        blank=True,
+    )
+    twitter_link = models.URLField(
+        verbose_name=_('twitter_link'),
+        blank=True,
+    )
+    instagram_link = models.URLField(
+        verbose_name=_('instagram_link'),
+        blank=True,
+    )
     twitter_handler = models.CharField(
         max_length=255,
         verbose_name=_('twitter handler'),
+        help_text=_('For rendering the twitter timeline'),
         blank=True,
+    )
+    talent_of_the_week = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        verbose_name=_('talent of the week'),
+        related_name='talented_at',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
     )
 
     content_panels = Page.content_panels + [
+        AutocompletePanel(
+            'talent_of_the_week', page_type=settings.AUTH_USER_MODEL),
         InlinePanel('top_menu', label='Top menu'),
         InlinePanel('left_menu', label='Left menu'),
         InlinePanel('left_submenu', label='Left submenu'),
-        FieldPanel('twitter_handler'),
+        MultiFieldPanel([
+            FieldPanel('facebook_link'),
+            FieldPanel('twitter_link'),
+            FieldPanel('instagram_link'),
+            FieldPanel('twitter_handler'),
+        ], heading=_('Social media')),
+    ]
+
+    def has_social_links(self):
+        return any(
+            (self.facebook_link,
+             self.twitter_link,
+             self.instagram_link))
+
+    def get_context(self, request):
+        from article.models import ArticlePage
+        context = super().get_context(request)
+        context['most_recent_articles'] = ArticlePage.objects.order_by(
+            '-publication_date')[:5]
+        return context
+
+
+@register_setting
+class GlobalSettings(BaseSetting):
+    show_view_count = models.BooleanField(
+        verbose_name=_('show view count'),
+        help_text='Show the hit counter for each article',
+        default=False,
+    )
+    enable_paywall = models.BooleanField(
+        verbose_name=_('enable paywall'),
+        help_text=(
+            'Enable the paywall, UI blocker for AVP pages '
+            'if the user is not suscribed'),
+        default=False,
+    )
+
+    panels = [
+        FieldPanel('show_view_count'),
+        FieldPanel('enable_paywall')
     ]

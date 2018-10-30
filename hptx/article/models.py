@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.admin.edit_handlers import (
@@ -7,14 +8,19 @@ from wagtail.admin.edit_handlers import (
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
+from wagtail.core.url_routing import RouteResult
+from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.embeds.blocks import EmbedBlock
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from taggit.models import TaggedItemBase
 from wagtailautocomplete.edit_handlers import AutocompletePanel
+
+from hitcount.models import HitCount
+from hitcount.views import HitCountMixin
+
 
 from home.models import Tag
 
@@ -31,6 +37,9 @@ class ArticleTag(TaggedItemBase):
 
 
 class ArticlePage(Page):
+    parent_page_types = ['article.ArticleTagIndexPage']
+    subpage_types = []
+
     tags = ClusterTaggableManager(through=ArticleTag, blank=True)
 
     authors = ParentalManyToManyField(
@@ -92,19 +101,50 @@ class ArticlePage(Page):
         ], heading=_('Content')),
     ]
 
+    def serve(self, request, *args, **kwargs):
+        hit_count = HitCount.objects.get_for_object(self)
+        HitCountMixin.hit_count(request, hit_count)
+        return super().serve(request, *args, **kwargs)
+
+
+class PodcastPage(ArticlePage):
+    parent_page_types = ['article.ArticleTagIndexPage']
+    subpage_types = ['article.PodcastEpisodePage']
+
+
+class VideoPage(ArticlePage):
+    parent_page_types = ['article.ArticleTagIndexPage']
+    subpage_types = []
+
+
+class PodcastEpisodePage(ArticlePage):
+    parent_page_types = ['article.PodcastPage']
+    subpage_types = []
+
 
 class ArticleTagIndexPage(Page):
+    parent_page_types = ['home.Homepage']
+
+    def route(self, request, path_components):
+        if (path_components and len(path_components) == 2 and
+                path_components[0] == 'tag'):
+            self.tag_name = path_components[1]
+        else:
+            self.tag_name = ''
+            return super().route(request, path_components)
+        if self.live:
+            return RouteResult(self)
+        else:
+            raise Http404
 
     def get_context(self, request):
-
-        tag = request.GET.get('tag')
         articles = ArticlePage.objects.filter(
-            tags__name__iexact=tag).live()
+            tags__name__iexact=self.tag_name).live()
 
         context = super().get_context(request)
         context['articles'] = articles
         try:
-            context['tag'] = Tag.objects.get(name__iexact=tag)
+            context['tag'] = Tag.objects.get(name__iexact=self.tag_name)
         except Tag.DoesNotExist:
             pass
         return context

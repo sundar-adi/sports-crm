@@ -1,4 +1,4 @@
-{% load static wagtailuserbar %}
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="{{ LANGUAGE_CODE |default:'en'}}" {% block extrahtml %}{% endblock %}>
@@ -18,6 +18,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       {# Global stylesheets #}
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
       <link rel="stylesheet" type="text/css" href="{% static 'css/hptx.css' %}">
 
       {% block extra_css %}
@@ -25,10 +26,70 @@
       {% endblock %}
   </head>
   <body class="{% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
     <div {% block vue_app %}id="app"{% endblock %}>
       <header class="header">
-        {% wagtailuserbar %}
-        <h1 style="display: inline-block;">HEADER</h1>
+        <div class="uk-navbar-container">
+          <div class="uk-container" uk-navbar>
+            <div class="uk-navbar-left">
+              <a href="{% pageurl homepage %}" class="uk-navbar-item uk-logo"><img src="{% static 'src/assets/Navbar/Logo.png'%}" alt="Houston Prominence" /></a>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                  {% for link in homepage.top_menu.all %}
+                  <li>
+                    <div class="uk-navbar-item uk-flex uk-flex-middle">{% if link.image %}{% image link.image max-24x24 class="mr-xs" alt="" %}{% else %}<span class="mr-xs"><i class="fas fa-tag }}"></i></span>{% endif%}<a class="fw-black fc-white" href="{% slugurl 'articles' %}tag/{{ link.tag }}/">{{ link.name|upper }}</a></div>
+                  </li>
+                  {% endfor %}
+                  {% if not user.is_authenticated %}
+                  <li class="uk-flex uk-flex-middle uk-margin-right">
+                    <div>
+                      <a href="" class="uk-button uk-hp-button-ghost">Log in</a>
+                    </div>
+                  </li>
+                  <li class="uk-flex uk-flex-middle">
+                    <div>
+                      <a href="" class="uk-button uk-button-primary uk-margin-small-right">Subscribe now</a>
+                    </div>
+                  </li>
+                  {% else %}
+                  <li class="uk-flex uk-flex-middle">
+                    <a href="#">
+                      <div class="hptx-avatar hptx-avatar--small hptx-avatar--rounded">{% if link.image %}{% image user.profile.photo fill-32x32 class="mr-xs hptx-avatar__image" alt="" %}{% else %}<img class=" hptx-avatar__image" src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" alt="" />{% endif %}</div>
+                    </a>
+                    <div class="" uk-dropdown="mode: click; pos:bottom-right;">
+                      <div class="fw-black fs-sm">{{ user.first_name }} {{ user.last_name }}</div>
+                      <div class="fs-xs">{{ user.email }}</div>
+                      <hr>
+                      <div class="uk-margin-small-bottom"><a href="" class="fw-light fs-sm fc-brand-secondary">Edit profile</a></div>
+                      <div class="uk-margin-small-bottom"><a href="" class="fw-light fs-sm fc-brand-secondary">Publications</a></div>
+                      <div><a href="" class="fw-light fs-sm fc-brand-secondary">Log out</a></div>
+                    </div>
+                  </li>
+                  {% endif %}
+                </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="uk-container uk-margin-top">
+        <div class="uk-grid-small" uk-grid>
+          <aside class="uk-width-1-6">
+              {% block left-sidebar-content %}
+              {% include "base/left-bar.html" %}
+              {% endblock left-sidebar-content %}
+          </aside>
+          <main class="uk-width-expand">
+            {% block content %}{% endblock %}
+          </main>
+          <aside class="uk-width-1-4">
+              {% block right-sidebar-content %}
+              {% include "base/right-bar.html" %}
+              {% endblock right-sidebar-content %}
+          </aside>
+        </div>
+      </div>
+        <!-- <h1 style="display: inline-block;">HEADER</h1>
         <table style="float: right;">
           <tr>
             {% if not user.is_authenticated %}
@@ -40,30 +101,15 @@
             {% endif %}
             <td><a href="{% url 'plans'%}"> | Plans</a></td>
           </tr>
-        </table>
-      </header>
-      <section class="content">
-        <section class="left-sidebar">
-          <h1>LEFT SIDEBAR</h1>
-          {% block left-sidebar-content %}
-          {% endblock left-sidebar-content %}
-        </section>
-        <section class="main-content">
-          {% block content %}{% endblock %}
-        </section>
-        <section class="right-sidebar">
-          <h1>RIGHT SIDEBAR</h1>
-          {% block right-sidebar-content %}
-          {% endblock right-sidebar-content %}
-        </section>
-      </section>
-      <section class="footer">
-          <h1>FOOTER</h1>
-      </section>
+        </table> -->
     </div>
 
     {# Global javascript #}
     <script type="text/javascript" src="{% static 'js/hptx.js' %}"></script>
+
+    {% if homepage and homepage.twitter_handler %}
+     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    {% endif %}
 
     {% block extra_js %}
         {# Override this in templates to add extra javascript #}
@@ -71,9 +117,9 @@
 
     <!-- VUE SCRIPT -->
     {% if debug %}
-    <script src="http://localhost:9000/static/js/app.buildVue.js"></script>
+    <script src="http://localhost:9000/static/app.buildVue.js"></script>
     {% else %}
-    <script src="{% static 'js/app.buildVue.js' %}"></script>
+    <script src="{% static 'app.buildVue.js' %}"></script>
     {% endif %}
   </body>
 </html>

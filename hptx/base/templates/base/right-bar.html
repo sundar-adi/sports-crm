@@ -1,0 +1,17 @@
+{% load wagtailcore_tags %}
+
+{% if homepage.talent_of_the_week %}
+<div class="uk-card uk-card-default uk-margin-bottom">
+  <div class="uk-card-body">
+    {{ homepage.talent_of_the_week }}
+  </div>
+</div>
+{% endif %}
+
+<div class="uk-card uk-card-default uk-card--twitter-feed uk-margin-bottom">
+  <div class="uk-card-body">
+    {% if homepage.twitter_handler %}
+    <a class="twitter-timeline" href="https://twitter.com/{{ homepage.twitter_handler }}"></a>
+    {% endif %}
+  </div>
+</div>

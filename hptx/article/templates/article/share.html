@@ -1,0 +1,7 @@
+{% load social_share %}
+
+<a href="#" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a>
+<div uk-dropdown="mode: click; pos:bottom-right;">
+  <div class="mb-xxs">{% post_to_facebook article_url %}</div>
+  {% post_to_twitter "{{ article.title }}" article_url %}
+</div>

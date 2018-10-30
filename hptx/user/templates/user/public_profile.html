@@ -1,9 +1,40 @@
 {% extends "base/base.html" %}
 {% load wagtailcore_tags %}
 
+{% block body_class %}template-public-profile{% endblock %}
 {% block content %}
 
-  <h1>{{ user.get_fullname }}</h1>
-  <h2>{{ user.username }}</h2>
+<div class="uk-card uk-card-primary uk-card-primary--profile">
+  <div class="uk-hp-card-primary-wrapper">
+    <div class="uk-card-header">
+      <div class="uk-flex uk-flex-between uk-padding">
+        <div class="uk-flex">
+          <div class="hptx-avatar hptx-avatar--rounded uk-margin-small-right">
+            <img class="htpx-avatar__image" data-src="https://images.unsplash.com/photo-1522201949034-507737bce479?fit=crop&w=80&h=80&q=80"
+            data-srcset="https://images.unsplash.com/photo-1522201949034-507737bce479?fit=crop&w=80&h=80&q=80 650w,
+                          https://images.unsplash.com/photo-1522201949034-507737bce479?fit=crop&w=80&h=80&q=80 1300w"
+            sizes="(min-width: 80px) 650px, 100vw" width="80" height="80" alt="{{ user.username }}" uk-img>
+          </div>
+          <h3 class="uk-card-title">{{ user.username }}</h3>
+        </div>
+        <span class="uk-badge">Contributor</span>
+      </div>
+    </div>
+  </div>
+  <div class="uk-card-body">
+    <div class="uk-flex uk-flex-between">
+      <div><a href="" >@JosephSilva</a></div><div>24 Articles Published</div>
+    </div>
+    <div class="uk-flex">
+      <div><a href="" uk-icon="location">Austin, Tx</a></div>
+    </div>
+  </div>
+  <div class="uk-divider-icon"></div>
+  <div class="uk-card-footer uk-card-footer--profile">
+    <p class="uk-text-small">National Emmy award winning television sports journalist and author. Passionate about family, politics, fast cars and of course all sports!</p>
+  </div>
+</div>
+
+
 
 {% endblock %}

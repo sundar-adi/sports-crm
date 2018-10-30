@@ -1,0 +1,61 @@
+{% extends "base/base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}podcast_episode_page{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+    {% image page.featured_image fill-600x400-c0 %}
+
+    <p class="meta">{{ page.publication_date }}</p>
+
+    {% if page.authors.all %}
+    <h2>Authors</h2>
+    <ul class="authors">
+      {% for author in page.authors.all %}
+      <li><a href="{% url 'profile_view' author.username %}">{{ author.get_full_name|default:author.username }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if page.editors.all %}
+    <h2>Editors</h2>
+    <ul class="editors">
+      {% for editor in page.editors.all %}
+      <li><a href="{% url 'profile_view' editor.username %}">{{ editor.get_full_name|default:editor.username }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if page.contributors.all %}
+    <h2>Contributors</h2>
+    <ul class="contributors">
+      {% for contributor in page.contributors.all %}
+      <li><a href="{% url 'profile_view' contributor.username %}">{{ contributor.get_full_name|default:contributor.username }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if page.tags.all %}
+    <h2>Tags</h2>
+    <ul class="tags">
+      {% for tag in page.tags.all %}
+      <li><a href="{% slugurl 'articles' %}?tag={{ tag }}">{{ tag }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% for block in page.body %}
+        {% if block.block_type == 'heading' %}
+            <h1>{{ block.value }}</h1>
+        {% elif block.block_type == 'image' %}
+          {% image block.value fill-400x400-c0 %}
+        {% else %}
+            <section class="block-{{ block.block_type }}">
+                {% include_block block %}
+            </section>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

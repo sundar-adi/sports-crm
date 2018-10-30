@@ -1,0 +1,22 @@
+$button-line-height: 32px;
+$button-primary-background: $orange;
+$button-primary-color: $white;
+
+@mixin hook-button-primary {
+  background-image: $brand-action-gradient;
+  border-radius: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.uk-button {
+  &.uk-hp-button-ghost {
+    background: none;
+    border: 2px solid $white;
+    border-radius: 8px;
+    color: $white;
+    font-weight: 900;
+    line-height: 30px;
+    text-transform: uppercase;
+  }
+}

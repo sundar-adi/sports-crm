@@ -16,6 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network "public_network",  use_dhcp_assigned_default_route: true, :bridge => 'en0: Wi-Fi (AirPort)'
 
   config.vm.provision :shell, path: "bootstrap.sh"
+  config.vm.network :forwarded_port, host: 35729, guest: 35729
   config.vm.network :forwarded_port, host: 8001, guest: 8000
 
   # celery flower monitoring running on guest port 5555 => 5556
