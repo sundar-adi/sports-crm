@@ -1,9 +1,74 @@
 {% extends "base/base.html" %}
 {% load wagtailcore_tags %}
 
+{% block body_class %}template-public-profile{% endblock %}
+
+{% block left-sidebar-content %}
+{% endblock left-sidebar-content %}
+
 {% block content %}
 
-  <h1>{{ user.get_fullname }}</h1>
-  <h2>{{ user.username }}</h2>
+<div class="uk-card uk-card-primary uk-card-primary--profile uk-card-primary--profile-edit">
+  <div class="uk-hp-card-primary-wrapper">
+    <div class="uk-card-header">
+      <div class="uk-flex uk-flex-between uk-padding uk-padding-remove-horizontal">
+        <div class="uk-flex">
+          <div class="hptx-avatar hptx-avatar--rounded uk-margin-small-right">
+            <img class="htpx-avatar__image" data-src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" width="80" height="80" alt="{{ user.username }}" uk-img>
+          </div>
+          <div class="uk-flex uk-flex-column uk-flex-center">
+            <h3 class="uk-card-title fw-bold uk-margin-remove-vertical">{{ user.first_name }} {{ user.last_name }}</h3>
+            <div class="uk-flex rating">
+              <div class="rating-star rating-star--full">
+                <i class="empty far fa-star"></i>
+                <i class="half fas fa-star-half-alt"></i>
+                <i class="full fas fa-star"></i>
+              </div>
+              <div class="rating-star rating-star--full">
+                <i class="empty far fa-star"></i>
+                <i class="half fas fa-star-half-alt"></i>
+                <i class="full fas fa-star"></i>
+              </div>
+              <div class="rating-star rating-star--full">
+                <i class="empty far fa-star"></i>
+                <i class="half fas fa-star-half-alt"></i>
+                <i class="full fas fa-star"></i>
+              </div>
+              <div class="rating-star rating-star--half">
+                <i class="empty far fa-star"></i>
+                <i class="half fas fa-star-half-alt"></i>
+                <i class="full fas fa-star"></i>
+              </div>
+              <div class="rating-star rating-star--empty">
+                <i class="empty far fa-star"></i>
+                <i class="half fas fa-star-half-alt"></i>
+                <i class="full fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="uk-flex-none uk-badge fw-black">Suscriptor Pro</span>
+      </div>
+    </div>
+  </div>
+  <div class="uk-card-body uk-padding">
+    <div class="uk-flex uk-flex-between uk-margin-small-bottom">
+      <a href="" class="uk-link-text fs-sm"><i class="fab fa-twitter uk-margin-right"></i>@JosephSilva</a>
+      <div class="fs-sm">24 Articles Published</div>
+    </div>
+    <div class="uk-flex">
+      <div class="uk-hp-user-location fs-sm"><i class="fas fa-map-marker uk-margin-right"></i>Austin, Tx</div>
+    </div>
+  </div>
+  <div class="uk-divider-icon"></div>
+  <div class="uk-card-footer uk-padding">
+    <p class="fs-sm">National Emmy award winning television sports journalist and author. Passionate about family, politics, fast cars and of course all sports!</p>
+  </div>
+</div>
 
 {% endblock %}
+
+
+{% block right-sidebar-content %}
+{% endblock right-sidebar-content %}
+
