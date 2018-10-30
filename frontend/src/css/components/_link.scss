@@ -1,6 +1,6 @@
 .hp-link-primary {
   color: $brand-primary;
-  font-weight: 900;
+  font-weight: $fw-black;
   &:hover{
     color: $brand-primary;
     opacity: 0.8;
@@ -9,7 +9,7 @@
 }
 .hp-link-secondary {
   color: $brand-secondary;
-  font-weight: 900;
+  font-weight: $fw-black;
   &:hover{
     color: $brand-secondary;
     opacity: 0.8;
