@@ -52,18 +52,24 @@
     </div>
   </div>
   <div class="uk-card-body uk-padding">
-    <div class="uk-flex uk-flex-between uk-margin-small-bottom">
+    <form>
+      <legend class="uk-legend fw-bold">Name</legend>
+      <div class="uk-margin">
+        <input class="uk-input uk-form-danger" type="text" placeholder="{{ user.first_name }} {{ user.last_name }}">
+      </div>
+    </form>
+    <!-- <div class="uk-flex uk-flex-between uk-margin-small-bottom">
       <a href="" class="uk-link-text fs-sm"><i class="fab fa-twitter uk-margin-right"></i>@JosephSilva</a>
       <div class="fs-sm">24 Articles Published</div>
     </div>
     <div class="uk-flex">
       <div class="uk-hp-user-location fs-sm"><i class="fas fa-map-marker uk-margin-right"></i>Austin, Tx</div>
-    </div>
+    </div> -->
   </div>
-  <div class="uk-divider-icon"></div>
+  <!-- <div class="uk-divider-icon"></div>
   <div class="uk-card-footer uk-padding">
     <p class="fs-sm">National Emmy award winning television sports journalist and author. Passionate about family, politics, fast cars and of course all sports!</p>
-  </div>
+  </div> -->
 </div>
 
 {% endblock %}

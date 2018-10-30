@@ -1,0 +1,27 @@
+$form-background: $light-grey;
+$form-focus-background: $light-grey;
+$form-legend-font-size: $fs-sm;
+$form-focus-background: $white;
+$form-focus-color: $global-font-color;
+$form-small-line-height: $form-small-height;
+// $form-small-font-size: $fs-sm;
+// $form-large-font-size: $fs-sm;
+// $form-success-color: 
+
+@mixin hook-form(){
+    font-size: $fs-sm;
+}
+
+@mixin hook-form-single-line() {
+    border-radius: $border-rounded-border-radius/2;
+    border: 1px solid $form-background;
+}
+
+@mixin hook-form-focus(){
+    border: 1px solid $dark-grey;
+}
+
+@mixin hook-form-danger(){
+    border: 1px solid $orange;
+    background-color: lighten( $orange, 49% );
+}
