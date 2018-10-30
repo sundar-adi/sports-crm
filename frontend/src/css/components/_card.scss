@@ -88,6 +88,18 @@ $card-primary-color: $brand-secondary;
   .uk-hp-card-primary-intro {
     color: $brand-secondary-lighter;
     font-size: $fs-sm;
+    max-height: 6rem;
+
+    &.uk-hp-card-primary-intro--has-media {
+      max-height: 10rem;
+    }
+  }
+
+  .uk-hp-card-primary-smallmedia {
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
   }
 
   .uk-hp-card-primary-wrapper {
@@ -199,4 +211,3 @@ $card-secondary-color: $brand-secondary;
     color: $brand-secondary;
   }
 }
-

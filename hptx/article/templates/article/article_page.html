@@ -5,6 +5,9 @@
 {% block body_class %}article_page{% endblock %}
 
 {% block content %}
+{% if user.is_anonymous and settings.home.GlobalSettings.enable_paywall %}
+<h1>QUE NO!</h1>
+{% else %}
     <h1>{{ page.title }}</h1>
     {% image page.featured_image fill-600x400-c0 %}
 
@@ -59,5 +62,5 @@
             </section>
         {% endif %}
     {% endfor %}
-
+{% endif %}
 {% endblock %}
