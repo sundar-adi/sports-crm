@@ -1,18 +1,20 @@
 {% extends "base/base.html" %}
-{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags %}
 {% block left-sidebar-content %}
 {% endblock left-sidebar-content %}
 {% block right-sidebar-content %}
 {% endblock right-sidebar-content %}
-{% block footer %}
-{% endblock footer %}
+{% block navbar-right %}
+{% endblock navbar-right %}
+
+
+
 {% block content %}
 
-<div class="uk-position-cover uk-margin-large-top uk-background-default">
-  <div class="uk-flex">
+<div class="uk-position-cover uk-hp-margin-nav-top uk-background-default">
+  <div class="uk-flex uk-flex-between uk-background-default">
     <div class="uk-width-1-3 uk-flex uk-flex-middle">
-      <div class="uk-margin-auto uk-width-medium">
-        <div class="fc-brand-secondary">
+      <div class="uk-margin-auto uk-width-medium uk-padding uk-padding-remove-horizontal">
+        <div class="fc-brand-secondary uk-margin-medium-bottom">
           <h2 class="fs-lg fw-black fo-high">Log In</h2>
           <p class="fs-sm">Nullam venenatis eu sem id hendrerit. In lorem augue, porttitor nec lorem eu, vehicula tincidunt lectus. Nullam congue, nunc id laoreet mattis, augue quam tempor mauris, in mollis justo diam vel metus. </p>
         </div>
@@ -20,27 +22,72 @@
         <form method="post" action="{% url 'user:login' %}">
           {% csrf_token %}
           <div>
-            <div class="uk-margin">
-               <div class="uk-inline uk-width-expand uk-hp-input-login">
-                   <img class="uk-form-icon uk-form-icon-flip" src="{% static 'src/assets/login/user-solid.svg'%}"  />
-                   {{ form.username }}
+            <div class="uk-margin-medium">
+               <div class="uk-inline uk-width-expand">
+                   <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-user"></i></span>
+                   <input id="id_username" name="username" required="required" type="text" placeholder="Username" class="uk-input"/>
                </div>
+               <span class="fs-xs fw-medium">Feedback Value</span>
             </div>
-            <div class="uk-margin">
+            <div class="uk-margin-medium">
                 <div class="uk-inline uk-width-expand">
-                  <img class="uk-form-icon uk-form-icon-flip" src="{% static 'src/assets/login/lock-solid.svg'%}"  />
-                  {{ form.password }}
+                  <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-lock"></i></span>
+                  <input id="id_password" name="password" required="required" type="text" placeholder="Password" class="uk-input"/>
                 </div>
+                <span class="fs-xs fw-medium">Feedback Value</span>
             </div>
           </div>
+          <div class="uk-flex uk-flex-start">
+            <input type="submit" value="log in" class="uk-button uk-button-primary">
+            <a href="#" class="uk-margin-medium-left uk-flex uk-flex-middle hp-link-secondary">
+              <svg aria-hidden="true" height="12px" data-prefix="fas" data-icon="question-circle" class="svg-inline--fa fa-question-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#121E4E" d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zM262.655 90c-54.497 0-89.255 22.957-116.549 63.758-3.536 5.286-2.353 12.415 2.715 16.258l34.699 26.31c5.205 3.947 12.621 3.008 16.665-2.122 17.864-22.658 30.113-35.797 57.303-35.797 20.429 0 45.698 13.148 45.698 32.958 0 14.976-12.363 22.667-32.534 33.976C247.128 238.528 216 254.941 216 296v4c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12v-1.333c0-28.462 83.186-29.647 83.186-106.667 0-58.002-60.165-102-116.531-102zM256 338c-25.365 0-46 20.635-46 46 0 25.364 20.635 46 46 46s46-20.636 46-46c0-25.365-20.635-46-46-46z"></path></svg>
+              <span class="uk-margin-left fs-xs">Forgot Password</span>
+            </a>
+          </div>
 
-          <input type="submit" value="login">
           <input type="hidden" name="next" value="{{ next }}">
         </form>
+        <div class="uk-margin-medium uk-hp-login-subscribe uk-padding-small uk-padding-remove-horizontal">
+          <span class="fs-xs fc-brand-secondary fw-black uk-margin-right">Don't have an account?</span><a hren="#" class="fs-xs hp-link-primary">Subscribe Now!</a>
+        </div>
       </div>
     </div>
     <div class="uk-width-2-3 uk-background-cover uk-hp-login-bg">
-
+      <div class="uk-position-bottom-right uk-margin-large-right uk-margin-large uk-flex uk-flex-between uk-flex-top" >
+        <img class="hptx-avatar hptx-avatar--circle uk-margin-right" data-src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" width="80" height="80" alt="{{ user.username }}" uk-img>
+        <div class="fc-white uk-width-medium">
+          <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus mollis, nisi vitae dignissim lacinia.</p>
+          <p class="fw-black uk-margin-remove-vertical	">Joseph Silva</p>
+          <p class="fs-xs fw-black fo-high uk-margin-remove-vertical	">Pro Contributor</p>
+          <div class="uk-flex rating">
+            <div class="rating-star rating-star--full">
+              <i class="empty far fa-star"></i>
+              <i class="half fas fa-star-half-alt"></i>
+              <i class="full fas fa-star"></i>
+            </div>
+            <div class="rating-star rating-star--full">
+              <i class="empty far fa-star"></i>
+              <i class="half fas fa-star-half-alt"></i>
+              <i class="full fas fa-star"></i>
+            </div>
+            <div class="rating-star rating-star--full">
+              <i class="empty far fa-star"></i>
+              <i class="half fas fa-star-half-alt"></i>
+              <i class="full fas fa-star"></i>
+            </div>
+            <div class="rating-star rating-star--half">
+              <i class="empty far fa-star"></i>
+              <i class="half fas fa-star-half-alt"></i>
+              <i class="full fas fa-star"></i>
+            </div>
+            <div class="rating-star rating-star--empty">
+              <i class="empty far fa-star"></i>
+              <i class="half fas fa-star-half-alt"></i>
+              <i class="full fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
