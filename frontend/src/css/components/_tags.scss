@@ -1,0 +1,14 @@
+.hp-tags {
+
+  .hp-tags__tag {
+    border: 1px solid $orange;
+    border-radius: $border-rounded-border-radius;
+    color: $orange;
+    font-weight: $fw-medium;
+    padding: 0rem 0.375rem 0.125rem;
+
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+  }
+}
