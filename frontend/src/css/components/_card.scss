@@ -4,6 +4,15 @@ $card-body-padding-vertical: round($global-medium-gutter / 2);
 $card-body-padding-vertical-l: round($global-gutter / 2);
 $card-default-box-shadow: none;
 
+.uk-hp-card-border{
+  background-color: $brand-primary;
+  border-radius: 4px;
+  height: 4px;
+  width: 98%;
+  &.uk-position-top-center{
+    top: 2px;
+  }
+}
 
 .uk-card-default {
   border-radius: $border-rounded-border-radius;
@@ -106,6 +115,7 @@ $card-primary-color: $brand-secondary;
     padding: 0.5rem 0.5rem 0 0.5rem;
   }
 
+
   &.uk-card-primary--profile {
     .uk-card-header {
       background-image: url('../assets/Feed/header-bg-big.png');
@@ -113,7 +123,7 @@ $card-primary-color: $brand-secondary;
       margin: 0;
       padding: 0;
       color: $white;
-  
+
       &::before {
         display: none;
       }

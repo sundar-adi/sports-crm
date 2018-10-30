@@ -1,38 +1,187 @@
 {% extends "base/base.html" %}
+{% block left-sidebar-content %}
+{% endblock left-sidebar-content %}
+{% block right-sidebar-content %}
+{% endblock right-sidebar-content %}
+{% block navbar-right %}
+{% endblock navbar-right %}
+
+
 
 {% block content %}
 
-<form method="post" action="{% url 'user:signup' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.first_name.label_tag }}</td>
-    <td>{{ form.first_name }}</td>
-</tr>
-<tr>
-    <td>{{ form.last_name.label_tag }}</td>
-    <td>{{ form.last_name }}</td>
-</tr>
-<tr>
-    <td>{{ form.email.label_tag }}</td>
-    <td>{{ form.email }}</td>
-</tr>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>Password</td>
-    <td>{{ form.password1 }}</td>
-</tr>
-<tr>
-    <td>Confirm password</td>
-    <td>{{ form.password2 }}</td>
-</tr>
-</table>
+<div class="uk-position-cover uk-hp-margin-nav-top uk-background-default">
+  <div class="uk-flex uk-flex-between uk-background-default">
+    <div class="uk-width-1-2 uk-flex uk-flex-middle">
+      <div class="uk-margin-auto uk-width-large uk-padding uk-padding-remove-horizontal">
+        <div class="fc-brand-secondary uk-margin-medium-bottom">
+          <h2 class="fs-xl fw-black fo-high fc-brand-secondary">Yearly Plan Subscription</h2>
+          <p class="fs-md">Please enter information on the form below to process subscription for Yearly Plan.</p>
+          <p class="fs-md fw-black fo-medium">Account Information</p>
+        </div>
 
-<input type="submit" value="signup">
-<input type="hidden" name="next" value="{{ next }}">
-</form>
+        <form method="post" action="{% url 'user:signup' %}">
+          {% csrf_token %}
+          <div class="uk-flex uk-flex-between uk-flex-wrap uk-flex-wrap-between">
+            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              {{ form.first_name.label_tag }}
+              {{ form.first_name }}
+            </div>
+            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
+              {{ form.last_name.label_tag }}
+              {{ form.last_name }}
+            </div>
+            <div class="uk-margin-medium-bottom uk-width-1-2 uk-margin-right uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              {{ form.email.label_tag }}
+              {{ form.email }}
+              <span class="fs-xs fw-medium">Feedback Value</span>
+            </div>
+            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+                <label class="">Password</label>
+                <div class="uk-inline uk-width-expand">
+                  <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-lock"></i></span>
+                  {{ form.password1 }}
+                </div>
+                <span class="fs-xs fw-medium">Feedback Value</span>
+            </div>
+            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
+                <label class=""> Retype Password</label>
+                <div class="uk-inline uk-width-expand">
+                  <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-lock"></i></span>
+                  {{ form.password2 }}
+                </div>
+                <span class="fs-xs fw-medium">Feedback Value</span>
+            </div>
+            <div class="uk-margin-medium-bottom uk-width-1-2 uk-margin-right uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              <label class="">Address</label>
+              <input type="text" name="address" class="uk-input" placeholder="Street, Number..."/>
+              <span class="fs-xs fw-medium">Feedback Value</span>
+            </div>
+            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              <label class="">City</label>
+              <div uk-form-custom="target: > * > span:first-child" class="uk-width-1-1">
+                  <select>
+                      <option value="">Select City</option>
+                      <option value="1">Option 01</option>
+                      <option value="2">Option 02</option>
+                      <option value="3">Option 03</option>
+                      <option value="4">Option 04</option>
+                  </select>
+                  <button class="uk-input uk-flex uk-flex-between uk-flex-middle" type="button" tabindex="-1">
+                      <span class="fo-medium"></span>
+                      <i class="fas fa-caret-down fo-medium"></i>
+                  </button>
+              </div>
+            </div>
+            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
+              <label class="">ZIP</label>
+              <input type="text" name="zip" class="uk-input"/>
+              <span class="fs-xs fw-medium">Feedback Value</span>
+            </div>
+            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              <label class="">Country</label>
+              <div uk-form-custom="target: > * > span:first-child" class="uk-width-1-1">
+                  <select>
+                      <option value="">Select Country</option>
+                      <option value="1">Option 01</option>
+                      <option value="2">Option 02</option>
+                      <option value="3">Option 03</option>
+                      <option value="4">Option 04</option>
+                  </select>
+                  <button class="uk-input uk-flex uk-flex-between uk-flex-middle" type="button" tabindex="-1">
+                      <span class="fo-medium"></span>
+                      <i class="fas fa-caret-down fo-medium"></i>
+                  </button>
+              </div>
+            </div>
+            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
+              <label class="">State</label>
+              <div uk-form-custom="target: > * > span:first-child" class="uk-width-1-1">
+                  <select>
+                      <option value="">Select State</option>
+                      <option value="1">Option 01</option>
+                      <option value="2">Option 02</option>
+                      <option value="3">Option 03</option>
+                      <option value="4">Option 04</option>
+                  </select>
+                  <button class="uk-input uk-flex uk-flex-between uk-flex-middle" type="button" tabindex="-1">
+                      <span class="fo-medium"></span>
+                      <i class="fas fa-caret-down fo-medium"></i>
+                  </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label class=""><input class="uk-checkbox uk-margin-small-right" type="checkbox"><span class="fs-sm">By signing up to this subscription plan and agreeing to the Privacy Policy you agree to this web site storing your information.</span></label>
+            <p class="fs-sm"><input class="uk-checkbox uk-margin-small-right" type="checkbox">I want to subscribe to your newsletters</p>
+            <p class="fs-sm"><input class="uk-checkbox uk-margin-small-right" type="checkbox">I accept <a href="#" class="hp-link-primary fw-medium">Terms and Conditions</a></p>
+          </div>
+          <input type="submit" value="proccess subscription" class="uk-button uk-button-primary uk-width-1-2 uk-margin-medium-top">
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
+      </div>
+    </div>
+    <div class="uk-width-1-2 uk-background-cover uk-hp-login-bg uk-flex uk-position-relative uk-flex-column">
+      <div class="uk-margin-auto uk-margin-auto-vertical" >
+        <div class="uk-card uk-card-default uk-margin-bottom uk-width-medium uk-position-relative">
+          <div class="uk-hp-card-border uk-position-top-center"></div>
+          <div class="uk-card-body uk-flex uk-flex-middle uk-flex-column uk-padding">
+            <span class="fs-xxl fw-black">$50</span>
+            <span class="fs-xs fw-black">PER YEAR</span>
+            <span class="fs-lg fw-black uk-margin-medium-top">Yearly Plan</span>
+            <p class="fs-sm ta-center">Cras fringilla justo odio, quis rutrum risus aliquam eget. Pellentesque euismod ultrices nisl.</p>
+            <a href="#" class="hp-link-primary fw-medium fs-xs"><i class="fas fa-angle-left uk-margin-right"></i>Change Plan</a>
+          </div>
+          <hr class="hptx-divider-nogutter">
+          <div class="uk-card-body uk-padding">
+            <ul class="uk-list uk-list--menu">
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Nam eros neque</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Praesent arcu ipsum posuere</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Aliquam risus augue</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="uk-flex uk-margin-auto uk-margin-large  uk-flex-between uk-flex-top" >
+        <img class="hptx-avatar hptx-avatar--circle uk-margin-right" data-src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" width="80" height="80" alt="{{ user.username }}" uk-img>
+        <div class="fc-white uk-width-medium">
+          <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus mollis, nisi vitae dignissim lacinia.</p>
+          <p class="fw-black uk-margin-remove-vertical	">Joseph Silva</p>
+          <p class="fs-xs fw-black fo-high uk-margin-remove-vertical	">Pro Contributor</p>
+          <div class="uk-flex rating">
+            <div class="rating-star rating-star--full">
+              <i class="empty far fa-star"></i>
+              <i class="half fas fa-star-half-alt"></i>
+              <i class="full fas fa-star"></i>
+            </div>
+            <div class="rating-star rating-star--full">
+              <i class="empty far fa-star"></i>
+              <i class="half fas fa-star-half-alt"></i>
+              <i class="full fas fa-star"></i>
+            </div>
+            <div class="rating-star rating-star--full">
+              <i class="empty far fa-star"></i>
+              <i class="half fas fa-star-half-alt"></i>
+              <i class="full fas fa-star"></i>
+            </div>
+            <div class="rating-star rating-star--half">
+              <i class="empty far fa-star"></i>
+              <i class="half fas fa-star-half-alt"></i>
+              <i class="full fas fa-star"></i>
+            </div>
+            <div class="rating-star rating-star--empty">
+              <i class="empty far fa-star"></i>
+              <i class="half fas fa-star-half-alt"></i>
+              <i class="full fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
 
 {% endblock %}
