@@ -1,22 +1,51 @@
 {% extends "base/base.html" %}
-
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags %}
+{% block left-sidebar-content %}
+{% endblock left-sidebar-content %}
+{% block right-sidebar-content %}
+{% endblock right-sidebar-content %}
+{% block footer %}
+{% endblock footer %}
 {% block content %}
 
-<form method="post" action="{% url 'user:login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
+<div class="uk-position-cover uk-margin-large-top uk-background-default">
+  <div class="uk-flex">
+    <div class="uk-width-1-3 uk-flex uk-flex-middle">
+      <div class="uk-margin-auto uk-width-medium">
+        <div class="fc-brand-secondary">
+          <h2 class="fs-lg fw-black fo-high">Log In</h2>
+          <p class="fs-sm">Nullam venenatis eu sem id hendrerit. In lorem augue, porttitor nec lorem eu, vehicula tincidunt lectus. Nullam congue, nunc id laoreet mattis, augue quam tempor mauris, in mollis justo diam vel metus. </p>
+        </div>
 
-<input type="submit" value="login">
-<input type="hidden" name="next" value="{{ next }}">
-</form>
+        <form method="post" action="{% url 'user:login' %}">
+          {% csrf_token %}
+          <div>
+            <div class="uk-margin">
+               <div class="uk-inline uk-width-expand uk-hp-input-login">
+                   <img class="uk-form-icon uk-form-icon-flip" src="{% static 'src/assets/login/user-solid.svg'%}"  />
+                   {{ form.username }}
+               </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-expand">
+                  <img class="uk-form-icon uk-form-icon-flip" src="{% static 'src/assets/login/lock-solid.svg'%}"  />
+                  {{ form.password }}
+                </div>
+            </div>
+          </div>
+
+          <input type="submit" value="login">
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
+      </div>
+    </div>
+    <div class="uk-width-2-3 uk-background-cover uk-hp-login-bg">
+
+    </div>
+
+  </div>
+
+</div>
+
 
 {% endblock %}
