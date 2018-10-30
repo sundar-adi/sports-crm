@@ -7,6 +7,7 @@ from django.urls import reverse
 
 from user.forms import SignUpForm
 from user.models import User
+from article.models import ArticlePage
 
 
 # Create your views here.
@@ -56,6 +57,8 @@ class ProfileView(TemplateView):
 
         context = super().get_context_data(*args, **kwargs)
         context.update({
-            'user': user
+            'user': user,
+            'articles': ArticlePage.objects.live().filter(
+                authors=user)
         })
         return context

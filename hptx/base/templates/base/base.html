@@ -34,7 +34,9 @@
             <div class="uk-navbar-left">
               <a href="{% pageurl homepage %}" class="uk-navbar-item uk-logo"><img src="{% static 'src/assets/Navbar/Logo.png'%}" alt="Houston Prominence" /></a>
             </div>
+
             <div class="uk-navbar-right">
+              {% block navbar-right %}
                 <ul class="uk-navbar-nav">
                   {% for link in homepage.top_menu.all %}
                   <li>
@@ -68,6 +70,7 @@
                   </li>
                   {% endif %}
                 </ul>
+              {% endblock navbar-right %}
             </div>
           </div>
         </div>
