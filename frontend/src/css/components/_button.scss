@@ -64,6 +64,14 @@ $button-link-hover-text-decoration: none;
     line-height: 1.875rem;
     text-transform: uppercase;
   }
+  &.uk-hp-button-white{
+    background-color: $white;
+    border-radius: 0.5rem;
+    color: $brand-primary;
+    font-weight: 900;
+    line-height: 1.875rem;
+    text-transform: uppercase;
+  }
 }
 
 .uk-button-group{
