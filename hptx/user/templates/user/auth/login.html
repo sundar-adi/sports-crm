@@ -53,41 +53,7 @@
       </div>
     </div>
     <div class="uk-width-2-3 uk-background-cover uk-hp-login-bg">
-      <div class="uk-position-bottom-right uk-margin-large-right uk-margin-large uk-flex uk-flex-between uk-flex-top" >
-        <img class="hptx-avatar hptx-avatar--circle uk-margin-right" data-src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" width="80" height="80" alt="{{ user.username }}" uk-img>
-        <div class="fc-white uk-width-medium">
-          <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus mollis, nisi vitae dignissim lacinia.</p>
-          <p class="fw-black uk-margin-remove-vertical	">Joseph Silva</p>
-          <p class="fs-xs fw-black fo-high uk-margin-remove-vertical	">Pro Contributor</p>
-          <div class="uk-flex rating">
-            <div class="rating-star rating-star--full">
-              <i class="empty far fa-star"></i>
-              <i class="half fas fa-star-half-alt"></i>
-              <i class="full fas fa-star"></i>
-            </div>
-            <div class="rating-star rating-star--full">
-              <i class="empty far fa-star"></i>
-              <i class="half fas fa-star-half-alt"></i>
-              <i class="full fas fa-star"></i>
-            </div>
-            <div class="rating-star rating-star--full">
-              <i class="empty far fa-star"></i>
-              <i class="half fas fa-star-half-alt"></i>
-              <i class="full fas fa-star"></i>
-            </div>
-            <div class="rating-star rating-star--half">
-              <i class="empty far fa-star"></i>
-              <i class="half fas fa-star-half-alt"></i>
-              <i class="full fas fa-star"></i>
-            </div>
-            <div class="rating-star rating-star--empty">
-              <i class="empty far fa-star"></i>
-              <i class="half fas fa-star-half-alt"></i>
-              <i class="full fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% if homepage.talent_of_the_week %}{% include "user/auth/talent_login.html" with user=homepage.talent_of_the_week %}{% endif %}
     </div>
 
   </div>

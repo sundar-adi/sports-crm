@@ -1,0 +1,10 @@
+{% load static wagtailimages_tags user_tags %}
+<div class="uk-position-bottom-right uk-margin-large-right uk-margin-large uk-flex uk-flex-between uk-flex-top" >
+  <div class="hptx-avatar hptx-avatar--circle uk-margin-right">{% if user.photo %}{% image user.photo fill-80x80 class="hptx-avatar__image" alt="{{ user.get_full_name }}" %}{% else %}<img class="hptx-avatar__image hptx-avatar__image--default" src="{% static 'src/assets/Feed/LogoHP@2x.png'%}" alt="{{ user.get_full_name }}" />{% endif %}</div>
+  <div class="fc-white uk-width-medium">
+    <p class="fs-sm">{{ user.bio|linebreaksbr }}</p>
+    <p class="fw-black uk-margin-remove-vertical">{{ user.get_full_name }}</p>
+    {% if user.is_talent %}<p class="fs-xs fw-black fo-high uk-margin-remove-vertical">Pro Contributor</p>{% endif %}
+    {% rating user.rating %}
+  </div>
+</div>
