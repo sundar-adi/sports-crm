@@ -111,6 +111,25 @@ class PodcastPage(Page):
     parent_page_types = ['article.PodcastIndexPage']
     subpage_types = ['article.PodcastEpisodePage']
 
+    authors = ParentalManyToManyField(
+        to=settings.AUTH_USER_MODEL,
+        verbose_name=_('authors'),
+        related_name='podcast_author_on',
+        blank=True,
+    )
+    editors = ParentalManyToManyField(
+        to=settings.AUTH_USER_MODEL,
+        verbose_name=_('editors'),
+        related_name='podcast_editor_on',
+        blank=True,
+    )
+    contributors = ParentalManyToManyField(
+        to=settings.AUTH_USER_MODEL,
+        verbose_name=_('contributors'),
+        related_name='podcast_contributor_on',
+        blank=True,
+    )
+
     featured_image = models.ForeignKey(
         'wagtailimages.Image',
         verbose_name=_('Featured Image'),
@@ -119,6 +138,21 @@ class PodcastPage(Page):
         blank=True,
         on_delete=models.SET_NULL,
     )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            AutocompletePanel(
+                'authors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+            AutocompletePanel(
+                'editors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+            AutocompletePanel(
+                'contributors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+        ], heading=_('People')),
+        ImageChooserPanel('featured_image'),
+    ]
 
 
 class VideoPage(ArticlePage):
