@@ -1,5 +1,16 @@
 $form-background: $grey;
 $form-focus-background: $grey;
 
-$form-radio-checked-background: $navy-lighter;
-$form-radio-checked-focus-background: $navy-lighter;
+$form-radio-background: $light-grey;
+$form-radio-checked-icon-color: $navy-lighter;
+$form-radio-checked-background: $white;
+$form-radio-checked-focus-background: $white;
+
+@mixin hook-form-radio(){
+  border: 1px solid $navy-lighter;
+}
+@mixin hook-form-radio-focus(){
+  border: 1px solid $navy-lighter;
+}
+@mixin hook-form-radio-checked(){}
+@mixin hook-form-radio-checked-focus(){}
