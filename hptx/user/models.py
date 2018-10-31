@@ -22,6 +22,16 @@ class User(AbstractUser):
         verbose_name=_(u'State'),
         blank=True,
     )
+    zip_code = models.CharField(
+        max_length=5,
+        verbose_name=_(u'zip code'),
+        blank=True,
+    )
+    country = models.CharField(
+        max_length=5,
+        verbose_name=_(u'zip code'),
+        blank=True,
+    )
     bio = models.TextField(
         verbose_name=_(u'Bio'),
         blank=True,
@@ -57,6 +67,10 @@ class User(AbstractUser):
     )
     is_talent = models.BooleanField(
         verbose_name=_('Is talent'),
+        default=False,
+    )
+    newsletter = models.BooleanField(
+        verbose_name=_('Newsletter subscribed'),
         default=False,
     )
 

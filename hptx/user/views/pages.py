@@ -27,6 +27,9 @@ class SignupView(FormView):
         login(self.request, user)
         return super().form_valid(form)
 
+    def put(self, request, *args, **kwargs):
+        import pdb; pdb.set_trace()
+
 
 class LogoutView(auth_views.LogoutView):
     next_page = "/"
