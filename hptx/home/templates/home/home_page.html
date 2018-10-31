@@ -7,7 +7,18 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-<div class="uk-card uk-card-primary">
+{% if page.editor_choices.count %}
+<div class="uk-card uk-card-primary mb-sm">
+  <div class="uk-card-header">
+    <h2>Editor choices</h2>
+  </div>
+  {% for choice in page.editor_choices.all %}
+    {% include "article/article_list_item.html" with article=choice.article first=forloop.first %}
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="uk-card uk-card-primary mb-sm">
   <div class="uk-card-header">
     <h2>Most recent</h2>
   </div>
@@ -15,4 +26,16 @@
     {% include "article/article_list_item.html" with article=article first=forloop.first %}
   {% endfor %}
 </div>
+
+
+{% if most_viewed_articles %}
+<div class="uk-card uk-card-primary">
+  <div class="uk-card-header">
+    <h2>Most popular</h2>
+  </div>
+  {% for article in most_viewed_articles %}
+    {% include "article/article_list_item.html" with article=article first=forloop.first %}
+  {% endfor %}
+</div>
+{% endif %}
 {% endblock %}

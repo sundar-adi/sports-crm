@@ -1,14 +1,18 @@
+from datetime import timedelta
+
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 from django.utils.text import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.admin.edit_handlers import (
-    FieldPanel, MultiFieldPanel, InlinePanel)
+    FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel)
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from hitcount.models import HitCount
 from modelcluster.fields import ParentalKey
 from taggit.models import TagBase
 from wagtailautocomplete.edit_handlers import AutocompletePanel
@@ -194,6 +198,22 @@ class TagLinkLeftSubMenu(Orderable, models.Model):
     ]
 
 
+class EditorChoice(Orderable, models.Model):
+    page = ParentalKey(
+        'home.HomePage',
+        on_delete=models.CASCADE,
+        related_name='editor_choices',
+    )
+    article = models.ForeignKey(
+        'article.ArticlePage',
+        on_delete=models.CASCADE,
+    )
+
+    panels = [
+        PageChooserPanel('article', page_type='article.ArticlePage'),
+    ]
+
+
 class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
     subpage_types = ['article.ArticleTagIndexPage', 'article.PodcastIndexPage']
@@ -228,6 +248,7 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         AutocompletePanel(
             'talent_of_the_week', page_type=settings.AUTH_USER_MODEL),
+        InlinePanel('editor_choices', label='Editor choices'),
         InlinePanel('top_menu', label='Top menu'),
         InlinePanel('left_menu', label='Left menu'),
         InlinePanel('left_submenu', label='Left submenu'),
@@ -246,10 +267,28 @@ class HomePage(Page):
              self.instagram_link))
 
     def get_context(self, request):
-        from article.models import ArticlePage
+        from article.models import ArticlePage, PodcastEpisodePage, VideoPage
+        from django.contrib.contenttypes.models import ContentType
+
         context = super().get_context(request)
-        context['most_recent_articles'] = ArticlePage.objects.order_by(
+        context['most_recent_articles'] = ArticlePage.objects.live().order_by(
             '-publication_date')[:5]
+
+        period = timezone.now() - timedelta(days=7)
+
+        try:
+            ctypes = ContentType.objects.get_for_models(
+                ArticlePage, PodcastEpisodePage, VideoPage).values()
+            hit_counts = HitCount.objects.filter(
+                content_type__in=ctypes).annotate(
+                    hit_count=models.Count(
+                        'hit', filter=models.Q(hit__created__gte=period))
+                ).order_by('hit_count')[:5]
+            context['most_viewed_articles'] = [
+                i.content_object for i in hit_counts]
+        except AttributeError:
+            pass
+
         return context
 
 

@@ -1,0 +1,9 @@
+.header-bg{
+  background-image: url('../assets/general/Headerbg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-clip-path: ellipse(100% 100% at top center);
+  clip-path: ellipse(100% 100% at top center);
+  height: 30rem;
+  margin-bottom: -17.5rem;
+}

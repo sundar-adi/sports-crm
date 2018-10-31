@@ -4,6 +4,24 @@ $card-body-padding-vertical: round($global-medium-gutter / 2);
 $card-body-padding-vertical-l: round($global-gutter / 2);
 $card-default-box-shadow: none;
 
+.uk-hp-card-border{
+  background-color: $brand-primary;
+  border-radius: 2.5px;
+  height: 5px;
+  width: 98%;
+  &.uk-position-top-center{
+    top: 2px;
+  }
+  &.border-yellow{
+    background-color: $yellow;
+  }
+  &.border-grey{
+    background-color: $grey;
+  }
+  &.border-gradient{
+    background-image: linear-gradient(92deg, #ff7800, #ff4300);
+  }
+}
 
 .uk-card-default {
   border-radius: $border-rounded-border-radius;
@@ -139,6 +157,7 @@ $card-primary-color: $brand-secondary;
   .uk-hp-card-primary-wrapper {
     padding: 0.5rem 0.5rem 0 0.5rem;
   }
+
 
   &.uk-card-primary--profile {
     .uk-card-header {

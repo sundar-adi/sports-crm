@@ -2,6 +2,7 @@ $internal-divider-icon-image: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4
 $divider-icon-line-border: $light-grey;
 $divider-icon-height: 0.75rem;
 $divider-margin-vertical: 0;
+$divider-vertical-height: auto;
 
 .hptx-divider-half {
   margin-bottom: round($global-margin / 2);
