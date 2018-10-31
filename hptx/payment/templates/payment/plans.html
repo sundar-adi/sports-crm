@@ -46,12 +46,22 @@
 {% endblock aside-right %}
 
 {% block bg-header %}
-  <div class="header-bg">
-
-  </div>
+  <div class="page-bg"></div>
 {% endblock bg-header %}
 
 {% block content %}
+  <div uk-grid class="uk-margin-medium-bottom">
+    <div class="uk-width-1-2">
+      <h1 class="uk-margin-medium-top ff-title fs-huge fc-white">Plans</h1>
+      <p class="fs-md fc-white">Subscribe now and enjoy the fantastic features that we offer. Subscribe now and enjoy the fantastic features that we offer.</p>
+    </div>
+    <div class="uk-width-1-2 uk-position-relative">
+      <div class="uk-position-bottom-right uk-margin-large">
+        {% if homepage.talent_of_the_week %}{% include "user/auth/talent_login.html" with user=homepage.talent_of_the_week %}{% endif %}
+      </div>
+    </div>
+  </div>
+
   <div class="uk-flex uk-background-default uk-position-relative">
     <div class="uk-card uk-card-default uk-margin-top uk-margin-right uk-position-relative">
      <div class="uk-hp-card-border border-grey uk-position-top-center uk-margin-top"></div>
@@ -87,10 +97,10 @@
                 <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>24/7 Live Coverage</li>
                 <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>100+ Videos, Writers & Podcasts</li>
                 <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>Access to Entire Site</li>
-                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>Build HP Credibility</li>
-                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>500 HP Credit*</li>
-                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>Start As 2-STAR</li>
-                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>50% Off 1-HP Shirt</li>
+                <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>Build HP Credibility</li>
+                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>100 HP Credit*</li>
+                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>Start As 1-STAR</li>
+                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>25% Off 1-HP Shirt</li>
              </ul>
            </div>
          </div>
@@ -109,11 +119,11 @@
                <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>24/7 Live Coverage</li>
                <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>100+ Videos, Writers & Podcasts</li>
                <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>Access to Entire Site</li>
-               <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>Build HP Credibility</li>
+               <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>Build HP Credibility</li>
                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>500 HP Credit*</li>
                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>Start As 2-STAR</li>
                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>50% Off 1-HP Shirt</li>
-               <li class="fs-sm fw-black uk-flex"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>Free Seat at HP Christmas Poker Tourney Shot at $10,000</li>
+               <li class="fs-sm fw-black uk-flex"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>Free Seat at HP Christmas Poker Tourney & Shot at $10,000</li>
              </ul>
            </div>
          </div>

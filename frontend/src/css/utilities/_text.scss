@@ -64,6 +64,9 @@
 }
 
 //sizes
+.fs-huge {
+  font-size: $fs-huge;
+}
 .fs-xxl {
   font-size: $fs-xxl;
 }
@@ -96,4 +99,9 @@
 //align
 .ta-center{
   text-align: center;
+}
+
+// family
+.ff-title {
+  font-family: $font-title;
 }
