@@ -45,3 +45,10 @@ def share(context, article):
     context['article'] = article
     context['article_url'] = article.full_url
     return context
+
+
+@register.simple_tag
+def get_last_podcast(podcast):
+    last = podcast.get_children().live().order_by(
+        '-first_published_at').first()
+    return last

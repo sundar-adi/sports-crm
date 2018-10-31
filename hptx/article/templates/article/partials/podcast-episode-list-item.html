@@ -1,0 +1,15 @@
+{% load wagtailimages_tags %}
+
+{% load article_tags %}
+
+<div class="podcast podcast--small">
+  <div class="podcast__image-wrapper">
+    {% image podcast.get_parent.specific.featured_image fill-120x120 alt="" class="podcast__image" %}
+    <div class="podcast__badge"><i class="fas fa-podcast"></i></div>
+  </div>
+  <div>
+    <h4 class="podcast__title">{{ podcast.get_parent.title }}</h4>
+    <p class="fw-medium">Episode 12</p>
+    <p>{{ podcast.title }}</p>
+  </div>
+</div>
