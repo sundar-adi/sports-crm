@@ -9,7 +9,7 @@
   </div>
   <div>
     <h4 class="podcast__title">{{ podcast.get_parent.title }}</h4>
-    <p class="fw-medium">Episode 12</p>
+    {% if podcast.episode_number is not None %}<p class="fw-medium">Episode {{ podcast.episode_number }}</p>{% endif %}
     <p>{{ podcast.title }}</p>
   </div>
 </div>

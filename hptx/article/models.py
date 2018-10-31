@@ -151,7 +151,7 @@ class PodcastPage(Page):
                 'contributors', page_type=settings.AUTH_USER_MODEL,
                 is_single=False),
         ], heading=_('People')),
-        ImageChooserPanel('featured_image'),
+        ImageChooserPanel('featured_image')
     ]
 
 
@@ -163,6 +163,35 @@ class VideoPage(ArticlePage):
 class PodcastEpisodePage(ArticlePage):
     parent_page_types = ['article.PodcastPage']
     subpage_types = []
+
+    episode_number = models.PositiveIntegerField(
+        verbose_name=_('Episode Number'),
+        null=True,
+        blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel('publication_date'),
+            FieldPanel('tags'),
+            FieldPanel('episode_number'),
+        ], heading=_('Article metadata')),
+        MultiFieldPanel([
+            AutocompletePanel(
+                'authors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+            AutocompletePanel(
+                'editors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+            AutocompletePanel(
+                'contributors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+        ], heading=_('People')),
+        MultiFieldPanel([
+            ImageChooserPanel('featured_image'),
+            StreamFieldPanel('body'),
+        ], heading=_('Content')),
+    ]
 
 
 class ArticleTagIndexPage(Page):

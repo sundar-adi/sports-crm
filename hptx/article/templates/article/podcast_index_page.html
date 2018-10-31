@@ -23,7 +23,7 @@
   <div class="uk-card-body">
     {% for podcast in podcasts.0.get_children %}
     <div {% if not forloop.last %} class="uk-margin-bottom" {% endif %}>
-      {% include "article/partials/podcast-episode-list-item.html" with podcast=podcast %}
+      {% include "article/partials/podcast-episode-list-item.html" with podcast=podcast.specific %}
     </div>
     {% endfor %}
   </div>
