@@ -200,9 +200,9 @@ class ArticleTagIndexPage(Page):
     def route(self, request, path_components):
         if (path_components and len(path_components) == 2 and
                 path_components[0] == 'tag'):
-            self.tag_name = path_components[1]
+            self.tag_slug = path_components[1]
         else:
-            self.tag_name = ''
+            self.tag_slug = ''
             return super().route(request, path_components)
         if self.live:
             return RouteResult(self)
@@ -211,12 +211,12 @@ class ArticleTagIndexPage(Page):
 
     def get_context(self, request):
         articles = ArticlePage.objects.filter(
-            tags__name__iexact=self.tag_name).live()
+            tags__slug__iexact=self.tag_slug).live()
 
         context = super().get_context(request)
         context['articles'] = articles
         try:
-            context['tag'] = Tag.objects.get(name__iexact=self.tag_name)
+            context['tag'] = Tag.objects.get(slug__iexact=self.tag_slug)
         except Tag.DoesNotExist:
             pass
         return context
