@@ -35,7 +35,7 @@
       {% image article.featured_image original alt="" class="uk-hp-article-main-media" %}
     {% elif article.specific.get_verbose_name == "Video page" and article|youtube_block %}
     <div class="uk-hp-article-main-media">{{ article|youtube_block }}</div>
-    {% elif article.specific.get_verbose_name == "Podcast page" and article|soundcloud_block %}
+    {% elif article.specific.get_verbose_name == "Podcast episode page" and article|soundcloud_block %}
     <div class="uk-hp-article-main-media soundcloud-content">{{ article|soundcloud_block }}</div>
     {% endif %}
 
@@ -47,7 +47,7 @@
       <div class="uk-width-2-5">{% image article.featured_image original alt="" %}</div>
       {% elif page_type == "Video page" %}
       <div class="uk-width-2-5 uk-hp-card-primary-smallmedia">{{ article|youtube_block }}</div>
-      {% elif page_type == "Podcast page" %}
+      {% elif page_type == "Podcast episode page" %}
       <div class="uk-width-1-4 uk-hp-card-primary-smallmedia">{{ article|soundcloud_block }}</div>
       {% endif %}
       {% endwith %}

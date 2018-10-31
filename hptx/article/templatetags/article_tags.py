@@ -35,7 +35,7 @@ def has_media(article):
     for block in article.body:
         if block.block_type == "embed" and \
                 article.specific.get_verbose_name() in [
-                    'Podcast page', 'Video page']:
+                    'Podcast episode page', 'Video page']:
             return True
     return False
 
