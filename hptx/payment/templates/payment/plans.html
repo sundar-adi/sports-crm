@@ -71,7 +71,7 @@
          <span class="fs-xs fw-black ta-center">PER MONTH</span>
          <span class="fs-lg fw-black uk-margin-medium-top ta-center">Silver Plan</span>
          <p class="fs-sm ta-center">Sed eu ante vel tellus dignissim rutrum. Vestibulum dignissim dapibus ullamcorper.</p>
-         <a href="" class="uk-button uk-button-primary uk-margin-small">Subscribe now</a>
+         <a href="{% url 'user:signup' %}?plan=silver" class="uk-button uk-button-primary uk-margin-small">Subscribe now</a>
          <ul class="uk-list uk-list--plan">
            <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>24/7 Live Coverage</li>
            <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>100+ Videos</li>
@@ -92,7 +92,7 @@
              <span class="fs-xs fw-black ta-center">PER YEAR</span>
              <span class="fs-lg fw-black uk-margin-medium-top ta-center">Gold Plan</span>
              <p class="fs-sm ta-center">Sed eu ante vel tellus dignissim rutrum. Vestibulum dignissim dapibus ullamcorper.</p>
-             <a href="" class="uk-button uk-button-primary uk-margin-small">Subscribe now</a>
+             <a href="{% url 'user:signup' %}?plan=gold" class="uk-button uk-button-primary uk-margin-small">Subscribe now</a>
              <ul class="uk-list uk-list--plan">
                 <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>24/7 Live Coverage</li>
                 <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>100+ Videos, Writers & Podcasts</li>
@@ -114,7 +114,7 @@
              <span class="fs-xs fw-black ta-center">PER 2 YEAR</span>
              <span class="fs-lg fw-black uk-margin-medium-top ta-center">Yearly Plan</span>
              <p class="fs-sm ta-center">Sed eu ante vel tellus dignissim rutrum. Vestibulum dignissim dapibus ullamcorper.</p>
-             <a href="" class="uk-button uk-hp-button-white uk-margin-small">Subscribe now</a>
+             <a href="{% url 'user:signup' %}?plan=platinum" class="uk-button uk-hp-button-white uk-margin-small">Subscribe now</a>
              <ul class="uk-list uk-list--plan">
                <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>24/7 Live Coverage</li>
                <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>100+ Videos, Writers & Podcasts</li>
