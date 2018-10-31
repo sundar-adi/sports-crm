@@ -1,5 +1,8 @@
+import json
+
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import FormView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -28,7 +31,12 @@ class SignupView(FormView):
         return super().form_valid(form)
 
     def put(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
+        data = json.loads(request.body.decode("utf-8"))
+        form = self.form_class(data)
+        if form.is_valid():
+            return JsonResponse({})
+        else:
+            return JsonResponse(form.errors, status=400)
 
 
 class LogoutView(auth_views.LogoutView):

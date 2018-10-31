@@ -22,6 +22,12 @@ $button-link-hover-text-decoration: none;
   font-weight: 900;
   text-transform: uppercase;
   transition: opacity 0.3s ease-in-out;
+
+  &.uk-button-primary--disabled {
+    background: transparent;
+    color: $navy;
+    cursor: not-allowed;
+  }
 }
 
 @mixin hook-button-primary-hover(){
@@ -36,6 +42,7 @@ $button-link-hover-text-decoration: none;
   padding-left: 0.625rem;
   padding-right: 0.625rem;
   border-radius: $border-rounded-border-radius;
+
 }
 
 @mixin hook-button-secondary-hover(){
