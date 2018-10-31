@@ -48,15 +48,17 @@
       {% elif page_type == "Video page" %}
       <div class="uk-width-2-5 uk-hp-card-primary-smallmedia">{{ article|youtube_block }}</div>
       {% elif page_type == "Podcast episode page" %}
-      <div class="uk-width-1-4 uk-hp-card-primary-smallmedia">{{ article|soundcloud_block }}</div>
+      <div class="{% if article|first_paragraph_value|length == 0 %}uk-width-expand soundcloud-content{% else %}uk-width-1-4 uk-hp-card-primary-smallmedia{% endif %}">{{ article|soundcloud_block }}</div>
       {% endif %}
       {% endwith %}
       {% endif %}
+      {% if article|first_paragraph_value|length > 0 %}
       <div class="uk-width-expand uk-hp-card-primary-intro {% if not first and article|has_media %}uk-hp-card-primary-intro--has-media{% endif %}">
         <ellipsis>
         {{ article|first_paragraph_value }}
         </ellipsis>
       </div>
+      {% endif %}
     </div>
   </div>
 </article>
