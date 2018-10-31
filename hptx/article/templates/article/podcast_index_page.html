@@ -18,8 +18,19 @@
     <h2>Podcasts</h2>
     <div class="uk-hp-card-header__badge uk-hp-card-header__badge--icon"><i class="fas fa-podcast"></i></div>
   </div>
-  {% for article in articles %}
-      {% include "article/article_list_item.html" with article=article first=forloop.first %}
-  {% endfor %}
+  <div class="uk-card-body">
+    <div class="podcast">
+      <div class="podcast__image-wrapper">
+        <img class="podcast__image" src="https://i.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg" alt="" />
+        <div class="podcast__badge"><i class="fas fa-podcast"></i></div>
+      </div>
+      <div>
+        <h4 class="podcast__title">Title</h4>
+        <a href="">Junihno Pernambucano</a>
+        <p>12 Episodies </p>
+        <p><span class="podcast__last">Last:</span> Roman Reigns Diagnosed with Leukemia </p>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
