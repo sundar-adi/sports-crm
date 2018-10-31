@@ -41,14 +41,14 @@ $form-select-option-color: rgba($navy, 0.5);
     border-radius: $border-rounded-border-radius/2;
     border: 1px solid $form-background;
     color: rgba($navy, 0.5);
-    min-height: 40px;
+    min-height: 2.5rem;
 }
 
 .uk-hp-select-inline {
     flex-grow: 1;
 
     &:not(:last-child) {
-        margin-right: 20px;
+        margin-right: 1.25rem;
     }
 }
 
