@@ -45,3 +45,8 @@ def share(context, article):
     context['article'] = article
     context['article_url'] = article.full_url
     return context
+
+
+@register.filter
+def pdb(article):
+    import pdb; pdb.set_trace()

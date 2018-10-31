@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% load article_tags %}
+
+{% block page_background %}
+<div>
+  {% image tag.main_image original class="body-page-background" alt="" %}
+</div>
+{% endblock page_background %}
+
+{% block content %}
+{{ page|pdb }}
+<div class="uk-card uk-card-secondary">
+  <div class="uk-card-header">
+    <h2>{{ tag.name }}</h2>
+    {% if tag.secondary_image %}{% image tag.secondary_image max-30x30 class="uk-hp-card-header__badge" alt="" %}{% endif %}
+  </div>
+  {% for article in articles %}
+      {% include "article/article_list_item.html" with article=article first=forloop.first %}
+  {% endfor %}
+</div>
+{% endblock %}

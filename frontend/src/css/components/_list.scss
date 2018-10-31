@@ -18,6 +18,17 @@
       text-align: center;
       width: 1.25rem;
     }
+
+    .uk-list__active {
+      a, .uk-link {
+        color: $brand-primary;
+      }
+
+      li {
+        border-left: 2px solid $orange;
+        position: relative;
+      }
+    }
   }
 
   &.uk-list--top-menu {
