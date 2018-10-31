@@ -193,10 +193,12 @@ $card-secondary-color: $brand-secondary;
 }
 
 .uk-hp-card-muted {
+  @include hook-card-secondary();
   background: $white;
   border-radius: $border-rounded-border-radius;
 
   .uk-card-header {
+    background: none;
     background-color: $grey;
     position: relative;
     border-top-left-radius: $border-rounded-border-radius;
