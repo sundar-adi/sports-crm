@@ -5,6 +5,15 @@ $form-focus-color: $global-font-color;
 $form-small-line-height: $form-small-height;
 $form-placeholder-color: rgba($navy, 0.5);
 $form-select-option-color: rgba($navy, 0.5);
+$internal-form-select-image: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iOXB4IiBoZWlnaHQ9IjVweCIgdmlld0JveD0iMCAwIDkgNSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNTIgKDY2ODY5KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5JY29uPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGcgaWQ9IlNjcmVlbnMiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIG9wYWNpdHk9IjAuNSI+CiAgICAgICAgPGcgaWQ9IlVzZXItUHJvZmlsZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTExMDQuMDAwMDAwLCAtNTA1LjAwMDAwMCkiIGZpbGw9IiMxMjFFNEUiPgogICAgICAgICAgICA8ZyBpZD0iUHJvZmlsZS1mb3JtIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MzUuMDAwMDAwLCAxMzQuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8ZyBpZD0iRmllbGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDU5MC4wMDAwMDAsIDMzMS4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNzkuOTcyNjU0Miw0MC4wMDAwMTY3IEw4Ny4wMjczMjQ5LDQwLjAwMDAxNjcgQzg3LjI2NDMwMzcsNDAuMDAwMDE2NyA4Ny40MjgzNjU4LDQwLjExMzk0ODggODcuNTE5NTExMiw0MC4zNDE4MTI3IEM4Ny42MTA2NTY3LDQwLjU2OTY3NjcgODcuNTc0MTk4Niw0MC43NjU2Mzk5IDg3LjQxMDEzNjUsNDAuOTI5NzAyIEw4My44ODI4MDEyLDQ0LjQ1NzAzNzMgQzgzLjc3MzQyNjQsNDQuNTY2NDEyMSA4My42NDU4MjI0LDQ0LjYyMTA5OTQgODMuNDk5OTg5Niw0NC42MjEwOTk0IEM4My4zNTQxNTY3LDQ0LjYyMTA5OTQgODMuMjI2NTUyNyw0NC41NjY0MTIxIDgzLjExNzE3OCw0NC40NTcwMzczIEw3OS41ODk4NDI2LDQwLjkyOTcwMiBDNzkuNDI1NzgwNSw0MC43NjU2Mzk5IDc5LjM4OTMyMjQsNDAuNTY5Njc2NyA3OS40ODA0Njc5LDQwLjM0MTgxMjcgQzc5LjU3MTYxMzQsNDAuMTEzOTQ4OCA3OS43MzU2NzU1LDQwLjAwMDAxNjcgNzkuOTcyNjU0Miw0MC4wMDAwMTY3IFoiIGlkPSJJY29uIj48L3BhdGg+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==";
+
+$form-background: $grey;
+$form-focus-background: $grey;
+
+$form-radio-background: $light-grey;
+$form-radio-checked-icon-color: $navy-lighter;
+$form-radio-checked-background: $white;
+$form-radio-checked-focus-background: $white;
 
 @mixin hook-form(){
     font-size: $fs-sm;
@@ -13,8 +22,9 @@ $form-select-option-color: rgba($navy, 0.5);
 }
 
 @mixin hook-form-focus(){
-    border: 1px solid $dark-grey;
-    color: $navy;
+  background-color: $white;
+  border: 1px solid $dark-grey;
+  color: $navy;
 }
 
 @mixin hook-form-label() {
@@ -36,6 +46,14 @@ $form-select-option-color: rgba($navy, 0.5);
     background-color: lighten( $orange, 49% );
 }
 
+@mixin hook-form-success(){
+  color: $navy;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJjaGVjay1jaXJjbGUiIGNsYXNzPSJzdmctaW5saW5lLS1mYSBmYS1jaGVjay1jaXJjbGUgZmEtdy0xNiIgcm9sZT0iaW1nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjNTFDRjY2IiBkPSJNNTA0IDI1NmMwIDEzNi45NjctMTExLjAzMyAyNDgtMjQ4IDI0OFM4IDM5Mi45NjcgOCAyNTYgMTE5LjAzMyA4IDI1NiA4czI0OCAxMTEuMDMzIDI0OCAyNDh6TTIyNy4zMTQgMzg3LjMxNGwxODQtMTg0YzYuMjQ4LTYuMjQ4IDYuMjQ4LTE2LjM3OSAwLTIyLjYyN2wtMjIuNjI3LTIyLjYyN2MtNi4yNDgtNi4yNDktMTYuMzc5LTYuMjQ5LTIyLjYyOCAwTDIxNiAzMDguMTE4bC03MC4wNTktNzAuMDU5Yy02LjI0OC02LjI0OC0xNi4zNzktNi4yNDgtMjIuNjI4IDBsLTIyLjYyNyAyMi42MjdjLTYuMjQ4IDYuMjQ4LTYuMjQ4IDE2LjM3OSAwIDIyLjYyN2wxMDQgMTA0YzYuMjQ5IDYuMjQ5IDE2LjM3OSA2LjI0OSAyMi42MjguMDAxeiI+PC9wYXRoPjwvc3ZnPgo=');
+  background-size: 14px;
+  background-position: calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+}
+
 @mixin hook-form-multi-line() {
     font-size: $fs-sm;
     border-radius: $border-rounded-border-radius/2;
@@ -44,6 +62,16 @@ $form-select-option-color: rgba($navy, 0.5);
     min-height: 2.5rem;
 }
 
+@mixin hook-form-radio(){
+  border: 1px solid $dark-grey;
+  border-radius: 2px;
+}
+@mixin hook-form-radio-focus(){
+  border: 1px solid $navy-lighter;
+}
+@mixin hook-form-radio-checked(){}
+@mixin hook-form-radio-checked-focus(){}
+
 .uk-hp-select-inline {
     flex-grow: 1;
 
@@ -51,4 +79,6 @@ $form-select-option-color: rgba($navy, 0.5);
         margin-right: 1.25rem;
     }
 }
-
+.uk-select{
+    background-position: calc(100% - 10px) 50% !important;
+}

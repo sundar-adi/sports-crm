@@ -23,93 +23,97 @@
         <form method="post" action="{% url 'user:signup' %}">
           {% csrf_token %}
           <div class="uk-flex uk-flex-between uk-flex-wrap uk-flex-wrap-between">
-            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
-              {{ form.first_name.label_tag }}
-              {{ form.first_name }}
+            <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              <label class="uk-form-label">First Name</label>
+              <div class="uk-margin-medium-bottom uk-margin uk-form-controls">
+                {{ form.first_name }}
+              </div>
             </div>
-            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
-              {{ form.last_name.label_tag }}
-              {{ form.last_name }}
+            <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
+              <label class="uk-form-label">Last Name</label>
+              <div class="uk-margin-medium-bottom uk-margin uk-form-controls">
+                {{ form.last_name }}
+              </div>
             </div>
-            <div class="uk-margin-medium-bottom uk-width-1-2 uk-margin-right uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
-              {{ form.email.label_tag }}
-              {{ form.email }}
-              <span class="fs-xs fw-medium">Feedback Value</span>
+
+            <div class="uk-width-1-2 uk-margin-right uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              <label class="uk-form-label">Email</label>
+              <div class="uk-margin-medium-bottom uk-margin uk-form-controls">
+                {{ form.email }}
+                <span class="fs-xs fw-medium fc-brand-primary">Feedback Value</span>
+              </div>
             </div>
-            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
-                <label class="">Password</label>
-                <div class="uk-inline uk-width-expand">
-                  <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-lock"></i></span>
-                  {{ form.password1 }}
-                </div>
-                <span class="fs-xs fw-medium">Feedback Value</span>
+            <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              <label class="uk-form-label">Password</label>
+              <div class="uk-margin-medium-bottom uk-margin uk-form-controls">
+                  <div class="uk-inline uk-width-expand">
+                    <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-lock"></i></span>
+                    {{ form.password1 }}
+                  </div>
+                  <span class="fs-xs fw-medium fc-brand-primary">Feedback Value</span>
+              </div>
             </div>
-            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
-                <label class=""> Retype Password</label>
+            <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
+              <label class="uk-form-label"> Retype Password</label>
+              <div class="uk-form-controls uk-margin-medium-bottom uk-margin">
                 <div class="uk-inline uk-width-expand">
                   <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-lock"></i></span>
                   {{ form.password2 }}
                 </div>
-                <span class="fs-xs fw-medium">Feedback Value</span>
+                <span class="fs-xs fw-medium fc-brand-primary">Feedback Value</span>
+              </div>
             </div>
-            <div class="uk-margin-medium-bottom uk-width-1-2 uk-margin-right uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
-              <label class="">Address</label>
-              <input type="text" name="address" class="uk-input" placeholder="Street, Number..."/>
-              <span class="fs-xs fw-medium">Feedback Value</span>
+            <div class="uk-width-1-2 uk-margin-right uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              <label class="uk-form-label">Address</label>
+              <div class="uk-margin-medium-bottom uk-margin-right uk-form-controls">
+                <input type="text" name="address" class="uk-input uk-form-success" placeholder="Street, Number..."/>
+                <span class="fs-xs fw-medium fc-brand-primary">Feedback Value</span>
+              </div>
             </div>
-            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
-              <label class="">City</label>
-              <div uk-form-custom="target: > * > span:first-child" class="uk-width-1-1">
-                  <select>
+            <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              <label class="uk-form-label">City</label>
+              <div class="uk-margin-medium-bottom uk-margin uk-form-controls uk-width-1-1">
+                  <select class="uk-select">
                       <option value="">Select City</option>
                       <option value="1">Option 01</option>
                       <option value="2">Option 02</option>
                       <option value="3">Option 03</option>
                       <option value="4">Option 04</option>
                   </select>
-                  <button class="uk-input uk-flex uk-flex-between uk-flex-middle" type="button" tabindex="-1">
-                      <span class="fo-medium"></span>
-                      <i class="fas fa-caret-down fo-medium"></i>
-                  </button>
               </div>
             </div>
-            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
-              <label class="">ZIP</label>
-              <input type="text" name="zip" class="uk-input"/>
-              <span class="fs-xs fw-medium">Feedback Value</span>
-            </div>
-            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
-              <label class="">Country</label>
-              <div uk-form-custom="target: > * > span:first-child" class="uk-width-1-1">
-                  <select>
-                      <option value="">Select Country</option>
-                      <option value="1">Option 01</option>
-                      <option value="2">Option 02</option>
-                      <option value="3">Option 03</option>
-                      <option value="4">Option 04</option>
-                  </select>
-                  <button class="uk-input uk-flex uk-flex-between uk-flex-middle" type="button" tabindex="-1">
-                      <span class="fo-medium"></span>
-                      <i class="fas fa-caret-down fo-medium"></i>
-                  </button>
+            <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
+              <label class="uk-form-label">ZIP</label>
+              <div class="uk-margin uk-margin-small-bottom uk-form-controls">
+                <input type="text" name="zip" class="uk-input"/>
+                <span class="fs-xs fw-medium fc-brand-primary">Feedback Value</span>
               </div>
             </div>
-            <div class="uk-margin-medium-bottom uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
-              <label class="">State</label>
-              <div uk-form-custom="target: > * > span:first-child" class="uk-width-1-1">
-                  <select>
+            <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
+              <label class="uk-form-label">Country</label>
+              <div class="uk-margin uk-margin-medium-bottom uk-form-controls uk-width-1-1">
+                <select class="uk-select">
+                    <option value="">Select Country</option>
+                    <option value="1">Option 01</option>
+                    <option value="2">Option 02</option>
+                    <option value="3">Option 03</option>
+                    <option value="4">Option 04</option>
+                </select>
+              </div>
+            </div>
+            <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
+              <label class="uk-form-label">State</label>
+              <div class="uk-margin uk-margin-medium-bottom uk-form-controls uk-width-1-1">
+                  <select class="uk-select">
                       <option value="">Select State</option>
                       <option value="1">Option 01</option>
                       <option value="2">Option 02</option>
                       <option value="3">Option 03</option>
                       <option value="4">Option 04</option>
                   </select>
-                  <button class="uk-input uk-flex uk-flex-between uk-flex-middle" type="button" tabindex="-1">
-                      <span class="fo-medium"></span>
-                      <i class="fas fa-caret-down fo-medium"></i>
-                  </button>
               </div>
             </div>
+
           </div>
           <div>
             <label class=""><input class="uk-checkbox uk-margin-small-right" type="checkbox"><span class="fs-sm">By signing up to this subscription plan and agreeing to the Privacy Policy you agree to this web site storing your information.</span></label>
