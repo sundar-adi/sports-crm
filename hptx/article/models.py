@@ -230,4 +230,7 @@ class PodcastIndexPage(Page):
 
         context = super().get_context(request)
         context['podcasts'] = podcasts
+        context['last_episodes'] = PodcastEpisodePage.objects.live().order_by(
+            '-first_published_at'
+        )[:3]
         return context

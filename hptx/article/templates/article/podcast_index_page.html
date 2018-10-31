@@ -21,9 +21,9 @@
   </div>
   <hr class="hptx-divider-nogutter">
   <div class="uk-card-body">
-    {% for podcast in podcasts.0.get_children %}
+    {% for podcast in last_episodes %}
     <div {% if not forloop.last %} class="uk-margin-bottom" {% endif %}>
-      {% include "article/partials/podcast-episode-list-item.html" with podcast=podcast.specific %}
+      {% include "article/partials/podcast-episode-list-item.html" with podcast=podcast %}
     </div>
     {% endfor %}
   </div>
