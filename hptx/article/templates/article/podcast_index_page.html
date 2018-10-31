@@ -15,8 +15,8 @@
 {% block content %}
 <div class="uk-card uk-card-secondary">
   <div class="uk-card-header">
-    <h2>{{ tag.name }}</h2>
-    {% if tag.secondary_image %}{% image tag.secondary_image max-30x30 class="uk-hp-card-header__badge" alt="" %}{% endif %}
+    <h2>Podcasts</h2>
+    <div class="uk-hp-card-header__badge uk-hp-card-header__badge--icon"><i class="fas fa-podcast"></i></div>
   </div>
   {% for article in articles %}
       {% include "article/article_list_item.html" with article=article first=forloop.first %}
