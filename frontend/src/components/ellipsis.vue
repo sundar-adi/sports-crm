@@ -9,18 +9,34 @@
 export default {
   name: "ellipsis",
   mounted() {
-    let ellipsed = false;
-    const el = this.$refs.text
-    var wordArray = el.innerHTML.split(' ');
-    while(el.scrollHeight > el.parentElement.offsetHeight) {
-        wordArray.pop();
-        ellipsed = true;
-        el.innerHTML = wordArray.join(' ') + '...';
-     }
-    if(ellipsed) {
-      // Safety
-      wordArray.pop();
-      el.innerHTML = wordArray.join(' ') + '...';
+    let elm = false;
+    let container = this.$refs.text
+    let source = container;
+    const qs = container.querySelectorAll("p");
+    if(qs && qs.length) {
+      let para = Array.from(qs).find((elm) => elm.innerHTML.length > 0)
+
+      if(para)
+        source = para
+    }
+
+    const wordArray = source.innerHTML.split(' ');
+    container.innerHTML = wordArray.join(' ');
+    for(var i=wordArray.length - 1; i > 0; i--) {
+      if(!elm && container.scrollHeight <= container.parentElement.offsetHeight) {
+        break;
+      } else {
+        if(!elm && /<\/[a-zA-Z]+>/.test(wordArray[i])) {
+          elm = true;
+        }
+
+        if(!elm) {
+          wordArray.splice(i, 1);
+          container.innerHTML = wordArray.join(' ') + '...';
+        } else if(/<[a-zA-Z]+/.test(wordArray[i])) {
+          elm = false;
+        }
+      }
     }
   }
 }

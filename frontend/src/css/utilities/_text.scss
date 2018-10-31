@@ -53,6 +53,9 @@
 }
 
 //sizes
+.fs-xxl {
+  font-size: $fs-xxl;
+}
 .fs-xl {
   font-size: $fs-xl;
 }
@@ -75,4 +78,11 @@
 //opacity
 .fo-high{
   opacity: 0.8;
+}
+.fo-medium{
+  opacity: 0.5;
+}
+//align
+.ta-center{
+  text-align: center;
 }

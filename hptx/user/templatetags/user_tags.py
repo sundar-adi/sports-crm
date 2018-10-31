@@ -5,6 +5,7 @@ register = template.Library()
 
 @register.inclusion_tag('user/rating.html')
 def rating(rating):
+    rating = rating or 0
     stars = []
     for i in range(5):
         if rating > i and rating < (i + 1):

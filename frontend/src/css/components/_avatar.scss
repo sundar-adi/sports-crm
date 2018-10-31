@@ -4,6 +4,7 @@
     position: relative;
     overflow: hidden;
     width: 5rem;
+    background-color: $navy-light;
 
     &.hptx-avatar--small {
         width: 2rem;
@@ -26,5 +27,9 @@
       top: 50%;
       vertical-align: initial;
       width: auto;
+    }
+
+    .hptx-avatar__image--default {
+      height: 60%;
     }
 }

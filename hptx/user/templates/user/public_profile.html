@@ -23,7 +23,7 @@
   </div>
   <div class="uk-card-body uk-padding">
     <div class="uk-flex uk-flex-between uk-margin-small-bottom">
-      {% if user.twitter_handler %}<a href="https://twitter.com/{{ user.twitter_handler }}" class="uk-link-text fs-sm"><i class="fab fa-twitter uk-margin-right"></i>@{{ user.twitter_handler }}</a>{% endif %}
+      {% if user.twitter_handler %}<a target="_blank" href="https://twitter.com/{{ user.twitter_handler }}" class="uk-link-text fs-sm"><i class="fab fa-twitter uk-margin-right"></i>@{{ user.twitter_handler }}</a>{% endif %}
       <div class="fs-sm">{{ articles.count }} Article{{ articles.count|pluralize }} Published</div>
     </div>
     {% if user.state or user.city %}
