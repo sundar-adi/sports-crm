@@ -4,7 +4,7 @@ from django.utils.text import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.admin.edit_handlers import (
-    FieldPanel, MultiFieldPanel, InlinePanel)
+    FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel)
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -194,6 +194,22 @@ class TagLinkLeftSubMenu(Orderable, models.Model):
     ]
 
 
+class EditorChoice(Orderable, models.Model):
+    page = ParentalKey(
+        'home.HomePage',
+        on_delete=models.CASCADE,
+        related_name='editor_choices',
+    )
+    article = models.ForeignKey(
+        'article.ArticlePage',
+        on_delete=models.CASCADE,
+    )
+
+    panels = [
+        PageChooserPanel('article', page_type='article.ArticlePage'),
+    ]
+
+
 class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
     subpage_types = ['article.ArticleTagIndexPage']
@@ -225,34 +241,10 @@ class HomePage(Page):
         null=True,
     )
 
-    articles = models.ManyToManyField(
-        'article.ArticlePage',
-        verbose_name=_('articles'),
-        related_name='articles',
-        blank=True,
-    )
-
-
     content_panels = Page.content_panels + [
         AutocompletePanel(
             'talent_of_the_week', page_type=settings.AUTH_USER_MODEL),
-        MultiFieldPanel([
-            AutocompletePanel(
-                'articles', page_type='article.ArticlePage',
-                is_single=False),
-            AutocompletePanel(
-                'articles', page_type='article.ArticlePage',
-                is_single=False),
-            AutocompletePanel(
-                'articles', page_type='article.ArticlePage',
-                is_single=False),
-            AutocompletePanel(
-                'articles', page_type='article.ArticlePage',
-                is_single=False),
-            AutocompletePanel(
-                'articles', page_type='article.ArticlePage',
-                is_single=False)
-        ], heading=_('Edit Choices')),
+        InlinePanel('editor_choices', label='Editor choices'),
         InlinePanel('top_menu', label='Top menu'),
         InlinePanel('left_menu', label='Left menu'),
         InlinePanel('left_submenu', label='Left submenu'),
