@@ -4,6 +4,7 @@ const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
@@ -86,7 +87,10 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+        use: [
+          process.env.NODE_ENV === 'production'?MiniCssExtractPlugin.loader:'style-loader',
+          'css-loader', 'sass-loader'
+        ]
       }
     ]
   },
@@ -122,6 +126,10 @@ module.exports = {
     poll: 1000
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    }),
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new WriteFilePlugin({

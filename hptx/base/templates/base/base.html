@@ -19,6 +19,9 @@
 
       {# Global stylesheets #}
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+      {% if not debug %}
+      <script src="{% static 'app.css' %}"></script>
+      {% endif %}
       <link rel="stylesheet" type="text/css" href="{% static 'css/hptx.css' %}">
 
       {% block extra_css %}
