@@ -1,14 +1,14 @@
-{% load wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% load article_tags %}
 
 <div class="podcast">
-  <div class="podcast__image-wrapper">
+  <a class="podcast__image-wrapper" href="{% pageurl podcast %}">
     {% image podcast.featured_image fill-120x120 alt="" class="podcast__image" %}
     <div class="podcast__badge"><i class="fas fa-podcast"></i></div>
-  </div>
+  </a>
   <div>
-    <h4 class="podcast__title">{{ podcast.title }}</h4>
+    <h4 class="podcast__title"><a class="podcast__link" href="{% pageurl podcast %}">{{ podcast.title }}</a></h4>
     {% for author in podcast.authors.all %}
     <a href="{% url 'profile_view' author.username %}" class="hp-link-primary">{{ author.first_name }} {{ author.last_name }}</a> {% if not forloop.last %}, {% endif %}
     {% empty %}
@@ -16,6 +16,6 @@
     {% endfor %}
     <p>{{ podcast.get_children.live.count }} Episodes</p>
     {% get_last_podcast podcast as last_episode %}
-    <p><span class="podcast__last">Last:</span> {% if last_episode %}{{ last_episode.title }}{% else %}-{% endif %}</p>
+    <p><span class="podcast__last">Last:</span> {% if last_episode %}<a class="podcast__link" href="{% pageurl last_episode %}">{{ last_episode.title }}</a>{% else %}-{% endif %}</p>
   </div>
 </div>
