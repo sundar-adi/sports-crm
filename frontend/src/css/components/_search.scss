@@ -2,12 +2,12 @@ $search-default-background: $light-grey;
 $search-default-focus-background: $white;
 $search-icon-color: rgba($navy, 0.5);
 $search-default-width: 100%;
-$search-default-padding-horizontal: 10px;
+$search-default-padding-horizontal: 0.625rem;
 
 @mixin hook-search-input(){
-    font-size: $fs-sm;
-    border-radius: $border-rounded-border-radius/2;
     border: 1px solid $search-default-background;  
+    border-radius: $border-rounded-border-radius/2;
+    font-size: $fs-sm;
 }
 
 @mixin hook-search-toggle(){}
