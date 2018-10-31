@@ -17,9 +17,9 @@
     </ul>
   </div>
   <hr class="hptx-divider-nogutter">
-  <div class="uk-card-body">
+  <div class="uk-card-body {% if page.title == 'podcasts' %}uk-card-body--active{% endif %}">
     <ul class="uk-list uk-list--menu">
-      <li class="uk-flex uk-flex-middle uk-list__active"><span class="uk-list__hp-badge"><i class="fas fa-podcast"></i></span><span>Podcasts</span></li>
+      <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge"><i class="fas fa-podcast"></i></span><a href="{% slugurl 'podcasts' %}">Podcasts</a></li>
     </ul>
   </div>
   <hr class="hptx-divider-nogutter">

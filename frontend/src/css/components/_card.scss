@@ -7,6 +7,31 @@ $card-default-box-shadow: none;
 
 .uk-card-default {
   border-radius: $border-rounded-border-radius;
+
+  .uk-card-body {
+    &.uk-card-body--active {
+      color: $brand-primary;
+      position: relative;
+
+      a, .uk-link {
+        color: $brand-primary;
+      }
+
+      &::before {
+        border-left: 2px solid $orange;
+        bottom: 0;
+        content: "";
+        display: block;
+        left: 0;
+        position: absolute;
+        top: 0;
+      }
+
+      .hp-link-primary {
+        color: $brand-primary;
+      }
+    }
+  }
 }
 
 .uk-card--twitter-feed {
