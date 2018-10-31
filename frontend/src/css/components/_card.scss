@@ -64,8 +64,13 @@ $card-primary-color: $brand-secondary;
     padding-right: 1.25rem;
     padding-bottom: 0.75rem;
 
-    .uk-hp-article-image {
+    .uk-hp-article-main-media {
       min-width: 100%;
+
+      iframe {
+        height: 100%;
+        width: 100%;
+      }
     }
 
     &:not(:last-child) {
@@ -82,6 +87,10 @@ $card-primary-color: $brand-secondary;
         right: 0.125rem;
         width: 100%;
       }
+    }
+
+    .uk-hp-article-body {
+      font-size: $fs-sm;
     }
   }
 
@@ -113,7 +122,7 @@ $card-primary-color: $brand-secondary;
       margin: 0;
       padding: 0;
       color: $white;
-  
+
       &::before {
         display: none;
       }
@@ -145,18 +154,24 @@ $card-primary-color: $brand-secondary;
     }
   }
 
+  &.uk-card-primary--article {
+    .uk-card-body {
+      padding-bottom: 1.25rem;
+    }
+  }
+
   &.uk-card-primary--profile-edit {
     .uk-card-header {
       padding-left: 7rem;
       padding-right: 2rem;
     }
+
     .uk-card-body {
       padding-left: 7.5rem;
       padding-right: 7.5rem;
     }
   }
 }
-
 
 @mixin hook-card-primary-title {
   color: $brand-secondary;
@@ -165,8 +180,19 @@ $card-primary-color: $brand-secondary;
   font-weight: 900;
   margin-bottom: 0.5rem;
 
+  a {
+    color: $brand-secondary;
+    font-family: $font-title;
+    font-size: $fs-lg;
+    font-weight: 900;
+  }
+
   &.uk-card-title--important {
     font-size: $fs-xl;
+
+    a {
+      font-size: $fs-xl;
+    }
   }
 }
 

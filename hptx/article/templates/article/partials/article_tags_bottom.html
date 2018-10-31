@@ -1,0 +1,17 @@
+{% load wagtailcore_tags %}
+
+{% load hitcount_tags %}
+
+<div class="uk-flex uk-flex-between">
+  <div class="hp-tags">
+    {% for tag in article.tags.all %}
+    <a class="hp-tags__tag" href="{% slugurl 'articles' %}tag/{{ tag }}/">{{ tag.name }}</a>
+    {% endfor %}
+  </div>
+  {% if settings.home.GlobalSettings.show_view_count %}
+  <span class="uk-margin-right">
+    {% get_hit_count for article as hits %}
+    Views {{ hits }}
+  </span>
+  {% endif %}
+</div>
