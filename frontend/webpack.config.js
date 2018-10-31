@@ -152,7 +152,7 @@ if (process.env.NODE_ENV === 'production') {
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.output = {
     path: path.resolve(__dirname, '../hptx/hptx/static'),
-    publicPath: '/static',
+    publicPath: '/static/',
     filename: '[name].buildVue.js'
   };
 
