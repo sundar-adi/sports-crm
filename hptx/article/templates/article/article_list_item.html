@@ -27,7 +27,17 @@
   </span>
   </p>
   <div>
-    {% if first and article.featured_image %}{% image article.featured_image original alt="" class="uk-hp-article-main-media" %}{% endif %}
+    {% if first %}
+
+    {% if article.featured_image %}
+      {% image article.featured_image original alt="" class="uk-hp-article-main-media" %}
+    {% elif article.specific.get_verbose_name == "Video page" and article|youtube_block %}
+    <div class="uk-hp-article-main-media">{{ article|youtube_block }}</div>
+    {% elif article.specific.get_verbose_name == "Podcast page" and article|soundcloud_block %}
+    <div class="uk-hp-article-main-media soundcloud-content">{{ article|soundcloud_block }}</div>
+    {% endif %}
+
+    {% endif %}
     <div uk-grid class="uk-grid-small uk-margin-small-top">
       {% if not first %}
       {% with article.specific.get_verbose_name as page_type %}
