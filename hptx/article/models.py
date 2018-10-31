@@ -107,9 +107,52 @@ class ArticlePage(Page):
         return super().serve(request, *args, **kwargs)
 
 
-class PodcastPage(ArticlePage):
-    parent_page_types = ['article.ArticleTagIndexPage']
+class PodcastPage(Page):
+    parent_page_types = ['article.PodcastIndexPage']
     subpage_types = ['article.PodcastEpisodePage']
+
+    authors = ParentalManyToManyField(
+        to=settings.AUTH_USER_MODEL,
+        verbose_name=_('authors'),
+        related_name='podcast_author_on',
+        blank=True,
+    )
+    editors = ParentalManyToManyField(
+        to=settings.AUTH_USER_MODEL,
+        verbose_name=_('editors'),
+        related_name='podcast_editor_on',
+        blank=True,
+    )
+    contributors = ParentalManyToManyField(
+        to=settings.AUTH_USER_MODEL,
+        verbose_name=_('contributors'),
+        related_name='podcast_contributor_on',
+        blank=True,
+    )
+
+    featured_image = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_('Featured Image'),
+        related_name='featured_podcast_image_on',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            AutocompletePanel(
+                'authors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+            AutocompletePanel(
+                'editors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+            AutocompletePanel(
+                'contributors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+        ], heading=_('People')),
+        ImageChooserPanel('featured_image')
+    ]
 
 
 class VideoPage(ArticlePage):
@@ -120,6 +163,35 @@ class VideoPage(ArticlePage):
 class PodcastEpisodePage(ArticlePage):
     parent_page_types = ['article.PodcastPage']
     subpage_types = []
+
+    episode_number = models.PositiveIntegerField(
+        verbose_name=_('Episode Number'),
+        null=True,
+        blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel('publication_date'),
+            FieldPanel('tags'),
+            FieldPanel('episode_number'),
+        ], heading=_('Article metadata')),
+        MultiFieldPanel([
+            AutocompletePanel(
+                'authors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+            AutocompletePanel(
+                'editors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+            AutocompletePanel(
+                'contributors', page_type=settings.AUTH_USER_MODEL,
+                is_single=False),
+        ], heading=_('People')),
+        MultiFieldPanel([
+            ImageChooserPanel('featured_image'),
+            StreamFieldPanel('body'),
+        ], heading=_('Content')),
+    ]
 
 
 class ArticleTagIndexPage(Page):
@@ -147,4 +219,18 @@ class ArticleTagIndexPage(Page):
             context['tag'] = Tag.objects.get(name__iexact=self.tag_name)
         except Tag.DoesNotExist:
             pass
+        return context
+
+
+class PodcastIndexPage(Page):
+    parent_page_types = ['home.Homepage']
+
+    def get_context(self, request):
+        podcasts = PodcastPage.objects.live()
+
+        context = super().get_context(request)
+        context['podcasts'] = podcasts
+        context['last_episodes'] = PodcastEpisodePage.objects.live().order_by(
+            '-first_published_at'
+        )[:3]
         return context

@@ -1,0 +1,15 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% load article_tags %}
+
+<div class="podcast podcast--small">
+  <a class="podcast__image-wrapper" href="{% pageurl podcast %}">
+    {% image podcast.get_parent.specific.featured_image fill-120x120 alt="" class="podcast__image" %}
+    <div class="podcast__badge"><i class="fas fa-podcast"></i></div>
+  </a>
+  <div>
+    <h4 class="podcast__title"><a class="podcast__link" href="{% pageurl podcast.get_parent.specific %}">{{ podcast.get_parent.title }}</a></h4>
+    {% if podcast.episode_number is not None %}<p class="fw-medium">Episode {{ podcast.episode_number }}</p>{% endif %}
+    <a href="{% pageurl podcast %}" class="podcast__link">{{ podcast.title }}</a>
+  </div>
+</div>

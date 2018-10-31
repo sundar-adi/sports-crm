@@ -8,45 +8,13 @@
 {% block body_class %}article_page{% endblock %}
 
 {% block content %}
-{% if user.is_anonymous and settings.home.GlobalSettings.enable_paywall %}
-<h1>QUE NO!</h1>
-{% else %}
-<div class="uk-card uk-card-primary uk-card-primary--article">
-  <article class="uk-card-body">
-    <h3 class="uk-card-title uk-card-title--important">{{page.title}}</h3>
-    <div class="uk-flex uk-flex-between fw-medium uk-margin-small-top uk-flex-middle uk-margin-small-bottom">
-      <span>
-        {% for author in page.authors.all %}
-        <a href="{% url 'profile_view' author.username %}" class="hp-link-primary">{{ author.first_name }} {{ author.last_name }}</a> {% if not forloop.last %}, {% endif %}
-        {% empty %}
-        HPTX
-        {% endfor %}
-        on {{ page.publication_date|date }}
-      </span>
-      <div class="uk-flex-inline">
-        {% if homepage.has_social_links %}
-        <div class="uk-margin-small-right">{% post_to_facebook page.full_url "Share" %}</div>
-        {% post_to_twitter "{{ page.title }}" page.full_url "Tweet" %}
-        {% endif %}
-      </div>
-    </div>
-    <div>
-      {% if page.featured_image %}
-        {% image page.featured_image original alt="" class="uk-hp-article-main-media" %}
-      {% else %}
-        <div class="uk-hp-article-main-media soundcloud-content">{{ page|soundcloud_block }}</div>
-      {% endif %}
-    </div>
-    <div class="uk-hp-article-body uk-margin-small-top uk-margin-medium-bottom">
-      {% if page.featured_image %}
-          {% include "article/partials/article_content.html" with article=page %}
-      {% else %}
-          {% include "article/partials/article_content.html" with article=page excluded=page|soundcloud_block %}
-      {% endif %}
-
-    </div>
-    {% include "article/partials/article_tags_bottom.html" with article=page %}
-  </article>
+<div class="uk-card uk-card-secondary">
+  <div class="uk-card-header">
+    <h2>Podcasts - {{ page.title }}</h2>
+    <div class="uk-hp-card-header__badge uk-hp-card-header__badge--icon"><i class="fas fa-podcast"></i></div>
+  </div>
+  {% for article in page.get_children %}
+      {% include "article/article_list_item.html" with article=article.specific first=forloop.first %}
+  {% endfor %}
 </div>
-{% endif %}
 {% endblock %}

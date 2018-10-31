@@ -216,7 +216,7 @@ class EditorChoice(Orderable, models.Model):
 
 class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
-    subpage_types = ['article.ArticleTagIndexPage']
+    subpage_types = ['article.ArticleTagIndexPage', 'article.PodcastIndexPage']
 
     facebook_link = models.URLField(
         verbose_name=_('facebook_link'),

@@ -1,0 +1,48 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% load article_tags %}
+
+{% block page_background %}
+<div>
+  {% image tag.main_image original class="body-page-background" alt="" %}
+</div>
+{% endblock page_background %}
+
+{% block right-sidebar-content %}
+<div class="uk-card uk-card-default uk-margin-small-bottom">
+  <div class="uk-card-body uk-card-body--slim">
+    <ul class="uk-list uk-list--menu uk-list--primary">
+      <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge"><i class="fas fa-podcast"></i></span><span class="fc-brand-secondary-lighter">Last Episodes</span></li>
+    </ul>
+  </div>
+  <hr class="hptx-divider-nogutter">
+  <div class="uk-card-body">
+    {% for podcast in last_episodes %}
+    <div {% if not forloop.last %} class="uk-margin-bottom" {% endif %}>
+      {% include "article/partials/podcast-episode-list-item.html" with podcast=podcast %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uk-card uk-card-secondary">
+  <div class="uk-card-header">
+    <h2>Podcasts</h2>
+    <div class="uk-hp-card-header__badge uk-hp-card-header__badge--icon"><i class="fas fa-podcast"></i></div>
+  </div>
+  <div class="uk-card-body" uk-grid>
+    {% for podcast in podcasts %}
+    <div class="uk-width-1-2">
+      {% include "article/partials/podcast-list-item.html" with podcast=podcast %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
