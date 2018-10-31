@@ -57,7 +57,7 @@
                   {% else %}
                   <li class="uk-flex uk-flex-middle">
                     <a href="#">
-                      <div class="hptx-avatar hptx-avatar--small hptx-avatar--rounded">{% if link.image %}{% image user.profile.photo fill-32x32 class="mr-xs hptx-avatar__image" alt="" %}{% else %}<img class=" hptx-avatar__image" src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" alt="" />{% endif %}</div>
+                      <div class="hptx-avatar hptx-avatar--small hptx-avatar--rounded">{% if user.photo %}{% image user.photo fill-32x32 class="mr-xs hptx-avatar__image" alt="{{ user.get_full_name }}" %}{% else %}<img class="hptx-avatar__image hptx-avatar__image--default" src="{% static 'src/assets/Feed/LogoHP@2x.png'%}" alt="{{ user.get_full_name }}" />{% endif %}</div>
                     </a>
                     <div class="" uk-dropdown="mode: click; pos:bottom-right;">
                       <div class="fw-black fs-sm">{{ user.first_name }} {{ user.last_name }}</div>
