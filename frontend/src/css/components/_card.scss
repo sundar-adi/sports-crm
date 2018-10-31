@@ -159,8 +159,19 @@ $card-primary-color: $brand-secondary;
       padding-bottom: 1.25rem;
     }
   }
-}
 
+  &.uk-card-primary--profile-edit {
+    .uk-card-header {
+      padding-left: 7rem;
+      padding-right: 2rem;
+    }
+
+    .uk-card-body {
+      padding-left: 7.5rem;
+      padding-right: 7.5rem;
+    }
+  }
+}
 
 @mixin hook-card-primary-title {
   color: $brand-secondary;
@@ -209,10 +220,12 @@ $card-secondary-color: $brand-secondary;
 }
 
 .uk-hp-card-muted {
+  @include hook-card-secondary();
   background: $white;
   border-radius: $border-rounded-border-radius;
 
   .uk-card-header {
+    background: none;
     background-color: $grey;
     position: relative;
     border-top-left-radius: $border-rounded-border-radius;

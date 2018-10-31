@@ -1,9 +1,130 @@
 {% extends "base/base.html" %}
 {% load wagtailcore_tags %}
 
+{% block body_class %}template-public-profile{% endblock %}
+
+{% block left-sidebar-content %}
+{% endblock left-sidebar-content %}
+
 {% block content %}
 
-  <h1>{{ user.get_fullname }}</h1>
-  <h2>{{ user.username }}</h2>
+<div class="uk-card uk-card-primary uk-card-primary--profile uk-card-primary--profile-edit">
+  <div class="uk-hp-card-primary-wrapper">
+    <div class="uk-card-header">
+      <div class="uk-flex uk-flex-between uk-padding uk-padding-remove-horizontal">
+        <div class="uk-flex">
+          <div class="hptx-avatar hptx-avatar--rounded uk-margin-small-right">
+            <img class="htpx-avatar__image" data-src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" width="80" height="80" alt="{{ user.username }}" uk-img>
+          </div>
+          <div class="uk-flex uk-flex-column uk-flex-center">
+            <h3 class="uk-card-title fw-bold uk-margin-remove-vertical">{{ user.first_name }} {{ user.last_name }}</h3>
+            <div class="uk-flex rating">
+              <div class="rating-star rating-star--full">
+                <i class="empty far fa-star"></i>
+                <i class="half fas fa-star-half-alt"></i>
+                <i class="full fas fa-star"></i>
+              </div>
+              <div class="rating-star rating-star--full">
+                <i class="empty far fa-star"></i>
+                <i class="half fas fa-star-half-alt"></i>
+                <i class="full fas fa-star"></i>
+              </div>
+              <div class="rating-star rating-star--full">
+                <i class="empty far fa-star"></i>
+                <i class="half fas fa-star-half-alt"></i>
+                <i class="full fas fa-star"></i>
+              </div>
+              <div class="rating-star rating-star--half">
+                <i class="empty far fa-star"></i>
+                <i class="half fas fa-star-half-alt"></i>
+                <i class="full fas fa-star"></i>
+              </div>
+              <div class="rating-star rating-star--empty">
+                <i class="empty far fa-star"></i>
+                <i class="half fas fa-star-half-alt"></i>
+                <i class="full fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="uk-flex-none uk-badge fw-black">Suscriptor Pro</span>
+      </div>
+    </div>
+  </div>
+  <div class="uk-card-body uk-padding">
+    <form>
+      <legend class="uk-legend fw-bold">Name</legend>
+      <div class="uk-margin uk-margin-small-bottom">
+        <input class="uk-input" type="text" placeholder="">
+      </div>
+      <legend class="uk-legend fw-bold">Email Address</legend>
+      <div class="uk-margin uk-margin-small-bottom">
+        <input class="uk-input" type="text" placeholder="example@domain.com">
+      </div>
+      <div class="uk-flex uk-flex-between uk-flex-bottom">
+        <div class="uk-hp-select-inline">
+          <label class="uk-form-label" for="user-birthdate-month">Birthdate</label>
+          <div class="uk-form-controls uk-margin uk-margin-small-bottom">
+            <select class="uk-select" id="user-birthdate-month">
+                <option>Option 01</option>
+                <option>Option 02</option>
+            </select>
+          </div>
+        </div>
+        <div class="uk-hp-select-inline">
+          <div class="uk-form-controls uk-margin uk-margin-small-bottom">
+            <select class="uk-select" id="user-birthdate-day">
+                <option>Option 01</option>
+                <option>Option 02</option>
+            </select>
+          </div>
+        </div>
+        <div class="uk-hp-select-inline">
+          <div class="uk-form-controls uk-margin uk-margin-small-bottom">
+            <select class="uk-select" id="user-birthdate-year">
+                <option>Option 01</option>
+                <option>Option 02</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label class="uk-form-label" for="form-stacked-select">City</label>
+        <div class="uk-form-controls uk-margin uk-margin-small-bottom">
+          <select class="uk-select" id="form-stacked-select">
+            <option>Option 01</option>
+            <option>Option 02</option>
+          </select>
+        </div>
+      </div>
+      <div class="uk-flex uk-flex-column">
+        <label class="uk-form-label" for="user-city">City</label>
+        <div class="uk-search uk-search-default">
+          <span class="uk-search-icon-flip uk-hp-icon-locarion" uk-search-icon><i class="fas fa-map-marker"></i></span>
+          <input class="uk-search-input uk-margin uk-margin-small-bottom" type="search" placeholder="Search..." id="user-city">
+        </div>
+      </div>
+      <legend class="uk-legend fw-bold">Twitter Account</legend>
+      <div class="uk-margin uk-margin-small-bottom">
+        <input class="uk-input" type="text" placeholder="@twitter">
+      </div>
+      <legend class="uk-legend fw-bold">Short Bio</legend>
+      <div class="uk-margin uk-margin-small-bottom">
+          <textarea class="uk-textarea" rows="1" placeholder="140 Characters Max."></textarea>
+      </div>
+    </form>
+    <div class="uk-flex uk-margin uk-margin-small-top uk-button-group uk-hp-button-group-spaced ">
+      <button class="uk-button uk-button-secondary">Save Changes</button>
+      <button class="uk-button uk-button-link"><i class="fas fa-power-off uk-hp-icon-left"></i>Logout</button>
+    </div>
+
+
+  </div>
+</div>
 
 {% endblock %}
+
+
+{% block right-sidebar-content %}
+{% endblock right-sidebar-content %}
+

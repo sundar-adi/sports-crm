@@ -34,17 +34,19 @@
             <div class="uk-navbar-left">
               <a href="{% pageurl homepage %}" class="uk-navbar-item uk-logo"><img src="{% static 'src/assets/Navbar/Logo.png'%}" alt="Houston Prominence" /></a>
             </div>
+
             <div class="uk-navbar-right">
+              {% block navbar-right %}
                 <ul class="uk-navbar-nav">
                   {% for link in homepage.top_menu.all %}
                   <li>
-                    <div class="uk-navbar-item uk-flex uk-flex-middle">{% if link.image %}{% image link.image max-24x24 class="mr-xs" alt="" %}{% else %}<span class="mr-xs"><i class="fas fa-tag }}"></i></span>{% endif%}<a class="fw-black fc-white" href="{% slugurl 'articles' %}tag/{{ link.tag }}/">{{ link.name|upper }}</a></div>
+                    <div class="uk-navbar-item uk-flex uk-flex-middle"><a class="fw-black fc-white" href="{% slugurl 'articles' %}tag/{{ link.tag }}/">{% if link.image %}{% image link.image max-24x24 class="mr-xs" alt="" %}{% else %}<span class="mr-xs"><i class="fas fa-tag }}"></i></span>{% endif%}{{ link.name|upper }}</a></div>
                   </li>
                   {% endfor %}
                   {% if not user.is_authenticated %}
                   <li class="uk-flex uk-flex-middle uk-margin-right">
                     <div>
-                      <a href="" class="uk-button uk-hp-button-ghost">Log in</a>
+                      <a href="{% url "user:login" %}" class="uk-button uk-hp-button-ghost">Log in</a>
                     </div>
                   </li>
                   <li class="uk-flex uk-flex-middle">
@@ -55,19 +57,19 @@
                   {% else %}
                   <li class="uk-flex uk-flex-middle">
                     <a href="#">
-                      <div class="hptx-avatar hptx-avatar--small hptx-avatar--rounded">{% if link.image %}{% image user.profile.photo fill-32x32 class="mr-xs hptx-avatar__image" alt="" %}{% else %}<img class=" hptx-avatar__image" src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" alt="" />{% endif %}</div>
+                      <div class="hptx-avatar hptx-avatar--small hptx-avatar--rounded">{% if user.photo %}{% image user.photo fill-32x32 class="mr-xs hptx-avatar__image" alt="{{ user.get_full_name }}" %}{% else %}<img class="hptx-avatar__image hptx-avatar__image--default" src="{% static 'src/assets/Feed/LogoHP@2x.png'%}" alt="{{ user.get_full_name }}" />{% endif %}</div>
                     </a>
                     <div class="" uk-dropdown="mode: click; pos:bottom-right;">
                       <div class="fw-black fs-sm">{{ user.first_name }} {{ user.last_name }}</div>
                       <div class="fs-xs">{{ user.email }}</div>
                       <hr>
-                      <div class="uk-margin-small-bottom"><a href="" class="fw-light fs-sm fc-brand-secondary">Edit profile</a></div>
-                      <div class="uk-margin-small-bottom"><a href="" class="fw-light fs-sm fc-brand-secondary">Publications</a></div>
-                      <div><a href="" class="fw-light fs-sm fc-brand-secondary">Log out</a></div>
+                      <div class="uk-margin-small-bottom"><a href="{% url "user:profile_edit_view" %}" class="fw-light fs-sm fc-brand-secondary">Edit profile</a></div>
+                      <div><a href="{% url "user:logout" %}" class="fw-light fs-sm fc-brand-secondary">Log out</a></div>
                     </div>
                   </li>
                   {% endif %}
                 </ul>
+              {% endblock navbar-right %}
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 {% extends "base/base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags user_tags %}
 
 {% block body_class %}template-public-profile{% endblock %}
 {% block content %}
@@ -10,79 +10,49 @@
       <div class="uk-flex uk-flex-between uk-padding">
         <div class="uk-flex">
           <div class="hptx-avatar hptx-avatar--rounded uk-margin-small-right">
-            <img class="htpx-avatar__image" data-src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" width="80" height="80" alt="{{ user.username }}" uk-img>
+            {% image user.photo fill-80x80 %}
           </div>
           <div class="uk-flex uk-flex-column uk-flex-center">
             <h3 class="uk-card-title fw-bold uk-margin-remove-vertical">{{ user.first_name }} {{ user.last_name }}</h3>
-            <div class="uk-flex rating">
-              <div class="rating-star rating-star--full">
-                <i class="empty far fa-star"></i>
-                <i class="half fas fa-star-half-alt"></i>
-                <i class="full fas fa-star"></i>
-              </div>
-              <div class="rating-star rating-star--full">
-                <i class="empty far fa-star"></i>
-                <i class="half fas fa-star-half-alt"></i>
-                <i class="full fas fa-star"></i>
-              </div>
-              <div class="rating-star rating-star--full">
-                <i class="empty far fa-star"></i>
-                <i class="half fas fa-star-half-alt"></i>
-                <i class="full fas fa-star"></i>
-              </div>
-              <div class="rating-star rating-star--half">
-                <i class="empty far fa-star"></i>
-                <i class="half fas fa-star-half-alt"></i>
-                <i class="full fas fa-star"></i>
-              </div>
-              <div class="rating-star rating-star--empty">
-                <i class="empty far fa-star"></i>
-                <i class="half fas fa-star-half-alt"></i>
-                <i class="full fas fa-star"></i>
-              </div>
-            </div>
+            {% rating user.rating %}
           </div>
         </div>
-        <span class="uk-badge fw-black">Contributor</span>
+        {% if user.is_talent %}<span class="uk-flex-none uk-badge fw-black">Contributor</span>{% endif %}
       </div>
     </div>
   </div>
   <div class="uk-card-body uk-padding">
     <div class="uk-flex uk-flex-between uk-margin-small-bottom">
-      <a href="" class="uk-link-text fs-sm"><i class="fab fa-twitter uk-margin-right"></i>@JosephSilva</a>
-      <div class="fs-sm">24 Articles Published</div>
+      {% if user.twitter_handler %}<a target="_blank" href="https://twitter.com/{{ user.twitter_handler }}" class="uk-link-text fs-sm"><i class="fab fa-twitter uk-margin-right"></i>@{{ user.twitter_handler }}</a>{% endif %}
+      <div class="fs-sm">{{ articles.count }} Article{{ articles.count|pluralize }} Published</div>
     </div>
+    {% if user.state or user.city %}
     <div class="uk-flex">
-      <div class="uk-hp-user-location fs-sm"><i class="fas fa-map-marker uk-margin-right"></i>Austin, Tx</div>
+      <div class="uk-hp-user-location fs-sm"><i class="fas fa-map-marker uk-margin-right"></i>{{ user.city }}{% if user.city and user.state %}, {% endif %}{{ user.state }}</div>
     </div>
+    {% endif %}
   </div>
+  {% if user.bio %}
   <div class="uk-divider-icon"></div>
   <div class="uk-card-footer uk-padding">
-    <p class="fs-sm">National Emmy award winning television sports journalist and author. Passionate about family, politics, fast cars and of course all sports!</p>
+    <p class="fs-sm">{{ user.bio }}</p>
   </div>
+  {% endif %}
 </div>
 
 <div class="uk-card uk-hp-card-muted uk-margin-small-top">
   <div class="uk-card-header fw-black">
       {{ user.first_name }} Activity
   </div>
-  <article class="uk-card-body uk-padding">
-    <h3 class="uk-card-title fs-lg">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
-    <p class="uk-flex uk-flex-between fw-medium fs-xs"><span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span><span><span class="uk-margin-right">Views 8108</span> <a href="" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a></span></p>
-    <div uk-grid class="uk-grid-small">
-      <div class="uk-width-2-5"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/UOX4bAS3C04" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-      <p class="uk-width-expand uk-hp-card-primary-intro">Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts....</p>
-    </div>
-  </article>
-  <div class="uk-divider-icon"></div>
-  <article class="uk-card-body uk-padding">
-    <h3 class="uk-card-title fs-lg">Texans Rookie Keke Coutee is the Slot Receiver Houston’s Been Missing</h3>
-    <p class="uk-flex uk-flex-between fw-medium fs-xs"><span><a href="" class="hp-link-primary">Scott Rauba</a> on 30 Aug 2018</span><span><span class="uk-margin-right">Views 8108</span> <a href="" class="hp-link-primary"><i class="fas fa-share-alt mr-icon"></i>Share</a></span></p>
-    <div uk-grid class="uk-grid-small">
-      <div class="uk-width-2-5"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/UOX4bAS3C04" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-      <p class="uk-width-expand uk-hp-card-primary-intro">Houston Texans’ fourth-round pick Keke Coutee made his first NFL appearance on Sunday against the Colts, catching 11 passes for 109 yards on 15 targets. Coutee, who had been the darling of Texans Twitter all summer before injuring his hamstring, justified the hype with his performance against the Colts....</p>
-    </div>
-  </article>
+  {% if not articles.count %}
+  <div class="uk-card-body">
+    <p>There is no activity for {{ user.first_name }}.</p>
+  </div>
+  {% else %}
+  {% for article in articles %}
+      {% include "article/article_list_item.html" with article=article first=forloop.first %}
+  {% endfor %}
+  {% endif %}
 </div>
 
 

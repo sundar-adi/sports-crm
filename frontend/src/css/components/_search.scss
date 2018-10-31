@@ -1,0 +1,34 @@
+$search-default-background: $light-grey;
+$search-default-focus-background: $white;
+$search-icon-color: rgba($navy, 0.5);
+$search-default-width: 100%;
+$search-default-padding-horizontal: 0.625rem;
+
+@mixin hook-search-input(){
+    border: 1px solid $search-default-background;  
+    border-radius: $border-rounded-border-radius/2;
+    font-size: $fs-sm;
+}
+
+@mixin hook-search-toggle(){}
+
+@mixin hook-search-toggle-hover(){}
+
+@mixin hook-search-misc(){
+    .uk-hp-icon-locarion {
+
+        & > svg {
+            display: none;
+        }
+
+        & > i {
+            transform: translateX(6px);
+        }
+    }
+}
+
+@mixin hook-search-default-input(){}
+
+@mixin hook-search-default-input-focus(){
+    border: 1px solid $dark-grey;
+}
