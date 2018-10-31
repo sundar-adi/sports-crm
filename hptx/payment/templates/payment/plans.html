@@ -1,33 +1,95 @@
 {% extends "base/base.html" %}
-
-{% load stripe_tags %}
-
-{% block body_class %}template-homepage{% endblock %}
-
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags %}
+{% block left-sidebar-content %}
+{% endblock left-sidebar-content %}
+{% block right-sidebar-content %}
+{% endblock right-sidebar-content %}
+{% block navbar-right %}
+<ul class="uk-navbar-nav">
+  {% if not user.is_authenticated %}
+  <li class="uk-flex uk-flex-middle uk-margin-right">
+    <div>
+      <a href="" class="uk-button uk-hp-button-ghost">Log in</a>
+    </div>
+  </li>
+  <li class="uk-flex uk-flex-middle">
+    <div>
+      <a href="" class="uk-button uk-button-primary uk-margin-small-right">Subscribe now</a>
+    </div>
+  </li>
+  {% else %}
+  <li class="uk-flex uk-flex-middle">
+    <a href="#">
+      <div class="hptx-avatar hptx-avatar--small hptx-avatar--rounded">{% if link.image %}{% image user.profile.photo fill-32x32 class="mr-xs hptx-avatar__image" alt="" %}{% else %}<img class=" hptx-avatar__image" src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" alt="" />{% endif %}</div>
+    </a>
+    <div class="" uk-dropdown="mode: click; pos:bottom-right;">
+      <div class="fw-black fs-sm">{{ user.first_name }} {{ user.last_name }}</div>
+      <div class="fs-xs">{{ user.email }}</div>
+      <hr>
+      <div class="uk-margin-small-bottom"><a href="" class="fw-light fs-sm fc-brand-secondary">Edit profile</a></div>
+      <div class="uk-margin-small-bottom"><a href="" class="fw-light fs-sm fc-brand-secondary">Publications</a></div>
+      <div><a href="" class="fw-light fs-sm fc-brand-secondary">Log out</a></div>
+    </div>
+  </li>
+  {% endif %}
+</ul>
+{% endblock navbar-right %}
+{% block aside-left %}
+{% endblock aside-left %}
+{% block aside-right %}
+{% endblock aside-right %}
 {% block content %}
-  <ul>
-  {% for plan in plans %}
-    <li>{{ plan.nickname }}</li>
-    <li>$ {{ plan.amount }}</li>
-    <li>
-      <stripe-button
-        public-key="{{ STRIPE_PUBLIC_KEY }}"
-        name="Houston Preeminence Media Incorporated"
-        image="https://hptx.us/images/hptx/HP-logo-9.png"
-        description="{{ plan.nickname }}"
-        :amount="{{ plan.amount|stripe_amount }}"
-        email="{{ user.email }}"
-        payment-url="{% url 'payment:rest:subscribe' %}"
-        :payment-payload="{'plan': '{{plan.stripe_id}}'}"
-        success-url="{% url 'payment:subscription_success' %}">
-          Subscribe
-      </stripe-button>
-    </li>
-  {% endfor %}
-  </ul>
-{% endblock %}
+  <div class="uk-flex uk-background-default">
+    <div class="uk-card uk-card-default uk-margin-bottom uk-position-relative">
+     <div class="uk-hp-card-border uk-position-top-center"></div>
+     <div class="uk-card-body uk-flex uk-flex-middle uk-flex-column uk-padding">
+       <span class="fs-xxl fw-black">$50</span>
+       <span class="fs-xs fw-black">PER YEAR</span>
+       <span class="fs-lg fw-black uk-margin-medium-top">Yearly Plan</span>
+       <p class="fs-sm ta-center">Cras fringilla justo odio, quis rutrum risus aliquam eget. Pellentesque euismod ultrices nisl.</p>
+       <a href="#" class="hp-link-primary fw-medium fs-xs"><i class="fas fa-angle-left uk-margin-right"></i>Change Plan</a>
+       <ul class="uk-list uk-list--menu">
+         <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Nam eros neque</li>
+         <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Praesent arcu ipsum posuere</li>
+         <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Aliquam risus augue</li>
+       </ul>
+     </div>
+   </div>
+   <div class="uk-card uk-card-default uk-margin-bottom uk-position-relative">
+         <div class="uk-hp-card-border uk-position-top-center"></div>
+         <div class="uk-card-body uk-flex uk-flex-middle uk-flex-column uk-padding">
+           <span class="fs-xxl fw-black">$50</span>
+           <span class="fs-xs fw-black">PER YEAR</span>
+           <span class="fs-lg fw-black uk-margin-medium-top">Yearly Plan</span>
+           <p class="fs-sm ta-center">Cras fringilla justo odio, quis rutrum risus aliquam eget. Pellentesque euismod ultrices nisl.</p>
+           <a href="#" class="hp-link-primary fw-medium fs-xs"><i class="fas fa-angle-left uk-margin-right"></i>Change Plan</a>
+           <ul class="uk-list uk-list--menu">
+             <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Nam eros neque</li>
+             <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Praesent arcu ipsum posuere</li>
+             <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Aliquam risus augue</li>
+           </ul>
+         </div>
+       </div>
+       <div class="uk-card uk-card-default uk-margin-bottom uk-position-relative">
+         <div class="uk-hp-card-border uk-position-top-center"></div>
+         <div class="uk-card-body uk-flex uk-flex-middle uk-flex-column uk-padding">
+           <span class="fs-xxl fw-black">$50</span>
+           <span class="fs-xs fw-black">PER YEAR</span>
+           <span class="fs-lg fw-black uk-margin-medium-top">Yearly Plan</span>
+           <p class="fs-sm ta-center">Cras fringilla justo odio, quis rutrum risus aliquam eget. Pellentesque euismod ultrices nisl.</p>
+           <a href="#" class="hp-link-primary fw-medium fs-xs"><i class="fas fa-angle-left uk-margin-right"></i>Change Plan</a>
+           <ul class="uk-list uk-list--menu">
+             <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Nam eros neque</li>
+             <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Praesent arcu ipsum posuere</li>
+             <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Aliquam risus augue</li>
+           </ul>
+         </div>
+       </div>
+  </div>
+
+{% endblock content %}
 
 
 {% block extra_js %}
-<script src="https://checkout.stripe.com/checkout.js"></script>
+
 {% endblock %}

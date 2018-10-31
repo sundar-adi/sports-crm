@@ -76,21 +76,30 @@
         </div>
       </header>
       <div class="uk-container uk-margin-top">
+
         <div class="uk-grid-small" uk-grid>
+          {% block aside-left %}
           <aside class="uk-width-1-6">
               {% block left-sidebar-content %}
               {% include "base/left-bar.html" %}
               {% endblock left-sidebar-content %}
           </aside>
+          {% endblock aside-left %}
+          {% block main %}
           <main class="uk-width-expand">
             {% block content %}{% endblock %}
           </main>
+          {% endblock main %}
+          {% block aside-right %}
           <aside class="uk-width-1-4">
               {% block right-sidebar-content %}
               {% include "base/right-bar.html" %}
               {% endblock right-sidebar-content %}
           </aside>
+          {% endblock aside-right %}
         </div>
+
+
       </div>
         <!-- <h1 style="display: inline-block;">HEADER</h1>
         <table style="float: right;">
