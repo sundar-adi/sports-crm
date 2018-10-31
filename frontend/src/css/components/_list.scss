@@ -19,7 +19,22 @@
       width: 1.25rem;
     }
   }
-
+  &.uk-list--plan{
+    > li:nth-child(n+2){
+      margin-top: 0.5rem;
+    }
+    .uk-list__hp-badge {
+      display: inline-block;
+      margin-right: round($global-medium-gutter / 4);
+      text-align: center;
+      width: 1.25rem;
+    }
+    li.uk-flex{
+      .uk-list__hp-badge{
+        margin-left: 3px;
+      }
+    }
+  }
   &.uk-list--top-menu {
     align-items: center;
     display: flex;

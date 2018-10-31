@@ -1,33 +1,128 @@
 {% extends "base/base.html" %}
 
-{% load stripe_tags %}
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block left-sidebar-content %}
+{% endblock left-sidebar-content %}
+
+{% block right-sidebar-content %}
+{% endblock right-sidebar-content %}
+
+{% block navbar-right %}
+<ul class="uk-navbar-nav">
+  {% if not user.is_authenticated %}
+  <li class="uk-flex uk-flex-middle uk-margin-right">
+    <div>
+      <a href="" class="uk-button uk-hp-button-ghost">Log in</a>
+    </div>
+  </li>
+  <li class="uk-flex uk-flex-middle">
+    <div>
+      <a href="" class="uk-button uk-button-primary uk-margin-small-right">Subscribe now</a>
+    </div>
+  </li>
+  {% else %}
+  <li class="uk-flex uk-flex-middle">
+    <a href="#">
+      <div class="hptx-avatar hptx-avatar--small hptx-avatar--rounded">{% if link.image %}{% image user.profile.photo fill-32x32 class="mr-xs hptx-avatar__image" alt="" %}{% else %}<img class=" hptx-avatar__image" src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" alt="" />{% endif %}</div>
+    </a>
+    <div class="" uk-dropdown="mode: click; pos:bottom-right;">
+      <div class="fw-black fs-sm">{{ user.first_name }} {{ user.last_name }}</div>
+      <div class="fs-xs">{{ user.email }}</div>
+      <hr>
+      <div class="uk-margin-small-bottom"><a href="" class="fw-light fs-sm fc-brand-secondary">Edit profile</a></div>
+      <div class="uk-margin-small-bottom"><a href="" class="fw-light fs-sm fc-brand-secondary">Publications</a></div>
+      <div><a href="" class="fw-light fs-sm fc-brand-secondary">Log out</a></div>
+    </div>
+  </li>
+  {% endif %}
+</ul>
+{% endblock navbar-right %}
+
+{% block aside-left %}
+{% endblock aside-left %}
+
+{% block aside-right %}
+{% endblock aside-right %}
+
+{% block bg-header %}
+  <div class="header-bg">
+
+  </div>
+{% endblock bg-header %}
 
 {% block content %}
-  <ul>
-  {% for plan in plans %}
-    <li>{{ plan.nickname }}</li>
-    <li>$ {{ plan.amount }}</li>
-    <li>
-      <stripe-button
-        public-key="{{ STRIPE_PUBLIC_KEY }}"
-        name="Houston Preeminence Media Incorporated"
-        image="https://hptx.us/images/hptx/HP-logo-9.png"
-        description="{{ plan.nickname }}"
-        :amount="{{ plan.amount|stripe_amount }}"
-        email="{{ user.email }}"
-        payment-url="{% url 'payment:rest:subscribe' %}"
-        :payment-payload="{'plan': '{{plan.stripe_id}}'}"
-        success-url="{% url 'payment:subscription_success' %}">
-          Subscribe
-      </stripe-button>
-    </li>
-  {% endfor %}
-  </ul>
-{% endblock %}
+  <div class="uk-flex uk-background-default uk-position-relative">
+    <div class="uk-card uk-card-default uk-margin-top uk-margin-right uk-position-relative">
+     <div class="uk-hp-card-border border-grey uk-position-top-center uk-margin-top"></div>
+     <div class="uk-card-body uk-padding">
+       <div class="uk-width-medium uk-flex uk-flex-column">
+         <span class="fs-xxl fw-black ta-center">$5</span>
+         <span class="fs-xs fw-black ta-center">PER MONTH</span>
+         <span class="fs-lg fw-black uk-margin-medium-top ta-center">Silver Plan</span>
+         <p class="fs-sm ta-center">Sed eu ante vel tellus dignissim rutrum. Vestibulum dignissim dapibus ullamcorper.</p>
+         <a href="" class="uk-button uk-button-primary uk-margin-small">Subscribe now</a>
+         <ul class="uk-list uk-list--plan">
+           <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>24/7 Live Coverage</li>
+           <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>100+ Videos</li>
+           <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>100+ Writers</li>
+           <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>100+ Podcasts</li>
+           <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Access to Entire Site</li>
+           <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Build HP Credibility</li>
+         </ul>
+       </div>
+     </div>
+   </div>
+   <div class="uk-divider-vertical uk-margin-top uk-margin-bottom"></div>
+   <div class="uk-card uk-card-default uk-margin-top uk-margin-right uk-margin-left uk-position-relative">
+         <div class="uk-hp-card-border border-yellow uk-position-top-center uk-margin-top"></div>
+         <div class="uk-card-body uk-padding">
+           <div class="uk-width-medium uk-flex uk-flex-column">
+             <span class="fs-xxl fw-black ta-center">$50</span>
+             <span class="fs-xs fw-black ta-center">PER YEAR</span>
+             <span class="fs-lg fw-black uk-margin-medium-top ta-center">Gold Plan</span>
+             <p class="fs-sm ta-center">Sed eu ante vel tellus dignissim rutrum. Vestibulum dignissim dapibus ullamcorper.</p>
+             <a href="" class="uk-button uk-button-primary uk-margin-small">Subscribe now</a>
+             <ul class="uk-list uk-list--plan">
+                <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>24/7 Live Coverage</li>
+                <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>100+ Videos, Writers & Podcasts</li>
+                <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>Access to Entire Site</li>
+                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>Build HP Credibility</li>
+                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>500 HP Credit*</li>
+                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>Start As 2-STAR</li>
+                <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-yellow"></i></span>50% Off 1-HP Shirt</li>
+             </ul>
+           </div>
+         </div>
+       </div>
+       <div class="uk-divider-vertical uk-margin-top uk-margin-bottom"></div>
+       <div class="uk-card uk-card-default uk-margin-top uk-margin-left uk-position-relative uk-margin-right uk-margin-bottom">
+         <div class="uk-hp-card-border border-gradient uk-position-top-center uk-margin-top"></div>
+         <div class="uk-card-body uk-padding uk-hp-bg-plan fc-white">
+           <div class="uk-width-medium uk-flex uk-flex-column">
+             <span class="fs-xxl fw-black ta-center">$75</span>
+             <span class="fs-xs fw-black ta-center">PER 2 YEAR</span>
+             <span class="fs-lg fw-black uk-margin-medium-top ta-center">Yearly Plan</span>
+             <p class="fs-sm ta-center">Sed eu ante vel tellus dignissim rutrum. Vestibulum dignissim dapibus ullamcorper.</p>
+             <a href="" class="uk-button uk-hp-button-white uk-margin-small">Subscribe now</a>
+             <ul class="uk-list uk-list--plan">
+               <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>24/7 Live Coverage</li>
+               <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>100+ Videos, Writers & Podcasts</li>
+               <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>Access to Entire Site</li>
+               <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>Build HP Credibility</li>
+               <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>500 HP Credit*</li>
+               <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>Start As 2-STAR</li>
+               <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>50% Off 1-HP Shirt</li>
+               <li class="fs-sm fw-black uk-flex"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-dark-red"></i></span>Free Seat at HP Christmas Poker Tourney Shot at $10,000</li>
+             </ul>
+           </div>
+         </div>
+       </div>
+  </div>
+
+{% endblock content %}
 
 
 {% block extra_js %}
-<script src="https://checkout.stripe.com/checkout.js"></script>
+
 {% endblock %}
