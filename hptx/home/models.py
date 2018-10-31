@@ -225,9 +225,34 @@ class HomePage(Page):
         null=True,
     )
 
+    articles = models.ManyToManyField(
+        'article.ArticlePage',
+        verbose_name=_('articles'),
+        related_name='articles',
+        blank=True,
+    )
+
+
     content_panels = Page.content_panels + [
         AutocompletePanel(
             'talent_of_the_week', page_type=settings.AUTH_USER_MODEL),
+        MultiFieldPanel([
+            AutocompletePanel(
+                'articles', page_type='article.ArticlePage',
+                is_single=False),
+            AutocompletePanel(
+                'articles', page_type='article.ArticlePage',
+                is_single=False),
+            AutocompletePanel(
+                'articles', page_type='article.ArticlePage',
+                is_single=False),
+            AutocompletePanel(
+                'articles', page_type='article.ArticlePage',
+                is_single=False),
+            AutocompletePanel(
+                'articles', page_type='article.ArticlePage',
+                is_single=False)
+        ], heading=_('Edit Choices')),
         InlinePanel('top_menu', label='Top menu'),
         InlinePanel('left_menu', label='Left menu'),
         InlinePanel('left_submenu', label='Left submenu'),
