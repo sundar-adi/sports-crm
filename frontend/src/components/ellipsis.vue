@@ -9,7 +9,6 @@
 export default {
   name: "ellipsis",
   mounted() {
-    let ellipsed = false;
     let elm = false;
     let container = this.$refs.text
     let source = container;
@@ -22,6 +21,7 @@ export default {
     }
 
     const wordArray = source.innerHTML.split(' ');
+    container.innerHTML = wordArray.join(' ');
     for(var i=wordArray.length - 1; i > 0; i--) {
       if(!elm && container.scrollHeight <= container.parentElement.offsetHeight) {
         break;
@@ -32,7 +32,6 @@ export default {
 
         if(!elm) {
           wordArray.splice(i, 1);
-          ellipsed = true;
           container.innerHTML = wordArray.join(' ') + '...';
         } else if(/<[a-zA-Z]+/.test(wordArray[i])) {
           elm = false;
