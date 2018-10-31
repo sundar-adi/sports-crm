@@ -9,8 +9,8 @@ DATABASES['default'].update({
     'USER': 'dbmaster',
     'ENGINE': 'django.db.backends.postgresql',
     'PASSWORD': 'SgVY6W$354Y1',
-    'HOST': '',
-    'PORT': '',
+    'HOST': 'production.cy4ccg1yqrv8.us-east-2.rds.amazonaws.com',
+    'PORT': '5432',
 })
 
 ALLOWED_HOSTS = (
