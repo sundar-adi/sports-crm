@@ -1,5 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% load article_tags %}
+
 {% for block in article.body %}
     {% if block is not excluded %}
       {% if block.block_type == 'heading' %}
@@ -7,7 +9,7 @@
       {% elif block.block_type == 'image' %}
         {% image block.value fill-400x400-c0 %}
       {% else %}
-          <section class="block-{{ block.block_type }}">
+          <section class="block-{{ block.block_type }} {% if block.block_type == 'embed' and 'soundcloud' in block.value.url %}soundcloud-content{% endif %}">
               {% include_block block %}
           </section>
       {% endif %}

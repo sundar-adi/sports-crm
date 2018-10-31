@@ -45,3 +45,13 @@ def share(context, article):
     context['article'] = article
     context['article_url'] = article.full_url
     return context
+
+
+@register.simple_tag
+def get_excluded_from_body(article):
+    if not article.featured_image:
+        if article.specific.get_verbose_name() == "Podcast page":
+            return soundcloud_block(article)
+        elif article.specific.get_verbose_name() == "Video page":
+            return youtube_block(article)
+    return None
