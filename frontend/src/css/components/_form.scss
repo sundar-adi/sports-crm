@@ -1,0 +1,54 @@
+$form-background: $light-grey;
+$form-legend-font-size: $fs-sm;
+$form-focus-background: $white;
+$form-focus-color: $global-font-color;
+$form-small-line-height: $form-small-height;
+$form-placeholder-color: rgba($navy, 0.5);
+$form-select-option-color: rgba($navy, 0.5);
+
+@mixin hook-form(){
+    font-size: $fs-sm;
+    border-radius: $border-rounded-border-radius/2;
+    border: 1px solid $form-background;
+}
+
+@mixin hook-form-focus(){
+    border: 1px solid $dark-grey;
+    color: $navy;
+}
+
+@mixin hook-form-label() {
+    font-size: $fs-sm;
+    font-weight: $fw-bold;
+}
+
+@mixin hook-form-legend(){
+    font-size: $fs-sm;
+    font-weight: $fw-bold;
+}
+
+@mixin hook-form-single-line(){
+    color: rgba($navy, 0.5);
+}
+
+@mixin hook-form-danger(){
+    border: 1px solid $orange;
+    background-color: lighten( $orange, 49% );
+}
+
+@mixin hook-form-multi-line() {
+    font-size: $fs-sm;
+    border-radius: $border-rounded-border-radius/2;
+    border: 1px solid $form-background;
+    color: rgba($navy, 0.5);
+    min-height: 2.5rem;
+}
+
+.uk-hp-select-inline {
+    flex-grow: 1;
+
+    &:not(:last-child) {
+        margin-right: 1.25rem;
+    }
+}
+
