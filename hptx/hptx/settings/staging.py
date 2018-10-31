@@ -13,8 +13,6 @@ ALLOWED_HOSTS = (
     'hptx.commite.co',
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, '../static_root')
-
 
 try:
     from .local import *

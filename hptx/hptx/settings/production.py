@@ -18,6 +18,8 @@ ALLOWED_HOSTS = (
     'pre.hptx.us',
 )
 
+STATIC_ROOT = os.path.join(BASE_DIR, '../static_root')
+
 try:
     from .local import *
 except ImportError:
