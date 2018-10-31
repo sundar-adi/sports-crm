@@ -107,9 +107,18 @@ class ArticlePage(Page):
         return super().serve(request, *args, **kwargs)
 
 
-class PodcastPage(ArticlePage):
-    parent_page_types = ['article.ArticleTagIndexPage']
+class PodcastPage(Page):
+    parent_page_types = ['article.PodcastIndexPage']
     subpage_types = ['article.PodcastEpisodePage']
+
+    featured_image = models.ForeignKey(
+        'wagtailimages.Image',
+        verbose_name=_('Featured Image'),
+        related_name='featured_podcast_image_on',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
 
 
 class VideoPage(ArticlePage):
@@ -147,4 +156,15 @@ class ArticleTagIndexPage(Page):
             context['tag'] = Tag.objects.get(name__iexact=self.tag_name)
         except Tag.DoesNotExist:
             pass
+        return context
+
+
+class PodcastIndexPage(Page):
+    parent_page_types = ['home.Homepage']
+
+    def get_context(self, request):
+        podcasts = PodcastPage.objects.live()
+
+        context = super().get_context(request)
+        context['podcasts'] = podcasts
         return context

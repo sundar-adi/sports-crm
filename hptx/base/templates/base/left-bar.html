@@ -19,6 +19,12 @@
   <hr class="hptx-divider-nogutter">
   <div class="uk-card-body">
     <ul class="uk-list uk-list--menu">
+      <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge"><i class="fas fa-podcast"></i></span><span>Podcasts</span></li>
+    </ul>
+  </div>
+  <hr class="hptx-divider-nogutter">
+  <div class="uk-card-body">
+    <ul class="uk-list uk-list--menu">
       {% for link in homepage.left_submenu.all %}
       <li><a href="{% slugurl 'articles' %}tag/{{ link.tag }}/"><span class="uk-list__hp-badge"><i class="fas fa-{{ link.icon|default:'tag' }}"></i></span>{{ link.name }}</a></li>
       {% endfor %}
