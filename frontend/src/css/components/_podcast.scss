@@ -57,6 +57,7 @@
       justify-content: center;
       left: 50%;
       line-height: 1;
+      opacity: 0.9;
       position: absolute;
       transform: translate(-50%, -50%);
       top: 50%;
@@ -79,6 +80,11 @@
 
   .podcast__last {
     font-weight: $fw-medium;
+  }
+
+  .podcast__episodes {
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
   }
 
   p {
