@@ -1,5 +1,5 @@
 {% extends "base/base.html" %}
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags user_tags %}
 
 {% block body_class %}template-public-profile{% endblock %}
 
@@ -8,120 +8,105 @@
 
 {% block content %}
 
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
 <div class="uk-card uk-card-primary uk-card-primary--profile uk-card-primary--profile-edit">
   <div class="uk-hp-card-primary-wrapper">
     <div class="uk-card-header">
       <div class="uk-flex uk-flex-between uk-padding uk-padding-remove-horizontal">
         <div class="uk-flex">
-          <div class="hptx-avatar hptx-avatar--rounded uk-margin-small-right">
-            <img class="htpx-avatar__image" data-src="https://yt3.ggpht.com/a-/AN66SAw_M_11Alp1TIDompdqcTC94F-T-BUKgNgSFw=s900-mo-c-c0xffffffff-rj-k-no" width="80" height="80" alt="{{ user.username }}" uk-img>
-          </div>
+          <div class="hptx-avatar hptx-avatar--rounded uk-margin-small-right">{% if user.photo %}{% image user.photo fill-80x80 class="hptx-avatar__image" alt="{{ user.get_full_name }}" %}{% else %}<img class="hptx-avatar__image hptx-avatar__image--default" src="{% static 'src/assets/Feed/LogoHP@2x.png'%}" alt="{{ user.get_full_name }}" />{% endif %}</div>
           <div class="uk-flex uk-flex-column uk-flex-center">
             <h3 class="uk-card-title fw-bold uk-margin-remove-vertical">{{ user.first_name }} {{ user.last_name }}</h3>
-            <div class="uk-flex rating">
-              <div class="rating-star rating-star--full">
-                <i class="empty far fa-star"></i>
-                <i class="half fas fa-star-half-alt"></i>
-                <i class="full fas fa-star"></i>
-              </div>
-              <div class="rating-star rating-star--full">
-                <i class="empty far fa-star"></i>
-                <i class="half fas fa-star-half-alt"></i>
-                <i class="full fas fa-star"></i>
-              </div>
-              <div class="rating-star rating-star--full">
-                <i class="empty far fa-star"></i>
-                <i class="half fas fa-star-half-alt"></i>
-                <i class="full fas fa-star"></i>
-              </div>
-              <div class="rating-star rating-star--half">
-                <i class="empty far fa-star"></i>
-                <i class="half fas fa-star-half-alt"></i>
-                <i class="full fas fa-star"></i>
-              </div>
-              <div class="rating-star rating-star--empty">
-                <i class="empty far fa-star"></i>
-                <i class="half fas fa-star-half-alt"></i>
-                <i class="full fas fa-star"></i>
-              </div>
-            </div>
+            {% rating user.rating %}
           </div>
         </div>
-        <span class="uk-flex-none uk-badge fw-black">Suscriptor Pro</span>
+        {% if user.is_talent %}<span class="uk-flex-none uk-badge fw-black">Suscriptor Pro</span>{% endif %}
       </div>
     </div>
   </div>
   <div class="uk-card-body uk-padding">
     <form>
-      <legend class="uk-legend fw-bold">Name</legend>
-      <div class="uk-margin uk-margin-small-bottom">
-        <input class="uk-input" type="text" placeholder="">
-      </div>
-      <legend class="uk-legend fw-bold">Email Address</legend>
-      <div class="uk-margin uk-margin-small-bottom">
-        <input class="uk-input" type="text" placeholder="example@domain.com">
-      </div>
-      <div class="uk-flex uk-flex-between uk-flex-bottom">
-        <div class="uk-hp-select-inline">
-          <label class="uk-form-label" for="user-birthdate-month">Birthdate</label>
-          <div class="uk-form-controls uk-margin uk-margin-small-bottom">
-            <select class="uk-select" id="user-birthdate-month">
-                <option>Option 01</option>
-                <option>Option 02</option>
-            </select>
+      <div class="uk-grid uk-child-width-expand">
+        <div class="uk-margin-small-right">
+          <legend class="uk-legend fw-bold"><label class="uk-form-label" for="first_name">First name</label></legend>
+          <div class="uk-margin uk-margin-small-bottom">
+            <input class="uk-input" id="first_name" name="first_name" type="text" placeholder="Your first name" value="{{ form.first_name.value|default:"" }}">
+            {% for error in form.errors.first_name %}
+              <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+            {% endfor %}
           </div>
         </div>
-        <div class="uk-hp-select-inline">
-          <div class="uk-form-controls uk-margin uk-margin-small-bottom">
-            <select class="uk-select" id="user-birthdate-day">
-                <option>Option 01</option>
-                <option>Option 02</option>
-            </select>
-          </div>
-        </div>
-        <div class="uk-hp-select-inline">
-          <div class="uk-form-controls uk-margin uk-margin-small-bottom">
-            <select class="uk-select" id="user-birthdate-year">
-                <option>Option 01</option>
-                <option>Option 02</option>
-            </select>
+        <div>
+          <legend class="uk-legend fw-bold"><label class="uk-form-label" for="last_name">Last name</label></legend>
+          <div class="uk-margin uk-margin-small-bottom">
+            <input class="uk-input" id="last_name" name="last_name" type="text" placeholder="Your last name" value="{{ form.last_name.value|default:"" }}">
+            {% for error in form.errors.last_name %}
+              <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+            {% endfor %}
           </div>
         </div>
       </div>
-      <div>
-        <label class="uk-form-label" for="form-stacked-select">City</label>
-        <div class="uk-form-controls uk-margin uk-margin-small-bottom">
-          <select class="uk-select" id="form-stacked-select">
-            <option>Option 01</option>
-            <option>Option 02</option>
-          </select>
-        </div>
-      </div>
-      <div class="uk-flex uk-flex-column">
-        <label class="uk-form-label" for="user-city">City</label>
-        <div class="uk-search uk-search-default">
-          <span class="uk-search-icon-flip uk-hp-icon-locarion" uk-search-icon><i class="fas fa-map-marker"></i></span>
-          <input class="uk-search-input uk-margin uk-margin-small-bottom" type="search" placeholder="Search..." id="user-city">
-        </div>
-      </div>
-      <legend class="uk-legend fw-bold">Twitter Account</legend>
+      <legend class="uk-legend fw-bold"><label for="email">Email Address</label></legend>
       <div class="uk-margin uk-margin-small-bottom">
-        <input class="uk-input" type="text" placeholder="@twitter">
+        <input class="uk-input" type="text" id="email" name="email" value="{{ form.email.value|default:"" }}" placeholder="example@domain.com">
+        {% for error in form.errors.email %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <legend class="uk-legend fw-bold"><label for="birthday">Birthdate</label></legend>
+      <div class="uk-margin uk-margin-small-bottom">
+        <input class="uk-input" type="text" id="birthday" name="birthday" value="{{ form.birthday.value|default:""|date:"m/d/Y" }}" placeholder="07/20/1969">
+        {% for error in form.errors.birthday %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <legend class="uk-legend fw-bold"><label for="city">City</label></legend>
+      <div class="uk-margin uk-margin-small-bottom">
+        <input class="uk-input" type="text" id="city" name="city" value="{{ form.city.value|default:"" }}" placeholder="Houston">
+        {% for error in form.errors.city %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <legend class="uk-legend fw-bold"><label for="state">State</label></legend>
+      <div class="uk-margin uk-margin-small-bottom">
+        <input class="uk-input" type="text" id="state" name="state" value="{{ form.state.value|default:"" }}" placeholder="Texas">
+        {% for error in form.errors.state %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <legend class="uk-legend fw-bold"><label for="twitter_handler">Twitter Account</label></legend>
+      <div class="uk-margin uk-margin-small-bottom">
+        <input class="uk-input" type="text" id="twitter_handler" name="twitter_handler" value="{{ form.twitter_handler.value|default:"" }}" placeholder="@twitter">
+        {% for error in form.errors.twitter_handler %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
       </div>
       <legend class="uk-legend fw-bold">Short Bio</legend>
       <div class="uk-margin uk-margin-small-bottom">
-          <textarea class="uk-textarea" rows="1" placeholder="140 Characters Max."></textarea>
+        <textarea class="uk-textarea" name="bio" rows="4" placeholder="140 Characters Max.">{{ form.bio.value|default:""}}</textarea>
+        {% for error in form.errors.bio %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <legend class="uk-legend fw-bold">Change photo</legend>
+      <div class="uk-margin uk-margin-small-bottom">
+        <div uk-form-custom="target: true" class="uk-flex">
+          <input type="file" id="image" name="image">
+          {% for error in form.errors.image %}
+            <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+          {% endfor %}
+          <input class="uk-input" type="text" placeholder="Select a file if you want to change your photo" disabled>
+        </div>
       </div>
     </form>
-    <div class="uk-flex uk-margin uk-margin-small-top uk-button-group uk-hp-button-group-spaced ">
-      <button class="uk-button uk-button-secondary">Save Changes</button>
-      <button class="uk-button uk-button-link"><i class="fas fa-power-off uk-hp-icon-left"></i>Logout</button>
+    <div class="uk-flex uk-margin uk-flex-middle uk-margin-small-top uk-button-group uk-hp-button-group-spaced ">
+      <input type="submit" class="uk-button uk-button-secondary" value="Save Changes">
+      <a href="{% url "user:logout" %}" class="uk-button uk-button-link"><i class="fas fa-power-off uk-hp-icon-left"></i>Logout</a>
     </div>
-
-
   </div>
 </div>
-
+</form>
 {% endblock %}
 
 

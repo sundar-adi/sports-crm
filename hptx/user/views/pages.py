@@ -3,11 +3,13 @@ import json
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
-from django.views.generic import FormView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import FormView, TemplateView
+from django.views.generic.edit import UpdateView
 
-from user.forms import SignUpForm
+from user.forms import SignUpForm, ProfileEditForm
 from user.models import User
 from article.models import ArticlePage
 
@@ -48,8 +50,13 @@ class LogoutView(auth_views.LogoutView):
     next_page = "/"
 
 
-class ProfileEditView(LoginRequiredMixin, TemplateView):
+class ProfileEditView(LoginRequiredMixin, UpdateView):
     template_name = 'user/edit_profile.html'
+    form_class = ProfileEditForm
+    success_url = reverse_lazy('user:profile_edit_view')
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
     def get_context_data(self, *args, **kwargs):
         user = self.request.user
