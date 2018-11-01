@@ -58,11 +58,18 @@ module.exports = {
         test: /\.(woff|woff2?|eot|ttf|otf|ttc)(\?.*)?$/,
         loader: 'file-loader',
         options: {
+          name: '[path][name].[ext]'
+        }
+      },
+      {
+        test: /\.(png|jpg|gif|ico)$/,
+        loader: 'file-loader',
+        options: {
           name: '[path][name].[ext]?[hash]'
         }
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(webmanifest|xml)$/,
         loader: 'file-loader',
         options: {
           name: '[path][name].[ext]?[hash]'
