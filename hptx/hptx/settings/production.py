@@ -27,7 +27,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'AKIAITRUEGII5PYJG5LQ'
 EMAIL_HOST_PASSWORD = 'Am8JAzMctk3lP6fKPoWnP1+tjb8z48t1U6dTTlvOUqoD'
 EMAIL_PORT = 2587
-DEFAULT_FROM_EMAIL = 'webmaster@hptx.us'
+DEFAULT_FROM_EMAIL = 'no-reply@hptx.us'
 
 try:
     from .local import *
