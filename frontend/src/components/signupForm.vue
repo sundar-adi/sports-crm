@@ -86,7 +86,8 @@
         <p class="fs-sm"><input type="checkbox" class="uk-checkbox uk-margin-small-right" v-model="form.newsletter">I want to subscribe to your newsletters</p>
         <p class="fs-sm"><input type="checkbox" v-model="terms" class="uk-checkbox uk-margin-small-right">I accept <a href="#" class="hp-link-primary fw-medium">Terms and Conditions</a></p>
      </div>
-     <input type="submit" value="proccess subscription" class="uk-button uk-button-primary uk-width-1-2 uk-margin-medium-top" :disabled="!ready" :class="{'uk-button-primary--disabled': !ready}">
+     <input v-if="!loading" type="submit" value="proccess subscription" class="uk-button uk-button-primary uk-width-1-2 uk-margin-medium-top" :disabled="!ready" :class="{'uk-button-primary--disabled': !ready}">
+     <p class="uk-margin-medium-top" v-if="loading">We're processing your information{{ this.loadingMsg }}</p>
   </form>
 </template>
 
@@ -120,6 +121,8 @@ export default {
       privacy: false,
       handler: undefined,
       loading: false,
+      loadInterval: null,
+      loadingMsg: "",
       form: {
         'first_name': "",
         'last_name': "",
@@ -150,6 +153,14 @@ export default {
     }
   },
   methods: {
+    setLoading() {
+      this.loading = true;
+      this.loadingInterval = setInterval(
+        () => {
+          this.loadingMsg = this.loadingMsg.length == 3 ? ".":(this.loadingMsg + ".")
+        }, 500
+      )
+    },
     validatePasswords() {
       this.errors = {};
       if(this.form.password != this.form.password2) {
@@ -198,7 +209,7 @@ export default {
         image: this.image,
         locale: 'auto',
         token: (token) => {
-          this.loading = true;
+          this.setLoading();
           this.$axios.post(
               `/community/rest/subscribe/`,
               {
@@ -207,6 +218,7 @@ export default {
               }
           ).then(
             (response) => {
+              clearInterval(this.loadingInterval)
               window.open(this.successUrl, "_self");
             }
           )
