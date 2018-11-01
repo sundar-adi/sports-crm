@@ -5,30 +5,35 @@
 <div class="uk-card uk-card-default uk-margin-bottom">
   <div class="uk-card-body uk-card-body--slim">
     <ul class="uk-list uk-list--menu uk-list--primary">
-      <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge fc-brand-primary">+</span><span class="fc-brand-secondary-lighter">Topics</span></li>
+      <li class="uk-flex uk-flex-middle">
+        <span class="uk-list__hp-badge fc-brand-primary uk-visible@m">+</span><span class="fc-brand-secondary-lighter uk-visible@m">Topics</span>
+        <a class="uk-hidden@m" href="#" uk-toggle="target: #responsive-menu; media: @s; cls: uk-visible@m"><span class="uk-list__hp-badge fc-brand-primary">+</span><span class="fc-brand-secondary-lighter">Topics</span></a>
+      </li>
     </ul>
   </div>
-  <hr class="hptx-divider-nogutter">
-  <div class="uk-card-body">
-    <ul class="uk-list uk-list--menu uk-list--primary">
-      {% for link in homepage.left_menu.all %}
-      <li class="uk-flex uk-flex-middle"><a class="hp-link-primary" href="{% slugurl 'articles' %}tag/{{ link.tag.slug }}/">{% if link.image %}<img src="{{ link.image.file.url }}" width="20" height="20" class="uk-list__hp-badge" alt="" />{% else %}<span class="uk-list__hp-badge"><i class="fas fa-tag }}"></i></span>{% endif%}{{ link.name }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
-  <hr class="hptx-divider-nogutter">
-  <div class="uk-card-body {% if page.slug == 'podcasts' %}uk-card-body--active{% endif %}">
-    <ul class="uk-list uk-list--menu">
-      <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge"><i class="fas fa-podcast"></i></span><a href="{% slugurl 'podcasts' %}">Podcasts</a></li>
-    </ul>
-  </div>
-  <hr class="hptx-divider-nogutter">
-  <div class="uk-card-body">
-    <ul class="uk-list uk-list--menu">
-      {% for link in homepage.left_submenu.all %}
-      <li><a href="{% slugurl 'articles' %}tag/{{ link.tag.slug }}/"><span class="uk-list__hp-badge"><i class="fas fa-{{ link.icon|default:'tag' }}"></i></span>{{ link.name }}</a></li>
-      {% endfor %}
-    </ul>
+  <div id="responsive-menu" class="uk-visible@m">
+    <hr class="hptx-divider-nogutter">
+    <div class="uk-card-body" >
+      <ul class="uk-list uk-list--menu uk-list--primary">
+        {% for link in homepage.left_menu.all %}
+        <li class="uk-flex uk-flex-middle"><a class="hp-link-primary" href="{% slugurl 'articles' %}tag/{{ link.tag.slug }}/">{% if link.image %}<img src="{{ link.image.file.url }}" width="20" height="20" class="uk-list__hp-badge" alt="" />{% else %}<span class="uk-list__hp-badge"><i class="fas fa-tag }}"></i></span>{% endif%}{{ link.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <hr class="hptx-divider-nogutter">
+    <div class="uk-card-body {% if page.slug == 'podcasts' %}uk-card-body--active{% endif %}">
+      <ul class="uk-list uk-list--menu">
+        <li class="uk-flex uk-flex-middle"><span class="uk-list__hp-badge"><i class="fas fa-podcast"></i></span><a href="{% slugurl 'podcasts' %}">Podcasts</a></li>
+      </ul>
+    </div>
+    <hr class="hptx-divider-nogutter">
+    <div class="uk-card-body">
+      <ul class="uk-list uk-list--menu">
+        {% for link in homepage.left_submenu.all %}
+        <li><a href="{% slugurl 'articles' %}tag/{{ link.tag.slug }}/"><span class="uk-list__hp-badge"><i class="fas fa-{{ link.icon|default:'tag' }}"></i></span>{{ link.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -39,14 +44,6 @@
 </a>
 {% endif %}
 
-{% if homepage.has_social_links %}
-<div class="uk-card uk-card-default">
-  <div class="uk-card-body">
-    <ul class="uk-list uk-list--menu">
-      {% if homepage.facebook_link %}<li><a target="_blank" href="{{ homepage.facebook_link }}"><span class="uk-list__hp-badge fc-facebook"><i class="fab fa-facebook"></i></span>Facebook</a></li>{% endif %}
-      {% if homepage.twitter_link %}<li><a target="_blank" href="{{ homepage.twitter_link }}"><span class="uk-list__hp-badge fc-twitter"><i class="fab fa-twitter"></i></span>Twitter</a></li>{% endif %}
-      {% if homepage.instagram_link %}<li><a target="_blank" href="{{ homepage.instagram_link }}"><span class="uk-list__hp-badge fc-instagram"><i class="fab fa-instagram"></i></span>Instagram</a></li>{% endif %}
-    </ul>
-  </div>
+<div class="uk-visible@m uk-margin-bottom">
+  {% include "base/partials/social_box.html" %}
 </div>
-{% endif %}

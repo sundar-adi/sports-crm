@@ -51,18 +51,18 @@
 
 {% block content %}
   <div uk-grid class="uk-margin-medium-bottom">
-    <div class="uk-width-1-2">
+    <div class="uk-width-1-2@m">
       <h1 class="uk-margin-medium-top ff-title fs-huge fc-white">Plans</h1>
       <p class="fs-md fc-white">Subscribe now and enjoy the fantastic features that we offer.</p>
     </div>
-    <div class="uk-width-1-2 uk-position-relative">
+    <div class="uk-visible@m uk-width-1-2 uk-position-relative">
       <div class="uk-position-bottom-right uk-margin-large">
         {% if homepage.talent_of_the_week %}{% include "user/auth/talent_login.html" with user=homepage.talent_of_the_week %}{% endif %}
       </div>
     </div>
   </div>
 
-  <div class="uk-flex uk-background-default uk-position-relative">
+  <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-align-start-large uk-flex-row-large uk-background-default uk-position-relative">
     <div class="uk-card uk-card-default uk-margin-top uk-margin-right uk-position-relative">
      <div class="uk-hp-card-border border-grey uk-position-top-center uk-margin-top"></div>
      <div class="uk-card-body uk-padding">

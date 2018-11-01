@@ -10,6 +10,11 @@ $button-link-hover-text-decoration: none;
 
 @mixin hook-button(){
   transition: opacity 0.3s ease-in-out;
+
+  &.uk-button--tall {
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+  }
 }
 
 @mixin hook-button-hover(){

@@ -11,9 +11,9 @@
 
 {% block content %}
 
-<div class="uk-position-cover uk-hp-margin-nav-top uk-background-default">
+<div class="uk-position-cover-medium uk-hp-margin-nav-top uk-background-default">
   <div class="uk-flex uk-flex-between uk-background-default">
-    <div class="uk-width-1-3 uk-flex uk-flex-middle">
+    <div class="uk-width-1-3@m uk-flex uk-flex-middle">
       <div class="uk-margin-auto uk-width-medium uk-padding uk-padding-remove-horizontal">
         <div class="fc-brand-secondary uk-margin-medium-bottom">
           <img src="{% static 'src/assets/Feed/LogoLogin.png'%}"/>
@@ -69,7 +69,7 @@
         {% endblock %}
       </div>
     </div>
-    <div class="uk-width-2-3 uk-background-cover uk-hp-login-bg">
+    <div class="uk-visible@m uk-width-2-3 uk-background-cover uk-hp-login-bg">
       <div class="uk-position-bottom-right uk-margin-large-right uk-margin-large">
         {% if homepage.talent_of_the_week %}{% include "user/auth/talent_login.html" with user=homepage.talent_of_the_week %}{% endif %}
       </div>

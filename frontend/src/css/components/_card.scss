@@ -206,13 +206,24 @@ $card-primary-color: $brand-secondary;
 
   &.uk-card-primary--profile-edit {
     .uk-card-header {
-      padding-left: 7rem;
-      padding-right: 2rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
     }
 
     .uk-card-body {
-      padding-left: 7.5rem;
-      padding-right: 7.5rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    @media (min-width: $breakpoint-medium) {
+      .uk-card-header {
+        padding-left: 7rem;
+      }
+
+      .uk-card-body {
+        padding-left: 7.5rem;
+        padding-right: 7.5rem;
+      }
     }
   }
 }

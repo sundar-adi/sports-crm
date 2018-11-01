@@ -3,4 +3,8 @@ $navbar-nav-item-height:  3.125rem;
 
 .uk-logo {
   margin-left: -3rem;
+
+  &.uk-logo--small {
+    margin-left: -2.5rem;
+  }
 }

@@ -1,0 +1,11 @@
+.uk-flex-row-large {
+  @media (min-width: $breakpoint-large) {
+    flex-direction: row !important;
+  }
+}
+
+.uk-flex-align-start-large {
+  @media (min-width: $breakpoint-large) {
+    align-items: flex-start !important;
+  }
+}

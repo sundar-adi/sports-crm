@@ -50,7 +50,7 @@ gtag('config', 'UA-128500300-1');
   <body class="{% block body_class %}{% endblock %}">
     {% wagtailuserbar %}
     <div {% block vue_app %}id="app"{% endblock %}>
-      <header class="header">
+      <header class="header uk-visible@m" >
         <div class="uk-navbar-container">
           <div class="uk-container" uk-navbar>
             <div class="uk-navbar-left">
@@ -96,13 +96,55 @@ gtag('config', 'UA-128500300-1');
           </div>
         </div>
       </header>
+
+      <header class="header uk-hidden@m">
+        <div class="uk-navbar-container">
+          <div class="uk-flex">
+            <a href="{% pageurl homepage %}" class="uk-logo uk-logo--small"><img src="{% static 'src/assets/Navbar/Logo.png'%}" alt="Houston Preeminence" /></a>
+            <div class="uk-navbar-right uk-margin-small-right">
+              <a class="hp-link-primary fs-lg" href="#" uk-toggle="target: #topbar-responsive-menu"><i class="fas fa-bars"></i></a>
+            </div>
+          </div>
+            <div id="topbar-responsive-menu" class="uk-padding-small" hidden>
+              <div class="uk-flex">
+                {% for link in homepage.top_menu.all %}
+                  <div class="{% if forloop.first %}uk-padding-remove-left{% endif %} uk-navbar-item uk-flex uk-flex-middle"><a class="fw-black fc-white" href="{% slugurl 'articles' %}tag/{{ link.tag.slug }}/">{% if link.image %}<img src="{{ link.image.file.url }}" width="24" height="24" class="mr-xs" alt="" />{% else %}<span class="mr-xs"><i class="fas fa-tag }}"></i></span>{% endif%}{{ link.name|upper }}</a></div>
+                {% endfor %}
+              </div>
+              <hr class="hptx-divider-white uk-margin-small-bottom">
+              {% if not user.is_authenticated %}
+              <div class="uk-margin-bottom">
+                <a href="{% url "user:login" %}" class="uk-button uk-button--tall uk-hp-button-ghost uk-width-expand ">Log in</a>
+              </div>
+              <div class="uk-margin-bottom">
+                <a href="{% url 'plans' %}" class="uk-button uk-button--tall uk-button-primary uk-margin-small-right uk-width-expand ">Subscribe now</a>
+              </div>
+              {% else %}
+              <div class="uk-margin-bottom uk-flex fc-white">
+                <div class="hptx-avatar hptx-avatar--small hptx-avatar--rounded uk-margin-right">{% if user.photo %}{% image user.photo fill-32x32 class="mr-xs hptx-avatar__image" alt="{{ user.get_full_name }}" %}{% else %}<img class="hptx-avatar__image hptx-avatar__image--default" src="{% static 'src/assets/Feed/LogoHP@2x.png'%}" alt="{{ user.get_full_name }}" />{% endif %}</div>
+                <div class="lh-1">
+                  <div class="fw-bold fs-sm">{{ user.first_name }} {{ user.last_name }}</div>
+                  <div class="fs-xs">{{ user.email }}</div>
+                </div>
+              </div>
+              <hr class="hptx-divider-white uk-margin-small-bottom uk-margin-top">
+              <div class="uk-margin-bottom">
+                <div class="uk-margin-small-bottom"><a href="{% url "user:profile_edit_view" %}" class="fw-medium fs-sm fc-white">Edit profile</a></div>
+              </div>
+              <div class="uk-margin-bottom">
+                <div><a href="{% url "user:logout" %}" class="fw-medium fs-sm fc-white">Log out</a></div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+      </header>
       {% block bg-header %}
       {% endblock bg-header %}
       <div class="uk-container uk-margin-top">
 
         <div class="uk-grid-small" uk-grid>
           {% block aside-left %}
-          <aside class="uk-width-1-6">
+          <aside class="uk-width-1-6@m">
               {% block left-sidebar-content %}
               {% include "base/left-bar.html" %}
               {% endblock left-sidebar-content %}
@@ -114,7 +156,7 @@ gtag('config', 'UA-128500300-1');
           </main>
           {% endblock main %}
           {% block aside-right %}
-          <aside class="uk-width-1-4">
+          <aside class="uk-width-1-4@m">
               {% block right-sidebar-content %}
               {% include "base/right-bar.html" %}
               {% endblock right-sidebar-content %}
