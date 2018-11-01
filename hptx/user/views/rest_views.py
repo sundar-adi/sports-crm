@@ -25,7 +25,7 @@ class SubscribeUserView(CreateAPIView):
         elif value == "gold":
             return settings.GOLD_PLAN_STRIPE_ID
         elif value == "platinum":
-            return settings.DIAMOND_PLAN_STRIPE_ID
+            return settings.PLATINUM_PLAN_STRIPE_ID
 
     def perform_create(self, serializer):
         user = serializer.save()
