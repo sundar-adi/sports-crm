@@ -87,9 +87,7 @@ gtag('config', 'UA-128500300-1');
                       <div class="fw-black fs-sm">{{ user.first_name }} {{ user.last_name }}</div>
                       <div class="fs-xs">{{ user.email }}</div>
                       <hr>
-                      {% comment %}
                       <div class="uk-margin-small-bottom"><a href="{% url "user:profile_edit_view" %}" class="fw-light fs-sm fc-brand-secondary">Edit profile</a></div>
-                      {% endcomment %}
                       <div><a href="{% url "user:logout" %}" class="fw-light fs-sm fc-brand-secondary">Log out</a></div>
                     </div>
                   </li>
