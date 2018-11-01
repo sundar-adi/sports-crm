@@ -27,39 +27,60 @@
   </div>
   <div class="uk-card-body uk-padding">
     <form>
-      <div class="uk-flex uk-flex-between uk-flex-bottom">
-        <div>
+      <div class="uk-grid uk-child-width-expand">
+        <div class="uk-margin-small-right">
           <legend class="uk-legend fw-bold"><label class="uk-form-label" for="first_name">First name</label></legend>
           <div class="uk-margin uk-margin-small-bottom">
             <input class="uk-input" id="first_name" name="first_name" type="text" placeholder="Your first name" value="{{ form.first_name.value|default:"" }}">
+            {% for error in form.errors.first_name %}
+              <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+            {% endfor %}
           </div>
         </div>
         <div>
           <legend class="uk-legend fw-bold"><label class="uk-form-label" for="last_name">Last name</label></legend>
           <div class="uk-margin uk-margin-small-bottom">
             <input class="uk-input" id="last_name" name="last_name" type="text" placeholder="Your last name" value="{{ form.last_name.value|default:"" }}">
+            {% for error in form.errors.last_name %}
+              <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+            {% endfor %}
           </div>
         </div>
       </div>
       <legend class="uk-legend fw-bold"><label for="email">Email Address</label></legend>
       <div class="uk-margin uk-margin-small-bottom">
         <input class="uk-input" type="text" id="email" name="email" value="{{ form.email.value|default:"" }}" placeholder="example@domain.com">
+        {% for error in form.errors.email %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
       </div>
-      <legend class="uk-legend fw-bold"><label for="birthdate">Birthdate</label></legend>
+      <legend class="uk-legend fw-bold"><label for="birthday">Birthdate</label></legend>
       <div class="uk-margin uk-margin-small-bottom">
-        <input class="uk-input" type="text" id="birthdate" name="birthdate" value="{{ form.birthdate.value|default:"" }}" placeholder="07/20/1969">
+        <input class="uk-input" type="text" id="birthday" name="birthday" value="{{ form.birthday.value|default:""|date:"m/d/Y" }}" placeholder="07/20/1969">
+        {% for error in form.errors.birthday %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
       </div>
       <legend class="uk-legend fw-bold"><label for="city">City</label></legend>
       <div class="uk-margin uk-margin-small-bottom">
         <input class="uk-input" type="text" id="city" name="city" value="{{ form.city.value|default:"" }}" placeholder="Houston">
+        {% for error in form.errors.city %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
       </div>
       <legend class="uk-legend fw-bold"><label for="state">State</label></legend>
       <div class="uk-margin uk-margin-small-bottom">
         <input class="uk-input" type="text" id="state" name="state" value="{{ form.state.value|default:"" }}" placeholder="Texas">
+        {% for error in form.errors.state %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
       </div>
       <legend class="uk-legend fw-bold"><label for="twitter_handler">Twitter Account</label></legend>
       <div class="uk-margin uk-margin-small-bottom">
         <input class="uk-input" type="text" id="twitter_handler" name="twitter_handler" value="{{ form.twitter_handler.value|default:"" }}" placeholder="@twitter">
+        {% for error in form.errors.twitter_handler %}
+          <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+        {% endfor %}
       </div>
       <legend class="uk-legend fw-bold">Short Bio</legend>
       <div class="uk-margin uk-margin-small-bottom">
@@ -69,6 +90,9 @@
       <div class="uk-margin uk-margin-small-bottom">
         <div uk-form-custom="target: true" class="uk-flex">
           <input type="file" id="image" name="image">
+          {% for error in form.errors.image %}
+            <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+          {% endfor %}
           <input class="uk-input" type="text" placeholder="Select a file if you want to change your photo" disabled>
         </div>
       </div>

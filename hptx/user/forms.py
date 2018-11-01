@@ -95,3 +95,8 @@ class ProfileEditForm(forms.ModelForm):
                 instance.save()
                 search_index.insert_or_update_object(instance.photo)
         return instance
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
