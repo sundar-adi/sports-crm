@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags hitcount_tags social_share %}
+
+{% load article_tags %}
+
+
+{% block body_class %}landing_page{% endblock %}
+{% block aside-left %}{% endblock %}
+{% block aside-right %}{% endblock %}
+
+{% block content %}
+<div class="uk-card uk-card-primary uk-card-primary--article">
+  <article class="uk-card-body">
+    <h3 class="uk-card-title uk-card-title--important">{{page.title}}</h3>
+    <div class="uk-hp-article-body uk-margin-small-top uk-margin-medium-bottom">
+      {% for block in page.body %}
+      {% if block.value is not excluded %}
+      {% if block.block_type == 'heading' %}
+      <h3>{{ block.value }}</h3>
+      {% elif block.block_type == 'image' %}
+      {% image block.value fill-400x400-c0 %}
+      {% else %}
+      <section class="block-{{ block.block_type }} {% if block.block_type == 'embed' and 'soundcloud' in block.value.url %}soundcloud-content{% endif %}">
+        {% include_block block %}
+      </section>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </div>
+  </article>
+</div>
+{% endblock %}

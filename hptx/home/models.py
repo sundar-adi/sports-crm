@@ -216,7 +216,11 @@ class EditorChoice(Orderable, models.Model):
 
 class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
-    subpage_types = ['article.ArticleTagIndexPage', 'article.PodcastIndexPage']
+    subpage_types = [
+        'article.ArticleTagIndexPage',
+        'article.PodcastIndexPage',
+        'landing.LandingPage',
+    ]
 
     live_radio_link = models.URLField(
         verbose_name=_('live radio link'),
