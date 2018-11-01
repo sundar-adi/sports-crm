@@ -32,7 +32,7 @@
     {% if first %}
 
     {% if article.featured_image %}
-      {% image article.featured_image original alt="" class="uk-hp-article-main-media" %}
+      <a href="{% pageurl article %}">{% image article.featured_image original alt="" class="uk-hp-article-main-media" %}</a>
     {% elif article.specific.get_verbose_name == "Video page" and article|youtube_block %}
     <div class="uk-hp-article-main-media">{{ article|youtube_block }}</div>
     {% elif article.specific.get_verbose_name == "Podcast episode page" and article|soundcloud_block %}
@@ -44,18 +44,18 @@
       {% if not first %}
       {% with article.specific.get_verbose_name as page_type %}
       {% if page_type == "Article page" and article.featured_image %}
-      <div class="{% if article|first_paragraph_value|length == 0 %}uk-width-expand{% else %}uk-width-2-5 uk-hp-card-primary-smallmedia{% endif %}">{% image article.featured_image original alt="" %}</div>
+      <a href="{% pageurl article %}" class="{% if article|first_paragraph_value|text_block_length == 0 %}uk-width-expand{% else %}uk-width-2-5 uk-hp-card-primary-smallmedia{% endif %}">{% image article.featured_image original alt="" %}</a>
       {% elif page_type == "Video page" %}
-      <div class="{% if article|first_paragraph_value|length == 0 %}uk-width-expand{% else %}uk-width-2-5 uk-hp-card-primary-smallmedia{% endif %}">{{ article|youtube_block }}</div>
+      <div class="{% if article|first_paragraph_value|text_block_length == 0 %}uk-width-expand{% else %}uk-width-2-5 uk-hp-card-primary-smallmedia{% endif %}">{{ article|youtube_block }}</div>
       {% elif page_type == "Podcast episode page" %}
-      <div class="{% if article|first_paragraph_value|length == 0 %}uk-width-expand soundcloud-content{% else %}uk-width-1-4 uk-hp-card-primary-smallmedia{% endif %}">{{ article|soundcloud_block }}</div>
+      <div class="{% if article|first_paragraph_value|text_block_length == 0 %}uk-width-expand soundcloud-content{% else %}uk-width-1-4 uk-hp-card-primary-smallmedia{% endif %}">{{ article|soundcloud_block }}</div>
       {% endif %}
       {% endwith %}
       {% endif %}
-      {% if article|first_paragraph_value|length > 0 %}
+      {% if article|first_paragraph_value|text_block_length > 0 %}
       <div class="uk-width-expand uk-hp-card-primary-intro {% if not first and article|has_media %}uk-hp-card-primary-intro--has-media{% endif %}">
-        <ellipsis>
         {{ article|first_paragraph_value }}
+        <ellipsis>
         </ellipsis>
       </div>
       {% endif %}

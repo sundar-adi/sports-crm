@@ -1,3 +1,5 @@
+import re
+
 from django import template
 
 register = template.Library()
@@ -9,6 +11,14 @@ def first_paragraph_value(article):
         if(block.block_type == "paragraph"):
             return block.value
     return ""
+
+
+@register.filter
+def text_block_length(block):
+    source = getattr(block, 'source', "")
+    cleanr = re.compile('<.*?>')
+    cleantext = re.sub(cleanr, '', source)
+    return len(cleantext)
 
 
 @register.filter
