@@ -218,6 +218,11 @@ class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
     subpage_types = ['article.ArticleTagIndexPage', 'article.PodcastIndexPage']
 
+    live_radio_link = models.URLField(
+        verbose_name=_('live radio link'),
+        blank=True,
+    )
+
     facebook_link = models.URLField(
         verbose_name=_('facebook_link'),
         blank=True,
@@ -253,6 +258,7 @@ class HomePage(Page):
         InlinePanel('left_menu', label='Left menu'),
         InlinePanel('left_submenu', label='Left submenu'),
         MultiFieldPanel([
+            FieldPanel('live_radio_link'),
             FieldPanel('facebook_link'),
             FieldPanel('twitter_link'),
             FieldPanel('instagram_link'),

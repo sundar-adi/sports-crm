@@ -31,6 +31,14 @@
     </ul>
   </div>
 </div>
+
+{% if homepage.live_radio_link %}
+<a class="uk-button uk-hp-button-live-radio uk-margin-small-bottom" href="{{homepage.live_radio_link}}" target="_blank">
+  Live Radio
+  <div class="uk-hp-button-live-radio__badge"><span><i class="fas fa-play"></i></span></div>
+</a>
+{% endif %}
+
 {% if homepage.has_social_links %}
 <div class="uk-card uk-card-default">
   <div class="uk-card-body">
