@@ -11,13 +11,13 @@
       {{ week_from|date:"j" }} - {{ week_to|date:"j"}} {{ week_to|date:"M" }}, {{ week_to|date:"Y" }}
     </div>
   </div>
-  <div class="uk-card-body uk-flex-inline uk-flex-between">
+  <div class="uk-card-body uk-flex uk-flex-between">
     {% if talent.photo %}
-    <div class="hptx-avatar hptx-avatar--rounded hptx-avatar--no-background hptx-avatar--medium uk-margin-right">
+    <div class="hptx-avatar hptx-avatar--rounded hptx-avatar--no-background hptx-avatar--medium uk-margin-right uk-flex-none">
       <a href="{% url "user:profile_view" talent.username %}">{% image talent.photo fill-120x120 class="hptx-avatar__image" alt="{{ talent.get_full_name }}" %}</a>
     </div>
     {% else %}
-    <div class="hptx-avatar hptx-avatar--rounded hptx-avatar--medium uk-margin-right">
+    <div class="hptx-avatar hptx-avatar--rounded hptx-avatar--medium uk-margin-right uk-flex-none">
       <a href="{% url "user:profile_view" talent.username %}"><img class="hptx-avatar__image hptx-avatar__image--default" src="{% static 'src/assets/Feed/LogoHP@2x.png'%}" alt="{{ talent.get_full_name }}" /></a>
     </div>
     {% endif %}
