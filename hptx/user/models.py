@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from user.constants import PLAN_CHOICES
+
 
 class User(AbstractUser):
 
@@ -11,6 +13,11 @@ class User(AbstractUser):
         verbose_name=_(u'Birthday'),
         blank=True,
         null=True
+    )
+    address = models.CharField(
+        max_length=255,
+        verbose_name=_(u'City'),
+        blank=True,
     )
     city = models.CharField(
         max_length=255,
@@ -28,7 +35,7 @@ class User(AbstractUser):
         blank=True,
     )
     country = models.CharField(
-        max_length=5,
+        max_length=255,
         verbose_name=_(u'zip code'),
         blank=True,
     )
@@ -72,6 +79,13 @@ class User(AbstractUser):
     newsletter = models.BooleanField(
         verbose_name=_('Newsletter subscribed'),
         default=False,
+    )
+    plan = models.CharField(
+        verbose_name=_('Current plan'),
+        max_length=8,
+        choices=PLAN_CHOICES,
+        blank=True,
+        null=True
     )
 
     def autocomplete_label(self):

@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 from user.views.pages import (
     LoginView, SignupView, LogoutView, ProfileView,
@@ -18,5 +18,9 @@ urlpatterns = [
         r'^(?P<username>[\w.@+-]+)/$',
         ProfileView.as_view(),
         name='profile_view'
+    ),
+    url(
+        r'^rest/', include(
+            ('user.urls.rest_urls', 'user_rest'), namespace="rest")
     ),
 ]

@@ -1,17 +1,17 @@
-import json
-
 from django.contrib.auth import views as auth_views
-from django.contrib.auth import authenticate, login
-from django.http import JsonResponse
+
+from djstripe.mixins import PaymentsContextMixin
+
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
-from django.views.generic import FormView, TemplateView
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy, reverse
+from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
 
-from user.forms import SignUpForm, ProfileEditForm
-from user.models import User
 from article.models import ArticlePage
+
+from user.forms import ProfileEditForm
+from user.models import User
 
 
 # Create your views here.
@@ -20,30 +20,20 @@ class LoginView(auth_views.LoginView):
     template_name = "user/auth/login.html"
 
 
-class SignupView(FormView):
-    form_class = SignUpForm
-    success_url = '/plans'
+class SignupView(PaymentsContextMixin, TemplateView):
     template_name = "user/auth/signup.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect(
+                reverse('user:profile_edit_view')
+            )
+        return super(SignupView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(SignupView, self).get_context_data(**kwargs)
         context['plan'] = self.request.GET.get('plan', 'silver')
         return context
-
-    def form_valid(self, form):
-        user = form.save()
-        raw_password = form.cleaned_data.get('password1')
-        user = authenticate(username=user.username, password=raw_password)
-        login(self.request, user)
-        return super().form_valid(form)
-
-    def put(self, request, *args, **kwargs):
-        data = json.loads(request.body.decode("utf-8"))
-        form = self.form_class(data)
-        if form.is_valid():
-            return JsonResponse({})
-        else:
-            return JsonResponse(form.errors, status=400)
 
 
 class LogoutView(auth_views.LogoutView):
