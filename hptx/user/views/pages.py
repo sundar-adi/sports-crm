@@ -1,7 +1,8 @@
 from django.contrib.auth import views as auth_views
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 
 from djstripe.mixins import PaymentsContextMixin
 
@@ -18,6 +19,13 @@ class LoginView(auth_views.LoginView):
 
 class SignupView(PaymentsContextMixin, TemplateView):
     template_name = "user/auth/signup.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect(
+                reverse('user:profile_edit_view')
+            )
+        return super(SignupView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(SignupView, self).get_context_data(**kwargs)
