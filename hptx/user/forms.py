@@ -9,6 +9,8 @@ from wagtail.users.forms import (
     UserEditForm as WagtailUserEditForm,
     UserCreationForm as WagtailUserCreationForm)
 
+from user.models import User
+
 
 class CustomUserEditForm(WagtailUserEditForm):
     birthday = forms.DateField(required=False, label=_('Birthday'))
