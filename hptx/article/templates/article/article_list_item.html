@@ -54,8 +54,8 @@
       {% endif %}
       {% if article|first_paragraph_value|text_block_length > 0 %}
       <div class="uk-width-expand uk-hp-card-primary-intro {% if not first and article|has_media %}uk-hp-card-primary-intro--has-media{% endif %}">
-        {{ article|first_paragraph_value }}
         <ellipsis>
+          {{ article|first_paragraph_value }}
         </ellipsis>
       </div>
       {% endif %}
