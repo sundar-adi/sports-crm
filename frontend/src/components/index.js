@@ -6,6 +6,7 @@ import StripeButton from './stripeButton.vue'
 
 export default {
 	install(Vue) {
+		Vue.component('ellipsis', Ellipsis);
 		Vue.component('signupForm', SignupForm);
 	}
 };
