@@ -1,5 +1,5 @@
 {% extends "base/base.html" %}
-{% load wagtailcore_tags wagtailimages_tags user_tags %}
+{% load static wagtailcore_tags wagtailimages_tags user_tags %}
 
 {% block body_class %}template-public-profile{% endblock %}
 {% block content %}
@@ -10,7 +10,11 @@
       <div class="uk-flex uk-flex-between uk-padding">
         <div class="uk-flex">
           <div class="hptx-avatar hptx-avatar--rounded uk-margin-small-right">
-            {% image user.photo fill-80x80 %}
+            {% if user.photo %}
+              {% image user.photo fill-80x80 %}
+            {% else %}
+              <img class="hptx-avatar__image hptx-avatar__image--default" src="{% static 'src/assets/Feed/LogoHP@2x.png'%}" alt="{{ talent.get_full_name }}" />
+            {% endif %}
           </div>
           <div class="uk-flex uk-flex-column uk-flex-center">
             <h3 class="uk-card-title fw-bold uk-margin-remove-vertical">{{ user.first_name }} {{ user.last_name }}</h3>
