@@ -53,10 +53,12 @@
           </div>
           <div class="uk-flex uk-flex-start">
             <input type="submit" value="log in" class="uk-button uk-button-primary">
+            {% comment %}
             <a href="{% url "user:password_reset" %}" class="uk-margin-medium-left uk-flex uk-flex-middle hp-link-secondary">
               <span class="fs-xs"><i class="fas fa-lock"></i></span>
               <span class="uk-margin-left fs-xs">Forgot Password</span>
             </a>
+            {% endcomment %}
           </div>
 
           <input type="hidden" name="next" value="{{ next }}">
