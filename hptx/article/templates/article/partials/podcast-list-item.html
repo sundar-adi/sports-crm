@@ -10,7 +10,7 @@
   <div>
     <h4 class="podcast__title"><a class="podcast__link" href="{% pageurl podcast %}">{{ podcast.title }}</a></h4>
     {% for author in podcast.authors.all %}
-    <a href="{% url 'profile_view' author.username %}" class="hp-link-primary">{{ author.first_name }} {{ author.last_name }}</a> {% if not forloop.last %}, {% endif %}
+    <a href="{% url 'user:profile_view' author.username %}" class="hp-link-primary">{{ author.first_name }} {{ author.last_name }}</a> {% if not forloop.last %}, {% endif %}
     {% empty %}
     <span>HPTX</span>
     {% endfor %}

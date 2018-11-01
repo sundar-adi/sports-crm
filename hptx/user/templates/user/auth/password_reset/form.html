@@ -1,0 +1,38 @@
+{% extends "user/auth/login.html" %}
+{% load staticfiles i18n %}
+{% block titletag %}{% trans "Reset password" %}{% endblock %}
+{% block bodyclass %}login{% endblock %}
+
+
+{% block login_title %}
+<h2 class="fs-lg fw-black fo-high fc-brand-secondary">Reset your password</h2>
+{% endblock %}
+
+{% block login_subtitle %}
+<p class="fs-sm">Enter your email address to reset your password</p>
+{% endblock %}
+
+{% block login_form %}
+        <form method="post" action="">
+          {% for error in form.non_field_errors %}
+            <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+          {% endfor %}
+          {% csrf_token %}
+          <div>
+            <div class="uk-margin-medium">
+               <div class="uk-inline uk-width-expand">
+                   <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-user"></i></span>
+                   <input id="id_email" name="email" required="required" type="text" placeholder="Your email" class="uk-input" value="{{ form.email.value|default:'' }}" />
+               </div>
+               {% for error in form.errors.email %}
+               <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+               {% endfor %}
+            </div>
+          </div>
+          <div class="uk-flex uk-flex-start">
+            <input type="submit" value="Reset password" class="uk-button uk-button-primary">
+          </div>
+
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
+{% endblock %}

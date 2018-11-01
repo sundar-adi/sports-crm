@@ -1,0 +1,16 @@
+{% extends "user/auth/login.html" %}
+{% load staticfiles i18n %}
+{% block titletag %}{% trans "Reset password" %}{% endblock %}
+{% block bodyclass %}login{% endblock %}
+
+
+{% block login_title %}
+<h2 class="fs-lg fw-black fo-high fc-brand-secondary">Check your email</h2>
+{% endblock %}
+
+{% block login_subtitle %}
+<p class="fs-sm">A link to reset your password has been emailed to you if an account exists for this address.</p>
+{% endblock %}
+
+{% block login_form %}
+{% endblock %}

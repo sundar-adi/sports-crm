@@ -17,10 +17,15 @@
       <div class="uk-margin-auto uk-width-medium uk-padding uk-padding-remove-horizontal">
         <div class="fc-brand-secondary uk-margin-medium-bottom">
           <img src="{% static 'src/assets/Feed/LogoLogin.png'%}"/>
+          {% block login_title %}
           <h2 class="fs-lg fw-black fo-high fc-brand-secondary">Log In</h2>
+          {% endblock %}
+          {% block login_subtitle %}
           <p class="fs-sm">Houston's most diverse & complete coverage of sports, culture & community, 24/7--365!</p>
+          {% endblock %}
         </div>
 
+        {% block login_form %}
         <form method="post" action="{% url 'user:login' %}">
           {% for error in form.non_field_errors %}
             <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
@@ -48,7 +53,7 @@
           </div>
           <div class="uk-flex uk-flex-start">
             <input type="submit" value="log in" class="uk-button uk-button-primary">
-            <a href="#" class="uk-margin-medium-left uk-flex uk-flex-middle hp-link-secondary">
+            <a href="{% url "user:password_reset" %}" class="uk-margin-medium-left uk-flex uk-flex-middle hp-link-secondary">
               <span class="fs-xs"><i class="fas fa-lock"></i></span>
               <span class="uk-margin-left fs-xs">Forgot Password</span>
             </a>
@@ -59,6 +64,7 @@
         <div class="uk-margin-medium uk-hp-login-subscribe uk-padding-small uk-padding-remove-horizontal">
           <span class="fs-xs fc-brand-secondary fw-black uk-margin-right">Don't have an account?</span><a href="#" class="fs-xs hp-link-primary">Subscribe Now!</a>
         </div>
+        {% endblock %}
       </div>
     </div>
     <div class="uk-width-2-3 uk-background-cover uk-hp-login-bg">

@@ -1,0 +1,65 @@
+{% extends "user/auth/login.html" %}
+{% load staticfiles i18n %}
+{% block titletag %}{% trans "Reset password" %}{% endblock %}
+{% block bodyclass %}login{% endblock %}
+
+
+{% block login_title %}
+<h2 class="fs-lg fw-black fo-high fc-brand-secondary">
+    {% if validlink %}
+        {% trans "Set your new password" %}
+    {% else %}
+        {% trans "Invalid password reset link" %}
+    {% endif %}
+</h2>
+{% endblock %}
+
+{% block login_subtitle %}
+<p class="fs-sm">
+{% if not validlink %}
+  {% trans "The password reset link was invalid, possibly because it has already been used." %}
+{% endif %}
+</p>
+{% endblock %}
+
+{% block login_form %}
+{% if validlink %}
+        <form method="post" action="">
+          {% for error in form.non_field_errors %}
+            <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+          {% endfor %}
+          {% csrf_token %}
+          <div>
+            <div class="uk-margin-medium">
+               <div class="uk-inline uk-width-expand">
+                   <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-user"></i></span>
+                   <input id="id_new_password1" name="new_password1" required="required" type="password" placeholder="New password" class="uk-input" value="{{ form.new_password1.value|default:'' }}" />
+               </div>
+               {% for error in form.errors.new_password1 %}
+               <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+               {% endfor %}
+            </div>
+          </div>
+          <div>
+            <div class="uk-margin-medium">
+               <div class="uk-inline uk-width-expand">
+                   <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-user"></i></span>
+                   <input id="id_new_password2" name="new_password2" required="required" type="password" placeholder="New password confirmation" class="uk-input" value="{{ form.new_password2.value|default:'' }}" />
+               </div>
+               {% for error in form.errors.new_password2 %}
+               <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+               {% endfor %}
+            </div>
+          </div>
+          <div class="uk-flex uk-flex-start">
+            <input type="submit" value="Reset password" class="uk-button uk-button-primary">
+          </div>
+
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
+{% else %}
+<div class="uk-margin-medium uk-hp-login-subscribe uk-padding-small uk-padding-remove-horizontal">
+  <a href="{% url "user:password_reset" %}" class="fs-xs hp-link-primary">Request a new password reset</a>
+</div>
+{% endif %}
+{% endblock %}

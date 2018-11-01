@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from user.views import (
+from user.views.pages import (
     LoginView, SignupView, LogoutView, ProfileView,
     ProfileEditView
 )

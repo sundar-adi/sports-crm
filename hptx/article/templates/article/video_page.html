@@ -17,7 +17,7 @@
     <div class="uk-flex uk-flex-between fw-medium uk-margin-small-top uk-flex-middle uk-margin-small-bottom">
       <span>
         {% for author in page.authors.all %}
-        <a href="{% url 'profile_view' author.username %}" class="hp-link-primary">{{ author.first_name }} {{ author.last_name }}</a> {% if not forloop.last %}, {% endif %}
+        <a href="{% url 'user:profile_view' author.username %}" class="hp-link-primary">{{ author.first_name }} {{ author.last_name }}</a> {% if not forloop.last %}, {% endif %}
         {% empty %}
         HPTX
         {% endfor %}

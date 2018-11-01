@@ -1,0 +1,17 @@
+{% extends "user/auth/login.html" %}
+{% load staticfiles i18n %}
+{% block titletag %}{% trans "Reset password" %}{% endblock %}
+{% block bodyclass %}login{% endblock %}
+
+
+{% block login_title %}
+<h2 class="fs-lg fw-black fo-high fc-brand-secondary">Password change successful</h2>
+{% endblock %}
+
+{% block login_subtitle %}
+<p class="fs-sm">{% trans "Now you can login with your new passwrod." %}</p>
+{% endblock %}
+
+{% block login_form %}
+<a href="{% url "user:login" %}" class="uk-button uk-button-primary">Login</a>
+{% endblock %}
