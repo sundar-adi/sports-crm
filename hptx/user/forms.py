@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from user.models import User
 from django.utils.translation import ugettext_lazy as _
 
+from wagtail.search import index as search_index
 from wagtail.images.models import Image
 from wagtail.images.widgets import AdminImageChooser
 from wagtail.users.forms import (
@@ -60,3 +61,37 @@ class CustomUserCreationForm(WagtailUserCreationForm):
         queryset=Image.objects.all(), required=False,
         label=_("Photo"), widget=AdminImageChooser)
     is_talent = forms.BooleanField(required=False, label=_('Is talent'))
+
+
+class ProfileEditForm(forms.ModelForm):
+
+    image = forms.ImageField(required=False, label=_('image'))
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'birthday', 'email',
+                  'city', 'state', 'twitter_handler', 'bio', 'image')
+
+    def save(self, commit=True):
+        instance = super().save(commit)
+        image = self.cleaned_data.get('image')
+        if commit is True and image:
+            photo = instance.photo
+            if photo:
+                photo.file = image
+                photo.file_size = photo.file.size
+                photo.file.seek(0)
+                photo._set_file_hash(photo.file.read())
+                photo.file.seek(0)
+                photo.save()
+                photo.renditions.all().delete()
+                search_index.insert_or_update_object(photo)
+            else:
+                instance.photo = Image.objects.create(
+                    file_size=image.size,
+                    title=image.name,
+                    file=image
+                )
+                instance.save()
+                search_index.insert_or_update_object(instance.photo)
+        return instance
