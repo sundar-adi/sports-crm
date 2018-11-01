@@ -117,7 +117,7 @@ $card-primary-color: $brand-secondary;
     }
 
     &:not(:last-child) {
-      margin-bottom: 0.5rem;
+      padding-bottom: 0;
       position: relative;
 
       &::after {
@@ -222,6 +222,7 @@ $card-primary-color: $brand-secondary;
   font-family: $font-title;
   font-size: $fs-lg;
   font-weight: 900;
+  line-height: normal;
   margin-bottom: 0.5rem;
 
   a {
