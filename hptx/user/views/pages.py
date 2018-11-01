@@ -1,15 +1,13 @@
-import json
-
 from django.contrib.auth import views as auth_views
-from django.contrib.auth import authenticate, login
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic import FormView, TemplateView
+from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from user.forms import SignUpForm
-from user.models import User
+from djstripe.mixins import PaymentsContextMixin
+
 from article.models import ArticlePage
+
+from user.models import User
 
 
 # Create your views here.
@@ -18,30 +16,13 @@ class LoginView(auth_views.LoginView):
     template_name = "user/auth/login.html"
 
 
-class SignupView(FormView):
-    form_class = SignUpForm
-    success_url = '/plans'
+class SignupView(PaymentsContextMixin, TemplateView):
     template_name = "user/auth/signup.html"
 
     def get_context_data(self, **kwargs):
         context = super(SignupView, self).get_context_data(**kwargs)
         context['plan'] = self.request.GET.get('plan', 'silver')
         return context
-
-    def form_valid(self, form):
-        user = form.save()
-        raw_password = form.cleaned_data.get('password1')
-        user = authenticate(username=user.username, password=raw_password)
-        login(self.request, user)
-        return super().form_valid(form)
-
-    def put(self, request, *args, **kwargs):
-        data = json.loads(request.body.decode("utf-8"))
-        form = self.form_class(data)
-        if form.is_valid():
-            return JsonResponse({})
-        else:
-            return JsonResponse(form.errors, status=400)
 
 
 class LogoutView(auth_views.LogoutView):

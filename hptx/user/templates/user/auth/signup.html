@@ -1,4 +1,7 @@
 {% extends "base/base.html" %}
+
+{% load static %}
+
 {% block left-sidebar-content %}
 {% endblock left-sidebar-content %}
 {% block right-sidebar-content %}
@@ -9,7 +12,6 @@
 
 
 {% block content %}
-
 <div class="uk-position-cover uk-hp-margin-nav-top uk-background-default">
   <div class="uk-flex uk-flex-between uk-background-default">
     <div class="uk-width-1-2 uk-flex uk-flex-middle">
@@ -21,7 +23,11 @@
         </div>
 
         <signup-form
-          plan="{{plan}}"></signup-form>
+          plan="{{plan}}"
+          :amount="{% if plan == 'silver' %}5{% elif plan == 'gold' %}50{% elif plan == 'platinum'%}75{% endif %}"
+          public-key="{{ STRIPE_PUBLIC_KEY }}"
+          image="{% static 'src/assets/Navbar/Logo.png' %}"
+          success-url="{% url 'user:profile_edit_view' %}"></signup-form>
       </div>
     </div>
     <div class="uk-width-1-2 uk-background-cover uk-hp-login-bg uk-flex uk-position-relative uk-flex-column">
@@ -29,7 +35,7 @@
         <div class="uk-card uk-card-default uk-margin-bottom uk-width-medium uk-position-relative">
           <div class="uk-hp-card-border uk-position-top-center"></div>
           <div class="uk-card-body uk-flex uk-flex-middle uk-flex-column uk-padding">
-            <span class="fs-xxl fw-black">${% if plan == "silver" %}5 {% elif plan == "gold" %}50{% elif plan == "platinum"%}75{% endif %}</span>
+            <span class="fs-xxl fw-black">${% if plan == "silver" %}5{% elif plan == "gold" %}50{% elif plan == "platinum"%}75{% endif %}</span>
             <span class="fs-xs fw-black">PER {% if plan == "silver" %}MONTH {% elif plan == "gold" %}YEAR{% elif plan == "platinum"%}2 YEARS{% endif %}</span>
             <span class="fs-lg fw-black uk-margin-medium-top">{{ plan|title }} Plan</span>
             <!-- <p class="fs-sm ta-center">Cras fringilla justo odio, quis rutrum risus aliquam eget. Pellentesque euismod ultrices nisl.</p> -->
@@ -75,6 +81,10 @@
   </div>
 
 </div>
+{% endblock %}
 
 
+{% block extra_js %}
+<script src="https://checkout.stripe.com/checkout.js"></script>
+{{ block.super }}
 {% endblock %}

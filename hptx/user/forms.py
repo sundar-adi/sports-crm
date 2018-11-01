@@ -1,6 +1,8 @@
 from django import forms
+
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
+
 
 from wagtail.images.models import Image
 from wagtail.images.widgets import AdminImageChooser
@@ -11,7 +13,7 @@ from wagtail.users.forms import (
 from user.models import User
 
 
-class SignUpForm(UserCreationForm):
+class UserSignupForm(UserCreationForm):
     first_name = forms.CharField(
         max_length=30,
         required=True, widget=forms.TextInput(attrs={'class': "uk-input"}))
@@ -45,7 +47,20 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email',
                   'password1', 'password2', 'address', 'city', 'zip_code',
-                  'country', 'state')
+                  'country', 'state', )
+
+
+class SignUpForm(UserSignupForm):
+    token = forms.CharField(
+        max_length=255, required=True)
+    plan = forms.CharField(
+        max_length=255, required=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email',
+                  'password1', 'password2', 'address', 'city', 'zip_code',
+                  'country', 'state', 'plan', 'token')
 
 
 class CustomUserEditForm(WagtailUserEditForm):

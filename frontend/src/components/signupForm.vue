@@ -32,8 +32,8 @@
         <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
            <label class="uk-form-label">Password</label>
            <div class="uk-margin-medium-bottom uk-margin uk-form-controls">
-              <div class="uk-inline uk-width-expand"><span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-lock"></i></span> <input id="id_password1" v-model="form.password1" name="password1" required="required" type="password" class="uk-input"></div>
-              <span class="fs-xs fw-medium fc-brand-primary" v-for="error in errors.password1">{{ error }}</span>
+              <div class="uk-inline uk-width-expand"><span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-lock"></i></span> <input id="id_password" v-model="form.password" name="password" required="required" type="password" class="uk-input"></div>
+              <span class="fs-xs fw-medium fc-brand-primary" v-for="error in errors.password">{{ error }}</span>
            </div>
         </div>
         <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
@@ -96,25 +96,44 @@ export default {
   props: {
     plan: {
       type: String
-    }
+    },
+    amount: {
+      type: Number
+    },
+    isStripeAmount: {
+      type: Boolean,
+      default: false
+    },
+    publicKey: {
+      type: String
+    },
+    successUrl: {
+      type: String
+    },
+    image: {
+      type: String,
+    },
   },
   data() {
     return {
       terms: false,
       privacy: false,
+      handler: undefined,
+      loading: false,
       form: {
         'first_name': "",
         'last_name': "",
         'username': "",
         'email': "",
-        'password1': "",
+        'password': "",
         'password2': "",
         'address': "",
         'city': "",
         'zip_code': "",
         'country': "",
         'state': "",
-        'newsletter': false
+        'newsletter': false,
+        'plan': this.plan
       },
       errors: {}
     }
@@ -122,23 +141,80 @@ export default {
   computed: {
     ready() {
       return this.terms && this.privacy;
+    },
+    stripeAmount() {
+      if(this.isStripeAmount)
+        return this.amount
+      else
+        return this.amount * 100
     }
   },
   methods: {
-    submit() {
-      if(!this.ready)
+    validatePasswords() {
+      this.errors = {};
+      if(this.form.password != this.form.password2) {
+        this.errors = {
+          'password2': "Passwords must match"
+        }
+        return false
+      }
+      return true
+    },
+    openStripe() {
+      if(!this.handler)
         return ;
 
-      this.$axios.put(
-        "/user/signup/",
+      this.handler.open({
+        name: "Houston Preeminence Media Incorporated",
+        description: `${this.plan.toUpperCase()} PLAN`,
+        amount: this.stripeAmount,
+        email: this.form.email
+      });
+    },
+    submit() {
+      if(!this.ready || !this.validatePasswords())
+        return ;
+
+      this.$axios.post(
+         `/community/rest/validate/`,
         this.form
       ).then(
-
+        () => {
+          this.openStripe();
+        }
       ).catch(
         (e) => {
           this.errors = Object.assign({}, e.response.data);
         }
       )
+    }
+  },
+  mounted() {
+    if(window.StripeCheckout == undefined) {
+      throw "StripeCheckout script missing"
+    } else {
+      this.handler = window.StripeCheckout.configure({
+        key: this.publicKey,
+        image: this.image,
+        locale: 'auto',
+        token: (token) => {
+          this.loading = true;
+          this.$axios.post(
+              `/community/rest/subscribe/`,
+              {
+                'token': token.id,
+                ...this.form
+              }
+          ).then(
+            (response) => {
+              window.open(this.successUrl, "_self");
+            }
+          )
+        }
+      });
+      window.addEventListener('popstate', () => {
+        this.handler.close();
+      });
     }
   }
 

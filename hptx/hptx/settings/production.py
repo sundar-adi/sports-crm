@@ -97,6 +97,9 @@ LOGGING = {
     }
 }
 
+# Stripe
+STRIPE_LIVE_MODE = True  # Change to True in production
+
 SILVER_PLAN_STRIPE_ID = "id_plan_silver"
 GOLD_PLAN_STRIPE_ID = "id_plan_gold"
 DIAMOND_PLAN_STRIPE_ID = "id_plan_diamond"
