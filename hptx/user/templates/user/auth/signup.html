@@ -20,7 +20,8 @@
           <p class="fs-md fw-black fo-medium">Account Information</p>
         </div>
 
-        <signup-form></signup-form>
+        <signup-form
+          plan="{{plan}}"></signup-form>
       </div>
     </div>
     <div class="uk-width-1-2 uk-background-cover uk-hp-login-bg uk-flex uk-position-relative uk-flex-column">
@@ -28,19 +29,41 @@
         <div class="uk-card uk-card-default uk-margin-bottom uk-width-medium uk-position-relative">
           <div class="uk-hp-card-border uk-position-top-center"></div>
           <div class="uk-card-body uk-flex uk-flex-middle uk-flex-column uk-padding">
-            <span class="fs-xxl fw-black">$50</span>
-            <span class="fs-xs fw-black">PER YEAR</span>
-            <span class="fs-lg fw-black uk-margin-medium-top">Yearly Plan</span>
-            <p class="fs-sm ta-center">Cras fringilla justo odio, quis rutrum risus aliquam eget. Pellentesque euismod ultrices nisl.</p>
-            <a href="#" class="hp-link-primary fw-medium fs-xs"><i class="fas fa-angle-left uk-margin-right"></i>Change Plan</a>
+            <span class="fs-xxl fw-black">${% if plan == "silver" %}5 {% elif plan == "gold" %}50{% elif plan == "platinum"%}75{% endif %}</span>
+            <span class="fs-xs fw-black">PER {% if plan == "silver" %}MONTH {% elif plan == "gold" %}YEAR{% elif plan == "platinum"%}2 YEARS{% endif %}</span>
+            <span class="fs-lg fw-black uk-margin-medium-top">{{ plan|title }} Plan</span>
+            <!-- <p class="fs-sm ta-center">Cras fringilla justo odio, quis rutrum risus aliquam eget. Pellentesque euismod ultrices nisl.</p> -->
+            <a href="{% url 'plans' %}" class="hp-link-primary fw-medium fs-xs"><i class="fas fa-angle-left uk-margin-right"></i>Change Plan</a>
           </div>
           <hr class="hptx-divider-nogutter">
           <div class="uk-card-body uk-padding">
             <ul class="uk-list uk-list--menu">
-              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Nam eros neque</li>
-              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Praesent arcu ipsum posuere</li>
-              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Aliquam risus augue</li>
-            </ul>
+              {% if plan == "silver" %}
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>24/7 Live Coverage</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>100+ Videos</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>100+ Writers</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>100+ Podcasts</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Access to Entire Site</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Build HP Credibility</li>
+              {% elif plan == "gold" %}
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>24/7 Live Coverage</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>100+ Videos, Writers & Podcasts</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Access to Entire Site</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Build HP Credibility</li>
+              <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>100 HP Credit*</li>
+              <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Start As 1-STAR</li>
+              <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>25% Off 1-HP Shirt</li>
+              {% elif plan == "platinum"%}
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>24/7 Live Coverage</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>100+ Videos, Writers & Podcasts</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Access to Entire Site</li>
+              <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Build HP Credibility</li>
+              <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>500 HP Credit*</li>
+              <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Start As 2-STAR</li>
+              <li class="fs-sm fw-black"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>50% Off 1-HP Shirt</li>
+              <li class="fs-sm fw-black uk-flex"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-grey"></i></span>Free Seat at HP Christmas Poker Tourney & Shot at $10,000</li>
+              {% endif %}
+              </ul>
           </div>
         </div>
       </div>

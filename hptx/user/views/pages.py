@@ -23,6 +23,11 @@ class SignupView(FormView):
     success_url = '/plans'
     template_name = "user/auth/signup.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(SignupView, self).get_context_data(**kwargs)
+        context['plan'] = self.request.GET.get('plan', 'silver')
+        return context
+
     def form_valid(self, form):
         user = form.save()
         raw_password = form.cleaned_data.get('password1')

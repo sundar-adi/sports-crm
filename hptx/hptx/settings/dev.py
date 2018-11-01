@@ -21,6 +21,11 @@ MIDDLEWARE += [
 
 LIVERELOAD_HOST = "0.0.0.0"
 
+SILVER_PLAN_STRIPE_ID = "id_plan_silver"
+GOLD_PLAN_STRIPE_ID = "id_plan_gold"
+DIAMOND_PLAN_STRIPE_ID = "id_plan_diamond"
+
+
 try:
     from .local import *
 except ImportError:

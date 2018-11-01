@@ -93,6 +93,11 @@
 <script>
 export default {
   name: 'signupForm',
+  props: {
+    plan: {
+      type: String
+    }
+  },
   data() {
     return {
       terms: false,
