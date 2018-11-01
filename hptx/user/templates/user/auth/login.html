@@ -22,21 +22,28 @@
         </div>
 
         <form method="post" action="{% url 'user:login' %}">
+          {% for error in form.non_field_errors %}
+            <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+          {% endfor %}
           {% csrf_token %}
           <div>
             <div class="uk-margin-medium">
                <div class="uk-inline uk-width-expand">
                    <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-user"></i></span>
-                   <input id="id_username" name="username" required="required" type="text" placeholder="Username" class="uk-input"/>
+                   <input id="id_username" name="username" required="required" type="text" placeholder="Username" class="uk-input" value="{{ form.username.value|default:'' }}" />
                </div>
-               <span class="fs-xs fw-medium">Feedback Value</span>
+               {% for error in form.errors.username %}
+               <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+               {% endfor %}
             </div>
             <div class="uk-margin-medium">
                 <div class="uk-inline uk-width-expand">
                   <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-lock"></i></span>
-                  <input id="id_password" name="password" required="required" type="text" placeholder="Password" class="uk-input"/>
+                  <input id="id_password" name="password" required="required" type="password" placeholder="Password" class="uk-input"/>
                 </div>
-                <span class="fs-xs fw-medium">Feedback Value</span>
+               {% for error in form.errors.password %}
+               <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
+               {% endfor %}
             </div>
           </div>
           <div class="uk-flex uk-flex-start">

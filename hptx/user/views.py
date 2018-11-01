@@ -3,7 +3,6 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
 from django.views.generic import FormView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
 
 from user.forms import SignUpForm
 from user.models import User
@@ -14,10 +13,6 @@ from article.models import ArticlePage
 class LoginView(auth_views.LoginView):
     redirect_authenticated_user = True
     template_name = "user/auth/login.html"
-
-    def get_success_url(self):
-        url = self.get_redirect_url()
-        return url or reverse('plans')
 
 
 class SignupView(FormView):
