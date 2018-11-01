@@ -14,8 +14,8 @@
     {% empty %}
     <span>HPTX</span>
     {% endfor %}
-    <p>{{ podcast.get_children.live.count }} Episodes</p>
+    <p class="fo-high">{{ podcast.get_children.live.count }} Episodes</p>
     {% get_last_podcast podcast as last_episode %}
-    <p><span class="podcast__last">Last:</span> {% if last_episode %}<a class="podcast__link" href="{% pageurl last_episode %}">{{ last_episode.title }}</a>{% else %}-{% endif %}</p>
+    <p class="fo-high"><span class="podcast__last">Last:</span> {% if last_episode %}<a class="podcast__link" href="{% pageurl last_episode %}">{{ last_episode.title }}</a>{% else %}-{% endif %}</p>
   </div>
 </div>

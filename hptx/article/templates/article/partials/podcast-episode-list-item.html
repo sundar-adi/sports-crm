@@ -9,7 +9,7 @@
   </a>
   <div>
     <h4 class="podcast__title"><a class="podcast__link" href="{% pageurl podcast.get_parent.specific %}">{{ podcast.get_parent.title }}</a></h4>
-    {% if podcast.episode_number is not None %}<p class="fw-medium">Episode {{ podcast.episode_number }}</p>{% endif %}
-    <a href="{% pageurl podcast %}" class="podcast__link">{{ podcast.title }}</a>
+    {% if podcast.episode_number is not None %}<p class="fw-medium fo-high">Episode {{ podcast.episode_number }}</p>{% endif %}
+    <a href="{% pageurl podcast %}" class="podcast__link fo-high">{{ podcast.title }}</a>
   </div>
 </div>

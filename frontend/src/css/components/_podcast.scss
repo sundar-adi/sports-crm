@@ -10,7 +10,7 @@
   display: flex;
   flex-flow: row nowrap;
   font-size: $fs-xs;
-  font-weight: $fw-black;
+  font-weight: $fw-bold;
 
   .podcast__image-wrapper {
     background-color: $navy-light;
@@ -67,8 +67,9 @@
 
   .podcast__title {
     font-family: $font-title;
-    font-size: $fs-md;
+    font-size: $fs-lg;
     font-weight: $fw-bold;
+    line-height: normal;
     margin-bottom: 0;
   }
 
@@ -81,7 +82,7 @@
   }
 
   p {
-    margin: 0;
+    margin: 0 0 0.25rem 0;
   }
 
   &.podcast--small {
@@ -105,7 +106,10 @@
     }
 
     .podcast__title {
+      font-family: $font-primary;
       font-size: $fs-sm;
+      font-weight: $fw-black;
+      line-height: 1;
     }
   }
 }
