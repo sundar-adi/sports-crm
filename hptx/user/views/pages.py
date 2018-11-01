@@ -1,13 +1,16 @@
 from django.contrib.auth import views as auth_views
-from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import TemplateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
 
 from djstripe.mixins import PaymentsContextMixin
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy, reverse
+from django.views.generic import TemplateView
+from django.views.generic.edit import UpdateView
+
 from article.models import ArticlePage
 
+from user.forms import ProfileEditForm
 from user.models import User
 
 
@@ -37,8 +40,13 @@ class LogoutView(auth_views.LogoutView):
     next_page = "/"
 
 
-class ProfileEditView(LoginRequiredMixin, TemplateView):
+class ProfileEditView(LoginRequiredMixin, UpdateView):
     template_name = 'user/edit_profile.html'
+    form_class = ProfileEditForm
+    success_url = reverse_lazy('user:profile_edit_view')
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
     def get_context_data(self, *args, **kwargs):
         user = self.request.user
