@@ -38,4 +38,4 @@ class SubscribeUserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email',
                   'password', 'address', 'city', 'zip_code',
-                  'country', 'state', 'plan', 'token')
+                  'country', 'state', 'plan', 'token', 'newsletter')
