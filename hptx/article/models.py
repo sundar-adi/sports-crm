@@ -211,7 +211,9 @@ class ArticleTagIndexPage(Page):
 
     def get_context(self, request):
         articles = ArticlePage.objects.filter(
-            tags__slug__iexact=self.tag_slug).live()
+            tags__slug__iexact=self.tag_slug).live().order_by(
+                '-first_published_at'
+            )
 
         context = super().get_context(request)
         context['articles'] = articles
