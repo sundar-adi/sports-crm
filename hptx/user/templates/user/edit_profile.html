@@ -56,7 +56,7 @@
       </div>
       <legend class="uk-legend fw-bold"><label for="birthday">Birthdate</label></legend>
       <div class="uk-margin uk-margin-small-bottom">
-        <input class="uk-input" type="text" id="birthday" name="birthday" value="{{ form.birthday.value|default:""|date:"m/d/Y" }}" placeholder="07/20/1969">
+        <input class="uk-input" type="text" id="birthday" name="birthday" value="{{ form.birthday.value|default:""|date:"m/d/Y" }}" placeholder="mm/dd/yyyy">
         {% for error in form.errors.birthday %}
           <span class="fs-xs fw-medium fc-brand-primary">{{ error }}</span>
         {% endfor %}
@@ -112,4 +112,3 @@
 
 {% block right-sidebar-content %}
 {% endblock right-sidebar-content %}
-

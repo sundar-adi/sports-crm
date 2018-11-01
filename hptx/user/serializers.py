@@ -17,6 +17,14 @@ class ValidateUserSerializer(serializers.ModelSerializer):
         fields = ('username', 'first_name', 'last_name', 'email',
                   'password', 'address', 'city', 'zip_code',
                   'country', 'state', )
+        required_fields = (
+            'username', 'first_name', 'last_name', 'email',
+            'password', 'address', 'city', 'zip_code',
+            'state',
+        )
+        extra_kwargs = {field: {
+            'required': True, 'allow_blank': False
+            } for field in required_fields}
 
 
 class SubscribeUserSerializer(serializers.ModelSerializer):
@@ -39,3 +47,11 @@ class SubscribeUserSerializer(serializers.ModelSerializer):
         fields = ('username', 'first_name', 'last_name', 'email',
                   'password', 'address', 'city', 'zip_code',
                   'country', 'state', 'plan', 'token', 'newsletter')
+        required_fields = (
+            'username', 'first_name', 'last_name', 'email',
+            'password', 'address', 'city', 'zip_code',
+            'state', 'token'
+        )
+        extra_kwargs = {field: {
+            'required': True, 'allow_blank': False
+            } for field in required_fields}

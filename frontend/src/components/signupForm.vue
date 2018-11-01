@@ -64,15 +64,8 @@
              <span class="fs-xs fw-medium fc-brand-primary" v-for="error in errors.zip_code">{{ error }}</span>
            </div>
         </div>
-        <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
-          <label class="uk-form-label">Country</label>
-          <div class="uk-margin-medium-bottom uk-margin uk-form-controls">
-           <input id="id_country" v-model="form.country"name="country" required="required" type="text" class="uk-input">
-           <span class="fs-xs fw-medium fc-brand-primary" v-for="error in errors.country">{{ error }}</span>
-         </div>
-
         </div>
-        <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-right">
+        <div class="uk-width-1-2 uk-padding-small uk-padding-remove-vertical uk-padding-remove-left">
           <label class="uk-form-label">State</label>
           <div class="uk-margin-medium-bottom uk-margin uk-form-controls">
            <input id="id_state" v-model="form.state" name="state" required="required" type="text" class="uk-input">
@@ -83,9 +76,7 @@
      </div>
      <div>
         <p class="uk-flex"><input type="checkbox" v-model="privacy" class="uk-checkbox uk-margin-small-right uk-flex-none uk-margin-top"><span class="fs-sm">By signing up to this subscription plan and agreeing to the Privacy Policy you agree to this web site storing your information.</span></p>
-        <p class="fs-sm"><input type="checkbox" class="uk-checkbox uk-margin-small-right" v-model="form.newsletter">I want to subscribe to your newsletters</p>
-        <p class="fs-sm"><input type="checkbox" v-model="terms" class="uk-checkbox uk-margin-small-right">I accept <a href="#" class="hp-link-primary fw-medium">Terms and Conditions</a></p>
-     </div>
+    </div>
      <input v-if="!loading" type="submit" value="proccess subscription" class="uk-button uk-button-primary uk-width-1-2 uk-margin-medium-top" :disabled="!ready" :class="{'uk-button-primary--disabled': !ready}">
      <p class="uk-margin-medium-top" v-if="loading">We're processing your information{{ this.loadingMsg }}</p>
   </form>
@@ -143,7 +134,7 @@ export default {
   },
   computed: {
     ready() {
-      return this.terms && this.privacy;
+      return this.privacy;
     },
     stripeAmount() {
       if(this.isStripeAmount)
