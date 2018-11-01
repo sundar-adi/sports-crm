@@ -1,12 +1,6 @@
-{% load wagtailcore_tags %}
+{% load static user_tags wagtailcore_tags wagtailimages_tags %}
 
-{% if homepage.talent_of_the_week %}
-<div class="uk-card uk-card-default uk-margin-bottom">
-  <div class="uk-card-body">
-    {{ homepage.talent_of_the_week }}
-  </div>
-</div>
-{% endif %}
+{% talent_of_the_week %}
 
 <div class="uk-hidden@m uk-margin-bottom">
   {% include "base/partials/social_box.html" %}

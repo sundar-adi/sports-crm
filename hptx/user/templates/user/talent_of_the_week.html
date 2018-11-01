@@ -1,0 +1,34 @@
+{% load static user_tags wagtailcore_tags wagtailimages_tags %}
+
+{% if talent %}
+<div class="uk-card uk-card-default uk-margin-bottom talent-week">
+  <div class="uk-hp-card-border uk-border-orange uk-position-top-center"></div>
+  <div class="uk-flex uk-flex-between talent-week__header">
+    <div class="uk-text-bold">
+       <i class="fas fa-trophy"></i><span class="uk-margin-left">Talent of the Week</span>
+    </div>
+    <div>
+      {{ week_from|date:"j" }} - {{ week_to|date:"j"}} {{ week_to|date:"M" }}, {{ week_to|date:"Y" }}
+    </div>
+  </div>
+  <div class="uk-card-body uk-flex-inline uk-flex-between">
+    {% if talent.photo %}
+    <div class="hptx-avatar hptx-avatar--rounded hptx-avatar--no-background hptx-avatar--medium uk-margin-right">
+      <a href="{% url "user:profile_view" talent.username %}">{% image talent.photo fill-120x120 class="hptx-avatar__image" alt="{{ talent.get_full_name }}" %}</a>
+    </div>
+    {% else %}
+    <div class="hptx-avatar hptx-avatar--rounded hptx-avatar--medium uk-margin-right">
+      <a href="{% url "user:profile_view" talent.username %}"><img class="hptx-avatar__image hptx-avatar__image--default" src="{% static 'src/assets/Feed/LogoHP@2x.png'%}" alt="{{ talent.get_full_name }}" /></a>
+    </div>
+    {% endif %}
+    <div class="uk-width-medium uk-text-small">
+      <p class="fw-black uk-margin-remove-vertical"><a class="fc-brand-secondary" href="{% url "user:profile_view" talent.username %}">{{ talent.get_full_name }}</a></p>
+      {% with total=talent.author_on.live.count %}
+      <p class="uk-margin-remove-vertical">{{ total }} Article{{ total|pluralize }} Published</p>
+      {% endwith %}
+      {% rating talent.rating %}
+      <p class="uk-margin-remove-vertical">Last: <a href="{% pageurl last_article %}">{{ last_article.title }}</a></p>
+    </div>
+  </div>
+</div>
+{% endif %}

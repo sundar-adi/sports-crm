@@ -12,6 +12,9 @@ $card-default-box-shadow: none;
   &.uk-position-top-center{
     top: 2px;
   }
+  &.border-orange{
+    background-color: $orange;
+  }
   &.border-yellow{
     background-color: $yellow;
   }

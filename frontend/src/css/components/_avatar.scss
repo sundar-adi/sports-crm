@@ -6,6 +6,10 @@
     width: 5rem;
     background-color: $navy-light;
 
+    &.hptx-avatar--no-background {
+	background: none;
+    }
+
     &.hptx-avatar--small {
         width: 2rem;
         height: 2rem;
@@ -13,6 +17,11 @@
 
     &.hptx-avatar--rounded {
         border-radius: 2*$border-rounded-border-radius;
+    }
+
+    &.hptx-avatar--medium {
+        height: 3.75rem;
+        width: 3.75rem;
     }
 
     &.hptx-avatar--circle {
