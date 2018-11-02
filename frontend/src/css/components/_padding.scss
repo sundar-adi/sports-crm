@@ -1,0 +1,27 @@
+
+  .uk-padding-remove-left\@m{
+    @media (min-width: $breakpoint-medium) {
+      padding-left: 0px !important;
+    }
+  }
+  .uk-padding-remove-right\@m{
+    @media (min-width: $breakpoint-medium) {
+      padding-right: 0px !important;
+    }
+  }
+  .uk-padding-remove\@m{
+    @media (min-width: $breakpoint-medium) {
+      padding: 0px !important;
+    }
+  }
+  .uk-padding-remove-horizontal\@m{
+    @media (min-width: $breakpoint-medium) {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+  .uk-padding-small\@m{
+    @media (min-width: $breakpoint-medium) {
+      padding: 1rem !important;
+    }
+  }
