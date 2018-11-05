@@ -2,24 +2,26 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% load static %}
 
-<p class="fs-md fw-bold">Related Articles</p>
-{% for article in related_articles %}
-<div class="uk-hp-related-articles uk-flex uk-flex-between uk-flex-bottom uk-margin-medium-top">
-  <div class="uk-hp-related-content {% if not article.featured_image %}uk-hp-related-content-expand{% endif %}">
-    <h3 class="uk-card-title fs-lg"><a href="{% pageurl article %}">{{article.title}}</a></h3>
-    <span>
-      {% for author in article.authors.all %}
-      <a href="{% url 'user:profile_view' author.username %}" class="hp-link-primary">{{ author.first_name }} {{ author.last_name }}</a> {% if not forloop.last %}, {% endif %}
-      {% empty %}
-      HPTX
-      {% endfor %}
-      on {{ article.publication_date|date }}
-    </span>
-  </div>
-  {% if article.featured_image %}
-    <div class="uk-hp-related-img">
-      {% image article.featured_image original %}
+{% if related_articles %}
+  <p class="fs-md fw-bold">Related Articles</p>
+  {% for article in related_articles %}
+  <div class="uk-hp-related-articles uk-flex uk-flex-between uk-flex-bottom uk-margin-medium-top">
+    <div class="uk-hp-related-content {% if not article.featured_image %}uk-hp-related-content-expand{% endif %}">
+      <h3 class="uk-card-title fs-lg"><a href="{% pageurl article %}">{{article.title}}</a></h3>
+      <span>
+        {% for author in article.authors.all %}
+        <a href="{% url 'user:profile_view' author.username %}" class="hp-link-primary">{{ author.first_name }} {{ author.last_name }}</a> {% if not forloop.last %}, {% endif %}
+        {% empty %}
+        HPTX
+        {% endfor %}
+        on {{ article.publication_date|date }}
+      </span>
     </div>
-  {% endif %}
-</div>
-{% endfor %}
+    {% if article.featured_image %}
+      <div class="uk-hp-related-img">
+        {% image article.featured_image original %}
+      </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+{% endif %}

@@ -110,7 +110,9 @@ class ArticlePage(Page):
         tags = self.tags.all()
         related_articles = ArticlePage.objects.filter(
             tags__in=tags
-        ).distinct()
+        ).distinct().exclude(
+            id=self.id
+        )
 
         context = super().get_context(request)
         context['related_articles'] = related_articles
