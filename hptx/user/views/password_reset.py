@@ -8,7 +8,7 @@ class PasswordResetView(auth_views.PasswordResetView):
     template_name = 'user/auth/password_reset/form.html'
     email_template_name = 'user/auth/password_reset/email.txt'
     subject_template_name = (
-        'wagtailadmin/account/password_reset/email_subject.txt')
+        'user/auth/password_reset/email_subject.txt')
     form_class = forms.PasswordResetForm
     success_url = reverse_lazy('user:password_reset_done')
 
