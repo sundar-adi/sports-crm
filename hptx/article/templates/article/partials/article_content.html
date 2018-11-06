@@ -2,7 +2,8 @@
 
 {% load article_tags %}
 
-{% for block in article.body %}
+{% if not settings.home.GlobalSettings.enable_paywall or user.is_authenticated %}
+  {% for block in article.body %}
     {% if block.value is not excluded %}
       {% if block.block_type == 'heading' %}
           <h3>{{ block.value }}</h3>
@@ -14,4 +15,14 @@
           </section>
       {% endif %}
     {% endif %}
-{% endfor %}
+  {% endfor %}
+{% else %}
+  {% if article|first_paragraph_value|text_block_length > 0 %}
+  <div class="block-paragraph">
+    <ellipsis :words="80">
+      {{ article|first_paragraph_value }}
+    </ellipsis>
+  </div>
+  {% endif %}
+  {% include "article/modals/paywall_modal.html" %}
+{% endif %}
