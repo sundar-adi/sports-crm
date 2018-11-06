@@ -19,9 +19,7 @@
 {% else %}
   {% if article|first_paragraph_value|text_block_length > 0 %}
   <div class="block-paragraph">
-    <ellipsis :words="80">
-      {{ article|first_paragraph_value }}
-    </ellipsis>
+    {{ article|first_paragraph_value|truncatewords_html:80 }}
   </div>
   {% endif %}
   {% include "article/modals/paywall_modal.html" %}
