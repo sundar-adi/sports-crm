@@ -97,6 +97,8 @@ LOGGING = {
     }
 }
 
+BASE_URL = 'https://hptx.us'
+
 # Stripe
 STRIPE_LIVE_MODE = True  # Change to True in production
 
