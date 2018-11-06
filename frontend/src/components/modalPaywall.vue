@@ -1,3 +1,10 @@
+<docs>
+  Hey, developer of the future. I'm the 6 November Dander, and I didn't delete this
+  because I don't know if we were going to need it or not. If you're going to use it,
+  please, delete this doc. If not, and at least two weeks have passed since Nov 6, please, delete me
+  and invite Dander of the future to a cold glass of beer (why not?)
+</docs>
+
 <template>
   <div class="modal-container">
     <div class="modal-container__overlay" @click="$emit('close')"></div>

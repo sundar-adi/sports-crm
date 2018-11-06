@@ -8,9 +8,6 @@
 {% block body_class %}article_page{% endblock %}
 
 {% block content %}
-{% if user.is_anonymous and settings.home.GlobalSettings.enable_paywall %}
-<h1>QUE NO!</h1>
-{% else %}
 <div class="uk-card uk-card-primary uk-card-primary--article">
   <article class="uk-card-body">
     <h3 class="uk-card-title uk-card-title--important">{{page.title}}</h3>
@@ -41,5 +38,4 @@
     {% include "article/partials/article_tags_bottom.html" with article=page %}
   </article>
 </div>
-{% endif %}
 {% endblock %}

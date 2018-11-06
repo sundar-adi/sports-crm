@@ -1,0 +1,28 @@
+{% load static %}
+
+<div class="modal-container">
+  <div class="modal-container__overlay"></div>
+  <div class="modal-container__content">
+    <div class="modal-paywall uk-flex">
+      <div class="fc-brand-secondary-light modal-paywall__content">
+        <h1 class="fs-xl fc-brand-secondary-light ff-title">Register now for unlimited articles, videos, and podcasts!</h1>
+        <p class="fs-sm">Gain access to Houston’s most diverse & complete coverage of sports, culture & community, 24/7--365 for as little as $3.15/month!</p>
+        <ul class="uk-list uk-list--menu">
+          <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>24/7 Live Coverage</li>
+          <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>100+ Videos</li>
+          <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>100+ Writers</li>
+          <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>100+ Podcasts</li>
+          <li class="fs-sm"><span class="uk-list__hp-badge"><i class="fas fa-check-circle fc-brand-primary"></i></span>Access to Entire Site</li>
+        </ul>
+        <a href="{% url 'plans' %}" class="uk-button uk-button-primary uk-margin-small uk-width-1-1">Sign up now!</a>
+        <div class="ta-center">
+          <span class="fs-sm fc-brand-secondary uk-margin-right">Do you already have an account? </span><a href="{% url 'user:login' %}" class="fs-xs hp-link-primary">Login Now</a>
+        </div>
+      </div>
+      <div class="modal-paywall__img uk-flex uk-flex-center uk-flex-middle uk-flex-column">
+        <img class="uk-margin-medium-bottom" src="{% static 'src/assets/Feed/logoWhite.png' %}"/>
+        <img src="{% static 'src/assets/general/mockup.png' %}"/>
+      </div>
+    </div>
+  </div>
+</div>
