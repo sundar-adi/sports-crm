@@ -6,7 +6,7 @@ from wagtail.admin import forms
 
 class PasswordResetView(auth_views.PasswordResetView):
     template_name = 'user/auth/password_reset/form.html'
-    email_template_name = 'wagtailadmin/account/password_reset/email.txt'
+    email_template_name = 'user/auth/password_reset/email.txt'
     subject_template_name = (
         'wagtailadmin/account/password_reset/email_subject.txt')
     form_class = forms.PasswordResetForm
