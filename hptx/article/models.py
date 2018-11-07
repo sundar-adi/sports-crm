@@ -117,7 +117,7 @@ class ArticlePage(Page):
         )
 
         context = super().get_context(request)
-        context['related_articles'] = related_articles
+        context['related_articles'] = related_articles[:7]
         return context
 
 
