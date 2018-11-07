@@ -108,10 +108,12 @@ class ArticlePage(Page):
 
     def get_context(self, request):
         tags = self.tags.all()
-        related_articles = ArticlePage.objects.filter(
+        related_articles = ArticlePage.objects.live().filter(
             tags__in=tags
         ).distinct().exclude(
             id=self.id
+        ).order_by(
+            '-publication_date', '-first_published_at'
         )
 
         context = super().get_context(request)
