@@ -95,13 +95,18 @@ $button-link-hover-text-decoration: none;
     color: $white;
     display: flex;
     flex-flow: row nowrap;
-    font-family: $font-title;
-    font-size: $fs-lg;
     justify-content: space-between;
-    line-height: 1;
+
     padding: 0.875rem 0.75rem;
     text-transform: none;
     width: 100%;
+
+    .uk-hp-button-live-radio__text {
+      font-family: $font-title;
+      font-size: 1.5rem;
+      line-height: 29px;
+      padding-top: 0.5rem;
+    }
 
     .uk-hp-button-live-radio__badge {
       align-items: center;
