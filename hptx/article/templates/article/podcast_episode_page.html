@@ -1,8 +1,25 @@
 {% extends "base/base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags hitcount_tags social_share %}
+{% load static wagtailcore_tags wagtailimages_tags hitcount_tags social_share %}
 
 {% load article_tags %}
+
+{% block extra_head_tags %}
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{page.title}}">
+  <meta name="twitter:title" content="{{page.title}}">
+  {% if page.featured_image %}
+  <meta property="og:image" content="{{ request.site.root_url }}{{ page.featured_image.file.url }}">
+  <meta name="twitter:image" content="{{ request.site.root_url }}{{ page.featured_image.file.url }}">
+  {% else %}
+  <meta property="og:image" content="{{ request.site.root_url }}{% static 'src/assets/Navbar/Logo.png'%}">
+  <meta name="twitter:image" content="{{ request.site.root_url }}{% static 'src/assets/Navbar/Logo.png'%}">
+  {% endif %}
+  {% for author in page.authors.all %}
+    <meta name="author" content="{{ author.first_name }} {{ author.last_name }}">
+  {% endfor %}
+
+{% endblock %}
 
 
 {% block body_class %}article_page {% if SHOW_PAYWALL %}body-modal-opened{% endif %}{% endblock %}
