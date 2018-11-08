@@ -10,8 +10,8 @@
   <meta property="og:title" content="{{page.title}}">
   <meta name="twitter:title" content="{{page.title}}">
   {% if page.featured_image %}
-    <meta property="og:image" content="{% image page.featured_image original %}">
-    <meta name="twitter:image" content="{% image page.featured_image original %}">
+    <meta property="og:image" content="{{ page.featured_image.file.url }}">
+    <meta name="twitter:image" content="{{ page.featured_image.file.url }}">
   {% else %}
     <meta property="og:image" content="{% static 'src/assets/Navbar/Logo.png'%}">
     <meta name="twitter:image" content="{% static 'src/assets/Navbar/Logo.png'%}">
