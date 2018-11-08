@@ -10,47 +10,47 @@
       <div class="uk-flex uk-flex-between uk-padding">
         <div class="uk-flex">
           <div class="hptx-avatar hptx-avatar--rounded uk-margin-small-right">
-            {% if user.photo %}
-              {% image user.photo fill-80x80 %}
+            {% if profile_user.photo %}
+              {% image profile_user.photo fill-80x80 %}
             {% else %}
               <img class="hptx-avatar__image hptx-avatar__image--default" src="{% static 'src/assets/Feed/LogoHP@2x.png'%}" alt="{{ talent.get_full_name }}" />
             {% endif %}
           </div>
           <div class="uk-flex uk-flex-column uk-flex-center">
-            <h3 class="uk-card-title fw-bold uk-margin-remove-vertical">{{ user.first_name }} {{ user.last_name }}</h3>
-            {% rating user.rating %}
+            <h3 class="uk-card-title fw-bold uk-margin-remove-vertical">{{ profile_user.first_name }} {{ profile_user.last_name }}</h3>
+            {% rating profile_user.rating %}
           </div>
         </div>
-        {% if user.is_talent %}<span class="uk-flex-none uk-badge fw-black">Contributor</span>{% endif %}
+        {% if profile_user.is_talent %}<span class="uk-flex-none uk-badge fw-black">Contributor</span>{% endif %}
       </div>
     </div>
   </div>
   <div class="uk-card-body uk-padding">
     <div class="uk-flex uk-flex-between uk-margin-small-bottom">
-      {% if user.twitter_handler %}<a target="_blank" href="https://twitter.com/{{ user.twitter_handler }}" class="uk-link-text fs-sm"><i class="fab fa-twitter uk-margin-right"></i>@{{ user.twitter_handler }}</a>{% endif %}
+      {% if profile_user.twitter_handler %}<a target="_blank" href="https://twitter.com/{{ profile_user.twitter_handler }}" class="uk-link-text fs-sm"><i class="fab fa-twitter uk-margin-right"></i>@{{ profile_user.twitter_handler }}</a>{% endif %}
       <div class="fs-sm">{{ articles.count }} Article{{ articles.count|pluralize }} Published</div>
     </div>
-    {% if user.state or user.city %}
+    {% if profile_user.state or profile_user.city %}
     <div class="uk-flex">
-      <div class="uk-hp-user-location fs-sm"><i class="fas fa-map-marker uk-margin-right"></i>{{ user.city }}{% if user.city and user.state %}, {% endif %}{{ user.state }}</div>
+      <div class="uk-hp-user-location fs-sm"><i class="fas fa-map-marker uk-margin-right"></i>{{ profile_user.city }}{% if profile_user.city and profile_user.state %}, {% endif %}{{ profile_user.state }}</div>
     </div>
     {% endif %}
   </div>
-  {% if user.bio %}
+  {% if profile_user.bio %}
   <div class="uk-divider-icon"></div>
   <div class="uk-card-footer uk-padding">
-    <p class="fs-sm">{{ user.bio }}</p>
+    <p class="fs-sm">{{ profile_user.bio }}</p>
   </div>
   {% endif %}
 </div>
 
 <div class="uk-card uk-hp-card-muted uk-margin-small-top">
   <div class="uk-card-header fw-black">
-      {{ user.first_name }} Activity
+      {{ profile_user.first_name }} Activity
   </div>
   {% if not articles.count %}
   <div class="uk-card-body">
-    <p>There is no activity for {{ user.first_name }}.</p>
+    <p>There is no activity for {{ profile_user.first_name }}.</p>
   </div>
   {% else %}
   {% for article in articles %}

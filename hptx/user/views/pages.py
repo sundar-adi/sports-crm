@@ -65,7 +65,7 @@ class ProfileView(TemplateView):
 
         context = super().get_context_data(*args, **kwargs)
         context.update({
-            'user': user,
+            'profile_user': user,
             'articles': ArticlePage.objects.live().filter(
                 authors=user).order_by(
                     '-publication_date', '-first_published_at')
