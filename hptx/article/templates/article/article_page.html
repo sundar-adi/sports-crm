@@ -4,7 +4,23 @@
 {% load static wagtailimages_tags user_tags %}
 
 {% load article_tags %}
+{% block extrahtml %}prefix="og: http://ogp.me/ns#"{% endblock %}
+{% block extra_head_tags %}
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{page.title}}">
+  <meta name="twitter:title" content="{{page.title}}">
+  {% if page.featured_image %}
+    <meta property="og:image" content="{{page.featured_image}}">
+    <meta name="twitter:image" content="{{page.featured_image}}">
+  {% else %}
+    <meta property="og:image" content="{% static 'src/assets/Navbar/Logo.png'%}">
+    <meta name="twitter:image" content="{% static 'src/assets/Navbar/Logo.png'%}">
+  {% endif %}
+  {% for author in page.authors.all %}
+    <meta name="author" content="{{ author.first_name }} {{ author.last_name }}">
+  {% endfor %}
 
+{% endblock %}
 
 {% block body_class %}article_page {% if settings.home.GlobalSettings.enable_paywall and user.is_anonymous %}body-modal-opened{% endif %}{% endblock %}
 

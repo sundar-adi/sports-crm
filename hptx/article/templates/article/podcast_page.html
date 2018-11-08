@@ -4,6 +4,25 @@
 
 {% load article_tags %}
 
+{% block extrahtml %}prefix="og: http://ogp.me/ns#"{% endblock %}
+{% block extra_head_tags %}
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{page.title}}">
+  <meta name="twitter:title" content="{{page.title}}">
+  {% for article in page.get_children %}
+    {% if article.featured_image %}
+      <meta property="og:image" content="{{article.featured_image}}">
+      <meta name="twitter:image" content="{{article.featured_image}}">
+    {% else %}
+      <meta property="og:image" content="{% static 'src/assets/Navbar/Logo.png'%}">
+      <meta name="twitter:image" content="{% static 'src/assets/Navbar/Logo.png'%}">
+    {% endif %}
+    {% for author in article.authors.all %}
+      <meta name="author" content="{{ author.first_name }} {{ author.last_name }}">
+    {% endfor %}
+  {% endfor %}
+
+{% endblock %}
 
 {% block body_class %}article_page{% endblock %}
 
