@@ -2,7 +2,7 @@
 
 {% load article_tags %}
 
-{% if not settings.home.GlobalSettings.enable_paywall or user.is_authenticated %}
+{% if not SHOW_PAYWALL %}
   {% for block in article.body %}
     {% if block.value is not excluded %}
       {% if block.block_type == 'heading' %}

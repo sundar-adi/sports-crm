@@ -36,7 +36,18 @@
     {% elif article.specific.get_verbose_name == "Video page" and article|youtube_block %}
     <div class="uk-hp-article-main-media">{{ article|youtube_block }}</div>
     {% elif article.specific.get_verbose_name == "Podcast episode page" and article|soundcloud_block %}
-    <div class="uk-hp-article-main-media soundcloud-content">{{ article|soundcloud_block }}</div>
+    <div class="uk-hp-article-main-media soundcloud-content">
+      {% if not SHOW_PAYWALL %}
+        {{ article|soundcloud_block }}
+      {% else %}
+        <a href="{% pageurl article %}">
+          <div class="podcast-thumbnail podcast-thumbnail--expand">
+            {% image article.get_parent.specific.featured_image original alt="" class="podcast-thumbnail__image" %}
+            <div class="podcast-thumbnail__badge"><i class="fas fa-podcast"></i></div>
+          </div>
+        </a>
+      {% endif %}
+    </div>
     {% endif %}
 
     {% endif %}
@@ -46,9 +57,37 @@
       {% if page_type == "Article page" and article.featured_image %}
       <a href="{% pageurl article %}" class="{% if article|first_paragraph_value|text_block_length == 0 %}uk-width-expand{% else %}uk-width-2-5 uk-hp-card-primary-smallmedia{% endif %}">{% image article.featured_image original alt="" %}</a>
       {% elif page_type == "Video page" %}
-      <div class="{% if article|first_paragraph_value|text_block_length == 0 %}uk-width-expand{% else %}uk-width-2-5 uk-hp-card-primary-smallmedia{% endif %}">{{ article|youtube_block }}</div>
+      <div class="{% if article|first_paragraph_value|text_block_length == 0 %}uk-width-expand{% else %}uk-width-2-5 uk-hp-card-primary-smallmedia{% endif %}">
+        {% if not SHOW_PAYWALL %}
+          {{ article|youtube_block }}
+        {% else %}
+        <a href="{% pageurl article %}">
+          <div class="video-thumbnail {% if article|first_paragraph_value|text_block_length == 0 %}video-thumbnail--expand{% endif %}">
+              <img class="video-thumbnail__image" src="{{ article|youtube_block|youtube_block_thumbnail }}" alt="" />
+              <div class="video-thumbnail__badge"><i class="fas fa-play"></i></div>
+          </div>
+        </a>
+        {% endif %}
+      </div>
       {% elif page_type == "Podcast episode page" %}
-      <div class="{% if article|first_paragraph_value|text_block_length == 0 %}uk-width-expand soundcloud-content{% else %}uk-width-1-4 uk-hp-card-primary-smallmedia{% endif %}">{{ article|soundcloud_block }}</div>
+      <div class="{% if article|first_paragraph_value|text_block_length == 0 %}uk-width-expand soundcloud-content{% else %}uk-width-1-4 uk-hp-card-primary-smallmedia{% endif %}">
+        {% if not SHOW_PAYWALL %}
+          {{ article|soundcloud_block }}
+        {% else %}
+          <a href="{% pageurl article %}">
+            <div class="podcast-thumbnail podcast-thumbnail--expand">
+              {% if article|first_paragraph_value|text_block_length == 0 %}
+                {% image article.get_parent.specific.featured_image original alt="" class="podcast-thumbnail__image" %}
+              {% else %}
+                {% image article.get_parent.specific.featured_image fill-120x120 alt="" class="podcast-thumbnail__image" %}
+              {% endif %}
+              <div class="podcast-thumbnail__badge"><i class="fas fa-podcast"></i></div>
+            </div>
+          </a>
+        {% endif %}
+
+
+      </div>
       {% endif %}
       {% endwith %}
       {% endif %}

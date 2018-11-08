@@ -3,9 +3,9 @@
 {% load article_tags %}
 
 <div class="podcast">
-  <a class="podcast__image-wrapper" href="{% pageurl podcast %}">
-    {% image podcast.featured_image fill-120x120 alt="" class="podcast__image" %}
-    <div class="podcast__badge"><i class="fas fa-podcast"></i></div>
+  <a class="podcast-thumbnail" href="{% pageurl podcast %}">
+    {% image podcast.featured_image fill-120x120 alt="" class="podcast-thumbnail__image" %}
+    <div class="podcast-thumbnail__badge"><i class="fas fa-podcast"></i></div>
   </a>
   <div>
     <h4 class="podcast__title"><a class="podcast__link" href="{% pageurl podcast %}">{{ podcast.title }}</a></h4>
