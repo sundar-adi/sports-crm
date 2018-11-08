@@ -1,6 +1,10 @@
 import re
 
+from wagtail.embeds.embeds import get_embed
+from wagtail.embeds.exceptions import EmbedException
+
 from django import template
+
 
 register = template.Library()
 
@@ -35,6 +39,17 @@ def youtube_block(article):
         if(block.block_type == "embed" and "youtube" in block.value.url):
             return block.value
     return ""
+
+
+@register.filter
+def youtube_block_thumbnail(block_value):
+    """ Use this method with a youtube_block"""
+    try:
+        embed = get_embed(getattr(block_value, 'url', ""))
+    except EmbedException:
+        # Cannot find embed
+        embed = None
+    return getattr(embed, "thumbnail_url", "")
 
 
 @register.filter

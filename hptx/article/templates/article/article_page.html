@@ -22,7 +22,7 @@
 
 {% endblock %}
 
-{% block body_class %}article_page {% if settings.home.GlobalSettings.enable_paywall and user.is_anonymous %}body-modal-opened{% endif %}{% endblock %}
+{% block body_class %}article_page {% if SHOW_PAYWALL %}body-modal-opened{% endif %}{% endblock %}
 
 {% block content %}
 <div class="uk-card uk-card-primary uk-card-primary--article">

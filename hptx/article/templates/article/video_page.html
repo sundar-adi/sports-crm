@@ -22,7 +22,7 @@
 
 {% endblock %}
 
-{% block body_class %}article_page {% if settings.home.GlobalSettings.enable_paywall and user.is_anonymous %}body-modal-opened{% endif %}{% endblock %}
+{% block body_class %}article_page {% if SHOW_PAYWALL %}body-modal-opened{% endif %}{% endblock %}
 
 {% block content %}
 <div class="uk-card uk-card-primary uk-card-primary--article">
@@ -47,8 +47,10 @@
     <div>
       {% if page.featured_image %}
         {% image page.featured_image original alt="" class="uk-hp-article-main-media" %}
-      {% elif not settings.home.GlobalSettings.enable_paywall or user.is_authenticated %}
+      {% elif not SHOW_PAYWALL %}
         <div class="uk-hp-article-main-media">{{ page|youtube_block }}</div>
+      {% else %}
+        <img class="uk-hp-article-main-media" src="{{ page|youtube_block|youtube_block_thumbnail }}" alt="" />
       {% endif %}
     </div>
     <div class="uk-hp-article-body uk-margin-small-top uk-margin-medium-bottom">
