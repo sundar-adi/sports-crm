@@ -106,6 +106,20 @@ class ArticlePage(Page):
         HitCountMixin.hit_count(request, hit_count)
         return super().serve(request, *args, **kwargs)
 
+    def get_context(self, request):
+        tags = self.tags.all()
+        related_articles = ArticlePage.objects.live().filter(
+            tags__in=tags
+        ).distinct().exclude(
+            id=self.id
+        ).order_by(
+            '-publication_date', '-first_published_at'
+        )
+
+        context = super().get_context(request)
+        context['related_articles'] = related_articles[:7]
+        return context
+
 
 class PodcastPage(Page):
     parent_page_types = ['article.PodcastIndexPage']

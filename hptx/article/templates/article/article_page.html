@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {% load wagtailcore_tags wagtailimages_tags hitcount_tags social_share %}
+{% load static wagtailimages_tags user_tags %}
 
 {% load article_tags %}
 
@@ -36,6 +37,12 @@
       {% include "article/partials/article_content.html" with article=page %}
     </div>
     {% include "article/partials/article_tags_bottom.html" with article=page %}
+    <div class="uk-flex uk-flex-between uk-hp-article-divider uk-margin-medium uk-flex-middle">
+      <div class="uk-hp-article-line"></div>
+      <img src="{% static 'src/assets/general/divider_star.png'%}" />
+      <div class="uk-hp-article-line"></div>
+    </div>
+    {% include "article/partials/related_articles.html" with article=page %}
   </article>
 </div>
 {% endblock %}
