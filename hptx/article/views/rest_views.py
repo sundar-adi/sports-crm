@@ -3,12 +3,16 @@ from django.template.loader import render_to_string
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from article.list import list_most_recent, list_week_most_popular
+
 
 class ArticleListPageRenderView(APIView):
     article_object_name = "article"
-    list_function = None
     page_size = None  # Leave None to use default
     template_name = "article/article_list_item.html"
+
+    def get_list(self, page, page_size=None):
+        raise NotImplementedError("The listing function must be implemented")
 
     def get_context(self):
         """
@@ -38,11 +42,11 @@ class ArticleListPageRenderView(APIView):
                 'page_size': page_size
             })
         if page:
-            list_context = {
+            list_context.update({
                 'page': page
-            }
+            })
 
-            has_next, objects = self.list_function(**list_context)
+            has_next, objects = self.get_list(**list_context)
 
             html = "".join([
                 render_to_string(
@@ -53,3 +57,15 @@ class ArticleListPageRenderView(APIView):
             'has_next': has_next,
             'html': html
         })
+
+
+class ListMostRecentPageView(ArticleListPageRenderView):
+
+    def get_list(self, page, page_size=None):
+        return list_most_recent(page, page_size)
+
+
+class ListWeekMostPopularPageView(ArticleListPageRenderView):
+
+    def get_list(self, page, page_size=None):
+        return list_week_most_popular(page, page_size)

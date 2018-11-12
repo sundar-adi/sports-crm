@@ -282,9 +282,9 @@ class HomePage(Page):
         context = super().get_context(request)
 
         recent_has_next, most_recent = list_most_recent(page=1)
-        context['recent_has_next'] = recent_has_next
+        context['most_recent_has_next'] = recent_has_next
         context['most_recent_articles'] = most_recent
-        
+
         most_viewed_has_next, most_viewed = list_week_most_popular(page=1)
         context['most_viewed_has_next'] = most_viewed_has_next
         context['most_viewed_articles'] = most_viewed

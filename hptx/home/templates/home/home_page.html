@@ -25,6 +25,10 @@
   {% for article in most_recent_articles %}
     {% include "article/article_list_item.html" with article=article first=forloop.first %}
   {% endfor %}
+
+  {% if most_recent_has_next %}
+  <load-more endpoint="{% url 'article:rest:list_week_most_popular' %}" elm-class="link-primary">Load more</load-more>
+  {% endif %}
 </div>
 
 
@@ -36,6 +40,10 @@
   {% for article in most_viewed_articles %}
     {% include "article/article_list_item.html" with article=article first=forloop.first %}
   {% endfor %}
+
+  {% if most_viewed_has_next %}
+  <load-more endpoint="{% url 'article:rest:list_week_most_popular' %}" elm-class="link-primary">Load more</load-more>
+  {% endif %}
 </div>
 {% endif %}
 {% endblock %}

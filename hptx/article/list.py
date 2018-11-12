@@ -10,10 +10,13 @@ from hitcount.models import HitCount
 from article.models import ArticlePage, PodcastEpisodePage, VideoPage
 
 
-DEFAULT_PAGE_SIZE = 10
+DEFAULT_PAGE_SIZE = 2
 
 
-def get_paginated_result(qs, page, page_size):
+def get_paginated_result(qs, page=None, page_size=None):
+    page = 1 if page is None else page
+    page_size = DEFAULT_PAGE_SIZE if page_size is None else page_size
+
     try:
         paginator = Paginator(qs, page_size).page(page)
         return paginator.has_next(), paginator.object_list
@@ -21,13 +24,13 @@ def get_paginated_result(qs, page, page_size):
         return False, []
 
 
-def list_most_recent(page=1, page_size=DEFAULT_PAGE_SIZE):
+def list_most_recent(page=None, page_size=None):
     objects = ArticlePage.objects.live().order_by(
             '-publication_date')
     return get_paginated_result(objects, page, page_size)
 
 
-def list_week_most_popular(page=1, page_size=DEFAULT_PAGE_SIZE):
+def list_week_most_popular(page=None, page_size=None):
     period = timezone.now() - timedelta(days=7)
 
     try:

@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^community/', include(('user.urls', 'user'), namespace='user')),
+    url(r'^article/', include(
+        ('article.urls', 'article'), namespace='article')),
 
     url(r'^search/$', search_views.search, name='search'),
     url(r'^plans/$', payment_views.PlansView.as_view(), name='plans'),
