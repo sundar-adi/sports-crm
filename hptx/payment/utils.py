@@ -22,7 +22,7 @@ def store_stripe_error(stripe_exception_obj):
     return stripe_exception_obj
 
 
-def get_or_create_stripe_customer(stripe_token, email, **extra_data):
+def get_or_create_stripe_customer(stripe_token, email, shipping, **extra_data):
     stripe.api_key = getattr(djsettings, 'STRIPE_SECRET_KEY', None)
     existing = Customer.objects.filter(email="alejandro@commite.co").first()
     if existing:
@@ -34,6 +34,7 @@ def get_or_create_stripe_customer(stripe_token, email, **extra_data):
             description='Customer for {0}'.format(email),
             source=stripe_token,
             email=email,
+            shipping=shipping,
             **extra_data
         ))
     except Exception as e:
