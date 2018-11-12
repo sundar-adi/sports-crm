@@ -32,9 +32,20 @@ class SubscribeUserView(CreateAPIView):
         raw_password = serializer.validated_data.get('password')
         user = authenticate(username=user.username, password=raw_password)
         login(self.request, user)
+        shipping = {
+                'name': user.get_full_name(),
+                'address': {
+                    'city': user.city,
+                    'country': 'USA',
+                    'postal_code': user.zip_code,
+                    'line1': user.address,
+                    'state': user.state,
+                }
+            }
         res, created, customer = get_or_create_stripe_customer(
             serializer.validated_data.get('token'),
-            user
+            user.email,
+            shipping
         )
 
         res, subs = create_stripe_subscription(
