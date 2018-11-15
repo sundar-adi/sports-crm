@@ -10,7 +10,7 @@ from hitcount.models import HitCount
 from article.models import ArticlePage, PodcastEpisodePage, VideoPage
 
 
-DEFAULT_PAGE_SIZE = 2
+DEFAULT_PAGE_SIZE = 10
 
 
 def get_paginated_result(qs, page=None, page_size=None):
