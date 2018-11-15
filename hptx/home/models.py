@@ -277,27 +277,17 @@ class HomePage(Page):
              self.instagram_link))
 
     def get_context(self, request):
-        from article.models import ArticlePage, PodcastEpisodePage, VideoPage
-        from django.contrib.contenttypes.models import ContentType
+        from article.list import list_most_recent, list_week_most_popular
 
         context = super().get_context(request)
-        context['most_recent_articles'] = ArticlePage.objects.live().order_by(
-            '-publication_date')[:5]
 
-        period = timezone.now() - timedelta(days=7)
+        recent_has_next, most_recent = list_most_recent(page=1)
+        context['most_recent_has_next'] = recent_has_next
+        context['most_recent_articles'] = most_recent
 
-        try:
-            ctypes = ContentType.objects.get_for_models(
-                ArticlePage, PodcastEpisodePage, VideoPage).values()
-            hit_counts = HitCount.objects.filter(
-                content_type__in=ctypes).annotate(
-                    hit_count=models.Count(
-                        'hit', filter=models.Q(hit__created__gte=period))
-                ).order_by('hit_count')[:5]
-            context['most_viewed_articles'] = [
-                i.content_object for i in hit_counts]
-        except AttributeError:
-            pass
+        most_viewed_has_next, most_viewed = list_week_most_popular(page=1)
+        context['most_viewed_has_next'] = most_viewed_has_next
+        context['most_viewed_articles'] = most_viewed
 
         return context
 
