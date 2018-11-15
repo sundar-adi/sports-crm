@@ -1,6 +1,6 @@
 <template>
   <div>
-    <articles-from-back :html="containedHtml" />
+    <articles-from-back v-for="chunk in html":html="containedHtml(chunk)" />
     <button :class="elmClass" @click.stop.prevent="loadMore" v-if="hasNext && elm == 'button'"><slot></slot></button>
     <a :class="elmClass" @click.stop.prevent="loadMore" href="#" v-else-if="hasNext"><slot></slot></a>
   </div>
@@ -55,18 +55,18 @@ export default {
     }
   },
   computed: {
-    containedHtml() {
-      return `<div>${this.html}</div>`
-    }
   },
   data() {
     return {
       page: this.initialPage,
       hasNext: true,
-      html: ""
+      html: [],
     }
   },
   methods: {
+    containedHtml(chunk) {
+      return `<div>${chunk}</div>`
+    },
     loadMore() {
       this.$axios.get(
         this.endpoint,
@@ -77,7 +77,7 @@ export default {
         }
       ).then(
         (response) => {
-          this.html += response.data[this.htmlKey]
+          this.html.push(response.data[this.htmlKey]);
           this.page += 1
           this.hasNext = response.data[this.hasNextKey]
         }
