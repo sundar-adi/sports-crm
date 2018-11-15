@@ -27,7 +27,7 @@
   {% endfor %}
 
   {% if most_recent_has_next %}
-  <load-more endpoint="{% url 'article:rest:list_week_most_popular' %}" elm-class="link-primary">Load more</load-more>
+  <load-more endpoint="{% url 'article:rest:list_week_most_popular' %}" elm-class="link-primary uk-card-body uk-flex">Load more...</load-more>
   {% endif %}
 </div>
 
@@ -42,7 +42,7 @@
   {% endfor %}
 
   {% if most_viewed_has_next %}
-  <load-more endpoint="{% url 'article:rest:list_week_most_popular' %}" elm-class="link-primary">Load more</load-more>
+  <load-more endpoint="{% url 'article:rest:list_week_most_popular' %}" elm-class="link-primary uk-card-body uk-flex">Load more...</load-more>
   {% endif %}
 </div>
 {% endif %}

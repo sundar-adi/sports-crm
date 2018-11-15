@@ -1,13 +1,20 @@
 <template>
   <div>
-    <articles-from-back v-for="chunk in html":html="containedHtml(chunk)" />
+    <transition-group name="list" tag="div">
+      <articles-from-back v-for="chunk in html":html="containedHtml(chunk)" v-bind:key="chunk" />
+    </transition-group>
     <button :class="elmClass" @click.stop.prevent="loadMore" v-if="hasNext && elm == 'button'"><slot></slot></button>
     <a :class="elmClass" @click.stop.prevent="loadMore" href="#" v-else-if="hasNext"><slot></slot></a>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
+.list-enter-active {
+  transition: all 1s;
+}
+.list-enter {
+  opacity: 0;
+}
 </style>
 
 <script>
