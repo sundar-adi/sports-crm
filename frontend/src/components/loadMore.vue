@@ -78,6 +78,7 @@ export default {
       ).then(
         (response) => {
           this.html += response.data[this.htmlKey]
+          this.page += 1
           this.hasNext = response.data[this.hasNextKey]
         }
       ).catch(
