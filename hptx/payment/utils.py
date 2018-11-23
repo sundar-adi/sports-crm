@@ -1,6 +1,8 @@
 import stripe
 import traceback
 
+from django.conf import settings
+
 from djstripe.models import Customer
 from djstripe import settings as djsettings
 
@@ -44,6 +46,11 @@ def get_or_create_stripe_customer(stripe_token, email, shipping, **extra_data):
 def create_stripe_subscription(customer_id, plan_id, **params):
     stripe.api_key = getattr(djsettings, 'STRIPE_SECRET_KEY', None)
     params = {}
+
+    if plan_id == settings.GOLD_PLAN_STRIPE_ID:
+        params['coupon'] = 'blackfriday-gold'
+    elif plan_id == settings.PLATINUM_PLAN_STRIPE_ID:
+        params['coupon'] = 'blackfriday-platinum'
 
     try:
         subs = stripe.Subscription.create(

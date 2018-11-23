@@ -24,7 +24,7 @@
 
         <signup-form
           plan="{{plan}}"
-          :amount="{% if plan == 'silver' %}5{% elif plan == 'gold' %}50{% elif plan == 'platinum'%}75{% endif %}"
+          :amount="{% if plan == 'silver' %}5{% elif plan == 'gold' %}30{% elif plan == 'platinum'%}50{% endif %}"
           public-key="{{ STRIPE_PUBLIC_KEY }}"
           image="{% static 'src/assets/Navbar/Logo.png' %}"
           success-url="{% url 'user:profile_edit_view' %}"></signup-form>
@@ -35,7 +35,7 @@
         <div class="uk-card uk-card-default uk-margin-bottom uk-width-medium uk-position-relative">
           <div class="uk-hp-card-border uk-position-top-center"></div>
           <div class="uk-card-body uk-flex uk-flex-middle uk-flex-column uk-padding">
-            <span class="fs-xxl fw-black">${% if plan == "silver" %}5{% elif plan == "gold" %}50{% elif plan == "platinum"%}75{% endif %}</span>
+            <span class="fs-xxl fw-black">${% if plan == "silver" %}5{% elif plan == "gold" %}30{% elif plan == "platinum"%}50{% endif %}</span>
             <span class="fs-xs fw-black">PER {% if plan == "silver" %}MONTH {% elif plan == "gold" %}YEAR{% elif plan == "platinum"%}2 YEARS{% endif %}</span>
             <span class="fs-lg fw-black uk-margin-medium-top">{{ plan|title }} Plan</span>
             <!-- <p class="fs-sm ta-center">Cras fringilla justo odio, quis rutrum risus aliquam eget. Pellentesque euismod ultrices nisl.</p> -->
